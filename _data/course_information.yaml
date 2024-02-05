@@ -1,0 +1,21 @@
+course:
+  title: Introduction to Computational Biology I/II
+  number: BIMS 8701 / BIMS 8702
+  term: Spring 2024
+  times: Mon/Wed 4:00pm-5:15pm
+  location: McKim Hall 1023 (BEC Classroom) (see <a href="map.png">map</a>)
+  instructor_of_record: Nathan Sheffield
+  instructors:
+    - name: Nathan Sheffield
+      url: https://databio.org
+    - name: Chongzhi Zang
+      url: https://zanglab.github.io
+    - name: Aakrosh Ratan
+      url: https://med.virginia.edu/cphg/aakrosh-ratan/
+    - name: Stefan Bekiranov
+      url: https://med.virginia.edu/faculty/faculty-listing/sb3de/
+    - name: Gloria Sheynkman
+      url: https://med.virginia.edu/faculty/faculty-listing/gs9yr/
+  description: >
+    This course introduces students to principles
+     and practical applications of methods in computational biology.

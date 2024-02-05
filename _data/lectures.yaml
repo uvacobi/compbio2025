@@ -1,0 +1,227 @@
+lectures:
+  - lecture_number: 1
+    section: "Computational Biology I"
+    date: 2024-02-12
+    topic: Course overview and introduction to computational biology
+    details: Course overview, history of computational biology, introduction to Bioconductor
+    instructor: Nathan Sheffield
+    links:
+      - url: slides/introduction
+        title: Lecture slides
+      - url: https://www.nature.com/articles/nbt.2740
+        title: So you want to be a computational biologist?
+      - url: https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2002050
+        title: All biology is computational biology
+  - lecture_number: 2
+    date: 2024-02-14
+    topic: Statistics and probability review
+    details: Random Variables, Probability Distributions, Expectation, Variance, Moment-Generating Functions, Central Limit Theorem
+    instructor: Stefan Bekiranov
+    links:
+      - url: #
+        title: Lecture slides
+  - lecture_number: 3
+    date: 2024-02-19
+    topic: Sequence alignment
+    details: Local vs. global alignment, Dynamic programming, Heuristic approaches, BLAST 
+    instructor: Aakrosh Ratan
+    assignments:
+      - title: Quiz 1
+      - title: Assignment 1 due
+    links:
+      - url: #
+        title: Lecture slides
+  - lecture_number: 4
+    date: 2024-02-21
+    topic: Sequence alignment lab
+    details: null
+    instructor: Aakrosh Ratan
+  - lecture_number: 5
+    date: 2024-02-26
+    topic: Genome assembly
+    details: null
+    instructor: Aakrosh Ratan
+    links:
+      - url: #
+        title: Lecture slides
+    assignments:
+      - title: Quiz 2
+      - title: Assignment 2 due
+  - lecture_number: 6
+    date: 2024-02-28
+    topic: Genome assembly lab
+    details: null
+    instructor: Aakrosh Ratan
+    links:
+      - url: #
+        title: Lecture slides
+  - lecture_number: 7
+    date: 2024-03-04
+    topic: Molecular evolution and phylogenetics
+    details: 
+    instructor: Nathan Sheffield
+    assignments:
+      - title: Quiz 3
+      - title: Assignment 3 due
+  - lecture_number: 8
+    date: 2024-03-06
+    topic: Molecular evolution and phylogenetics lab
+    details: 
+    instructor: Nathan Sheffield
+  - lecture_number: 9
+    date: 2024-03-11
+    topic: Differential expression analysis
+    details: null
+    instructor: Stefan Bekiranov
+    links:
+      - url: #
+        title: Lecture slides
+    assignments:
+      - title: Quiz 4
+      - title: Assignment 4 due
+  - lecture_number: 10
+    date: 2024-03-13
+    topic: Differential expression lab
+    details: 
+    instructor: Stefan Bekiranov
+    links:
+      - url: #
+        title: Lecture slides
+  - lecture_number: 11
+    date: 2024-03-18
+    topic: Transcription factors 
+    details: 
+    instructor: Chongzhi Zang
+    links:
+      - url: #
+        title: Lecture slides
+    assignments:
+      - title: Quiz 5
+      - title: Assignment 5 due
+  - lecture_number: 12
+    date: 2024-03-20
+    topic: Transcription factor lab
+    details: 
+    instructor: Chongzhi Zang
+    links:
+      - url: #
+        title: Lecture slides
+  - lecture_number: 13
+    date: 2024-03-25
+    topic: Module I Review
+    details:
+    instructor: Aakrosh Ratan
+    links: null
+    assignments:
+      - title: Quiz 6
+      - title: Assignment 6 due
+  - lecture_number: 14
+    section: "Computational Biology II"
+    date: 2024-03-27
+    topic: Dimensionality reduction
+    details: 
+    instructor: Chongzhi Zang
+    links:
+      - url: #
+        title: Lecture slides
+  - lecture_number: 15
+    date: 2024-04-01
+    topic: Dimensionality reduction lab
+    details: null
+    instructor: Chongzhi Zang
+    links: null
+  - lecture_number: 16
+    date: 2024-04-03
+    topic: Network analysis
+    details: null
+    instructor: Aakrosh Ratan
+    links:
+      - url: #
+        title: Lecture slides
+    assignments:
+      - title: Quiz 7
+      - title: Assignment 7 due
+  - lecture_number: 17
+    date: 2024-04-08
+    topic: Network analysis lab
+    details: null
+    instructor: Aakrosh Ratan
+    links:
+      - url: #
+        title: Lecture slides
+  - lecture_number: 18
+    date: 2024-04-10
+    topic: Genomic interval analysis
+    details: null
+    instructor: Nathan Sheffield
+    links:
+      - url: #
+        title: Lecture slides
+    assignments:
+      - title: Quiz 8
+      - title: Assignment 8 due
+  - lecture_number: 19
+    date: 2024-04-15
+    topic: Genomic interval analysis lab
+    details: null
+    instructor: Nathan Sheffield
+    links:
+      - url: #
+        title: Lecture slides
+  - lecture_number: 20
+    date: 2024-04-17
+    topic: Hidden Markov Models
+    details: null
+    instructor: Nathan Sheffield
+    links:
+      - url: #
+        title: Lecture slides 
+    assignments:
+      - title: Quiz 9
+      - title: Assignment 9 due
+  - lecture_number: 21
+    date: 2024-04-22
+    topic: Hidden Markov Models lab
+    details: Mircoarray and Bulk RNA-seq Analysis
+    instructor: Nathan Sheffield
+    links:
+      - url: #
+        title: Lecture slides
+  - lecture_number: 22
+    date: 2024-04-22
+    topic: Deep learning in biology
+    details: 
+    instructor: Stefan Bekiranov
+    links: null
+    assignments:
+      - title: Quiz 10
+      - title: Assignment 10 due
+  - lecture_number: 23
+    date: 2024-04-29
+    topic: Deep learning lab
+    details: null
+    instructor: Stefan Bekiranov
+    links: null
+  - lecture_number: 24
+    date: 2024-05-01
+    topic: Protein structure prediction
+    details: null
+    instructor: Gloria Sheynkman
+    assignments:
+      - title: Quiz 11
+      - title: Assignment 11 due
+  - lecture_number: 25
+    date: 2024-05-06
+    topic: Protein structure prediction lab
+    details: null
+    instructor: Gloria Sheynkman
+  - lecture_number: 26
+    date: 2024-05-08
+    topic: Review
+    details: null
+    instructor: Nathan Sheffield
+    assignments:
+      - title: Quiz 12
+      - title: Assignment 12 due
+
+
