@@ -99,6 +99,8 @@ lectures:
     links:
       - url: #
         title: Lecture slides
+      - url: https://www.nature.com/articles/nbt0406-423.pdf
+        title: What are DNA sequence motifs?
     assignments:
       - title: Quiz 5
       - title: Assignment 5 due
