@@ -20,11 +20,11 @@ lectures:
     links:
       - url: #
         title: Lecture slides
-      - url: https://www.nature.com/articles/506150a.pdf
+      - url: https://www.nature.com/articles/506150a
         title: Scientific method: Statistical errors
-      - url: https://www.nature.com/articles/nbt1209-1135.pdf
+      - url: https://www.nature.com/articles/nbt1209-1135
         title: How does multiple testing correction work?
-      - url: https://www.nature.com/articles/s41587-023-01794-9.pdf
+      - url: https://www.nature.com/articles/s41587-023-01794-9
         title: How the Monty Hall problem is similar to the false discovery rate in high-throughput data analysis
   - lecture_number: 3
     date: 2024-02-19
