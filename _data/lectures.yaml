@@ -15,7 +15,7 @@ lectures:
   - lecture_number: 2
     date: 2024-02-14
     topic: Statistics and probability review
-    details: Random Variables, Probability Distributions, Central Limit Theorem, Statistical Tests, P-value, Type I and Type II Errors, Multiple Testing Corrections, FDR
+    details: Random Variables, Probability Distributions, Central Limit Theorem, Hypothesis Testing, P-value, Type I and Type II Errors, Multiple Testing Correction, FDR
     instructor: Chongzhi Zang
     links:
       - url: #
