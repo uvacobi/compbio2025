@@ -20,6 +20,8 @@ lectures:
     links:
       - url: #
         title: Lecture slides
+      - url: https://www.nature.com/articles/506150a.pdf
+        title: Scientific method: Statistical errors
       - url: https://www.nature.com/articles/nbt1209-1135.pdf
         title: How does multiple testing correction work?
       - url: https://www.nature.com/articles/s41587-023-01794-9.pdf
