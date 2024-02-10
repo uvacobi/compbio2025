@@ -82,8 +82,10 @@ lectures:
     details: null
     instructor: Stefan Bekiranov
     links:
-      - url: #
+      - url: slides/diff_exp
         title: Lecture slides
+      - url: https://doi.org/10.1186/s13059-014-0550-8
+        title: "Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2"
     assignments:
       - title: Quiz 4
       - title: Assignment 4 due
