@@ -8,10 +8,14 @@ lectures:
     links:
       - url: slides/introduction
         title: Lecture slides
-      - url: https://www.nature.com/articles/nbt.2740
-        title: So you want to be a computational biologist?
       - url: https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2002050
         title: All biology is computational biology
+        required: true
+      - url: https://www.nature.com/articles/nbt.2740
+        title: So you want to be a computational biologist?
+    assignments:
+      - title: Quiz 0
+        url: https://docs.google.com/forms/d/e/1FAIpQLSepqDRD2htGRLupXRybXMbDsfOu5ipQrFU4pkgKeAVPWxl6nA/viewform?usp=sf_link
   - lecture_number: 2
     date: 2024-02-14
     topic: Statistics and probability review

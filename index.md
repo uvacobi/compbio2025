@@ -52,6 +52,8 @@ title: "welcome"
 
 ## Lectures
 
+Resources include both required reading as well as additional secondary sources for your own follow-up. The (<span style="color:red">!!</span>) icon indicates required reading; all other sources are secondary.
+
 <table class="table">
   <thead>
     <tr>
@@ -78,7 +80,7 @@ title: "welcome"
       <td>{{ l.instructor }}</td>
       <td>
         {% if r.links != "" %}<ul class="m-0 p-0">{% for r in l.links %}{% if r.url != "" and r.url != null %}
-          <li class="text-secondary"><a href="{{ r.url }}">{{r.title}}</a></li>{% endif %}{% endfor %}</ul>{% endif %}
+          <li class="text-secondary">{% if r.required %} <span style="color:red">!!</span> {% endif %}<a href="{{ r.url }}">{{r.title}}</a></li>{% endif %}{% endfor %}</ul>{% endif %}
       </td>
       <td>{% if r.assignments != "" %}<ul class="m-0 p-0">{% for r in l.assignments %}
           <li class="text-secondary">{% if r.url != "" and r.url != null %}<a href="{{ r.url }}">{{r.title}}</a>{% else %}{{r.title}}{% endif %}</li>{% endfor %}</ul>{% endif %}</td>
