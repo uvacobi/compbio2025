@@ -1,0 +1,71 @@
+---
+layout: aakrosh_markdown
+title: "Genome assembly Lab"
+tags: slides 
+---
+
+## {{page.title}}
+![assemble](images/assembly/title.png) <!-- .element height="80%" width="80%" -->
+
+---
+
+## Shortest Common Superstring
+Given set of strings $S$ find $SCS(S)$: shortest string containing the strings in $S$ as substrings
+![SCS](images/assembly/scs1.png)
+
+---
+
+## Idea 1: Enumerate all orders
+![order1](images/assembly/order1.png)
+
+---
+
+## Idea 1: Enumerate all orders
+![order2](images/assembly/order2.png)
+
+Try all possible orderings and pick shortest.
+
+Note: If S contains n strings, then how many orderings (n!). The SCS problem is NP-hard. Non-deterministic polynomial time hard problems contain the most complex problems in computer science. They are not only hard to solve but are hard to verify as well. In fact, some of these problems aren’t even decidable.
+
+---
+
+## Idea 2: Choose order prioritizing similarity
+![idea2](images/assembly/idea2.png)
+
+---
+
+## Idea 2: Choose order prioritizing similarity
+![idea2](images/assembly/idea2_simplified.png)
+
+Note: We keep on doing this, and we will have AAABBBA or AAABBAB as the result.
+
+---
+
+## Shortest common superstring
+![greedy](images/assembly/scs2.png)
+
+Note: The answer might be different if we try an equally reasonable order. For example, if we use ABB,BBA in the second step, then we get a superstring of length 9
+
+---
+
+## Shortest common superstring
+
+The greedy algorithm is a good approximation; i.e. the superstring yielded by the greedy algorithm won’t be more than ~2.5 times longer than true SCS (see Gusfield, Algorithms on Strings, Trees and Sequences: Computer Science and Computational Biology, 16.17.1)
+
+Note: Greedy algorithm is not guaranteed to choose overlaps yielding SCS
+
+---
+
+## Programming Problems
+* [https://github.com/cphg/genome_assembler](https://github.com/cphg/genome_assembler)
+* Skeleton code is provided in python
+* Simple test cases are also provided
+* Clone the repo and then make changes
+* Implement an algorithm to simplify overlap graph by iteratively removing transitively-inferrible edges
+    * implement the `simplify` function in `remove_transitive_edges.py`
+    * test your work `python3 test_remove_transitive_edges`
+* Implement parts of the Shortest common superstring problem
+    * implement the `calculate_scs` function in `shortest_common_superstring.py`
+    * test your work `python3 test_shortest_common_superstring`
+
+---
