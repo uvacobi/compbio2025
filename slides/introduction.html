@@ -383,6 +383,8 @@ IRanges stores a set of intervals over a range of integer coordinates, without s
 So: A GRanges object is an IRanges object plus a vector of sequence names.
 
 ---
+IRanges stores ranges: 
+
 ```R
 demo_iranges <- IRanges(start = c(10, 15), width = c(10, 5))
 demo_iranges
@@ -397,6 +399,54 @@ IRanges object with 2 ranges and 0 metadata columns:
 ```
 
 ---
+Extract information: 
+
+- `start(demo_iranges)` &rarr; `[1] 10 15`
+- `end(demo_iranges)` &rarr; `[1] 19 19`
+- `width(demo_iranges)` &rarr; `[1] 10  5`
+
+---
+Subset:
+
+```R
+demo_iranges[1]
+```
+
+```R
+IRanges object with 1 range and 0 metadata columns:
+          start       end     width
+      <integer> <integer> <integer>
+  [1]        10        19        10
+```
+
+---
+Find overlaps:
+
+```R
+query_iranges <- IRanges(
+  start = c(8, 16),
+  end   = c(14, 18)
+)
+overlaps_iranges <- findOverlaps(query = query_iranges,
+								 subject = demo_iranges)
+overlaps_iranges
+```
+
+```R
+Hits object with 3 hits and 0 metadata columns:
+      queryHits subjectHits
+      <integer>   <integer>
+  [1]         1           1
+  [2]         2           1
+  [3]         2           2
+  -------
+  queryLength: 2 / subjectLength: 2
+```
+
+---
+
+GRanges adds `seqnames`:
+
 ```R
 demo_granges <- GRanges(
   seqnames = c("chr1", "chr2"),
@@ -416,6 +466,100 @@ GRanges object with 2 ranges and 0 metadata columns:
   -------
   seqinfo: 2 sequences from an unspecified genome; no seqlengths
 ```
+
+---
+
+You can add metadata columns:
+
+```R
+GRanges object with 5 ranges and 7 metadata columns:
+      seqnames          ranges strand |      source       type     score
+         <Rle>       <IRanges>  <Rle> |    <factor>   <factor> <numeric>
+  [1]        7 5527147-5529949      - | rtracklayer transcript        NA
+  [2]        7 5527147-5530581      - | rtracklayer transcript        NA
+  [3]        7 5527147-5530604      - | rtracklayer transcript        NA
+  [4]        7 5527147-5530604      - | rtracklayer transcript        NA
+  [5]        7 5527147-5530604      - | rtracklayer transcript        NA
+          phase         gene_id   gene_name   transcript_id
+      <integer>     <character> <character>     <character>
+  [1]      <NA> ENSG00000075624        ACTB ENST00000642480
+  [2]      <NA> ENSG00000075624        ACTB ENST00000676397
+  [3]      <NA> ENSG00000075624        ACTB ENST00000676319
+  [4]      <NA> ENSG00000075624        ACTB ENST00000676189
+  [5]      <NA> ENSG00000075624        ACTB ENST00000473257
+  -------
+  seqinfo: 1 sequence from an unspecified genome; no seqlengths
+```
+---
+GRangesList objects hold multiple GRanges
+
+```R
+GRangesList object of length 23:
+$ENST00000414620
+GRanges object with 4 ranges and 7 metadata columns:
+      seqnames          ranges strand |      source     type     score
+         <Rle>       <IRanges>  <Rle> |    <factor> <factor> <numeric>
+  [1]        7 5562574-5562790      - | rtracklayer     exon        NA
+  [2]        7 5540676-5540771      - | rtracklayer     exon        NA
+  [3]        7 5529535-5529663      - | rtracklayer     exon        NA
+  [4]        7 5529282-5529400      - | rtracklayer     exon        NA
+          phase         gene_id   gene_name   transcript_id
+      <integer>     <character> <character>     <character>
+  [1]      <NA> ENSG00000075624        ACTB ENST00000414620
+  [2]      <NA> ENSG00000075624        ACTB ENST00000414620
+  [3]      <NA> ENSG00000075624        ACTB ENST00000414620
+  [4]      <NA> ENSG00000075624        ACTB ENST00000414620
+  -------
+  seqinfo: 1 sequence from an unspecified genome; no seqlengths
+
+$ENST00000417101
+GRanges object with 3 ranges and 7 metadata columns:
+      seqnames          ranges strand |      source     type     score
+         <Rle>       <IRanges>  <Rle> |    <factor> <factor> <numeric>
+  [1]        7 5529806-5529982      - | rtracklayer     exon        NA
+  [2]        7 5529535-5529663      - | rtracklayer     exon        NA
+  [3]        7 5529235-5529400      - | rtracklayer     exon        NA
+          phase         gene_id   gene_name   transcript_id
+      <integer>     <character> <character>     <character>
+  [1]      <NA> ENSG00000075624        ACTB ENST00000417101
+  [2]      <NA> ENSG00000075624        ACTB ENST00000417101
+  [3]      <NA> ENSG00000075624        ACTB ENST00000417101
+  -------
+  seqinfo: 1 sequence from an unspecified genome; no seqlengths
+
+$ENST00000425660
+GRanges object with 7 ranges and 7 metadata columns:
+      seqnames          ranges strand |      source     type     score
+         <Rle>       <IRanges>  <Rle> |    <factor> <factor> <numeric>
+  [1]        7 5530524-5530601      - | rtracklayer     exon        NA
+  [2]        7 5529535-5529663      - | rtracklayer     exon        NA
+  [3]        7 5529161-5529400      - | rtracklayer     exon        NA
+  [4]        7 5529019-5529059      - | rtracklayer     exon        NA
+  [5]        7 5528281-5528719      - | rtracklayer     exon        NA
+  [6]        7 5528004-5528185      - | rtracklayer     exon        NA
+  [7]        7 5527156-5527891      - | rtracklayer     exon        NA
+          phase         gene_id   gene_name   transcript_id
+      <integer>     <character> <character>     <character>
+  [1]      <NA> ENSG00000075624        ACTB ENST00000425660
+  [2]      <NA> ENSG00000075624        ACTB ENST00000425660
+  [3]      <NA> ENSG00000075624        ACTB ENST00000425660
+  [4]      <NA> ENSG00000075624        ACTB ENST00000425660
+  [5]      <NA> ENSG00000075624        ACTB ENST00000425660
+  [6]      <NA> ENSG00000075624        ACTB ENST00000425660
+  [7]      <NA> ENSG00000075624        ACTB ENST00000425660
+  -------
+  seqinfo: 1 sequence from an unspecified genome; no seqlengths
+
+...
+<20 more elements>
+```
+
+---
+## Summary
+
+- GenomicRanges is a useful core package for genomic interval analysis.
+- Biostrings is a useful core package for sequence analysis
+
 
 ---
 ## Other popular packages
