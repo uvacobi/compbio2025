@@ -6,7 +6,7 @@ lectures:
     details: Course overview, history of computational biology, introduction to Bioconductor
     instructor: Nathan Sheffield
     links:
-      - url: #
+      - url: slides/introduction
         title: Lecture slides
       - url: https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2002050
         title: All biology is computational biology

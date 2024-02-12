@@ -1,6 +1,6 @@
 ---
 layout: reveal_markdown
-title: "Course overview and introduction to computational genomics"
+title: "Course overview, introduction to computational biology and bioconductor"
 tags: slides 
 date: 2021-12-09
 ---
@@ -9,476 +9,440 @@ date: 2021-12-09
 ---
 ## Course overview
 
-- Course website: https://cphg.github.io/compgen/
-- Scribing assignments
-- Final presentations
-- Programming assignments: GitHub
-
----
-## git and GitHub in 5 slides
----
-### git/GitHub serve multiple purposes
-1. Backup
-2. Version control
-3. Distributing/sharing code
-4. Testing
-5. Communication and collaboration
----
-### Basics of git repos
-1. A git repository is a folder with a `.git` subfolder
-2. The `.git` subfolder stores an index of snapshots
-3. Commits track the repository, not individual files.
-4. Git uses a model of distributed *clones*
----
-<div class="row">
-<div class="col">
-	Centralized (svn)
-	<img src="images/introduction/centralized.png" style="margin-top:140px">
-</div>
-<div class="col">
-	Distributed (git)
-	<img src="images/introduction/distributed.png">
-</div>
-</div>
-<span class="small"><a href="https://git-scm.com/">ProGit</a></span>
----
-### Basics of git branching
-1. Branches are pointers to commits. They are cheap.
-2. Combine branches with either *merge* or *rebase*.
-3. Branching workflows can be opinionated<br>(*e.g*, gitflow, threeflow, trunk development)
----
-<div class="row">
-<div class="col">
-
-<img src="images/introduction/basic-branching-4.png" width="425" style="margin-bottom:65px">
-
-<pre><code class="small" style="line-height:1em">$ git checkout -b hotfix
-Switched to a new branch 'hotfix'
-$ vim index.html
-$ git commit -a -m 'Fix broken email address'
-[hotfix 1fb7853] Fix broken email address
- 1 file changed, 2 insertions(+)
-</code></pre>
-
-</div>
-<div class="col fragment">
-<img src="images/introduction/basic-branching-5.png" width="425">
-
-<pre><code class="small">$ git checkout master
-$ git merge hotfix
-Updating f42c576..3a0874c
-Fast-forward
- index.html | 2 ++
- 1 file changed, 2 insertions(+)
-</code></pre>
-
-</div>
-</div>
-<span class="small"><a href="https://git-scm.com/">ProGit</a></span>
-
-
+- Course website: https://cphg.github.io/compbio/
+- Quizzes: on "required" readings plus assignment topics.
+- Programming assignments: please attempt on your own first
 
 
 ---
-## Introduction to computational genomics
+## Introduction to computational biology
 
-This intro will cover:
-1. Definitions of genomics and related fields
-2. Brief history of genomics
-3. Core biological concepts and technology
-4. Overview of sequencing technologies
-5. The genomic data explosion and computation
-6. How genomics links to business, ethics, and health
----
-### Genomics is the study of genomes What is a genome?
+What is computational biology?
 
-<div class="fragment">
-
-> A complete set of genetic information.
-
-### What is genetic?
-
-</div>
-<div class="fragment">
-
-> Relating to origin.
-
-### What is genomics?
-
-</div>
-<div class="fragment">
-
-> The study of the instructions needed to originate an organism.
-
-</div>
+<div class="fragment">bioinformatics?</div>
 
 ---
-### Early history of genomics
+## Some history
 
-- Discovery of DNA (1871)
-- Discovery of nucleotides (1910)
-- DNA is the genetic material (1944)
-- Discovery of structure of DNA (1953)
-- The central dogma (1957)
+- 1950-1960s Margaret Dayhoff
+- 1970 First use of term bioinformatics (in dutch)
+- 1974 "Biocomputing" gains popularity
+- 1982 GenBank is founded
+- 1985 Computer Applications in the Biosciences
+- 1988 FASTA published
+- 1988 NCBI is founded
+- 1993 Intelligent Systems in Molecular Biology (ISMB) 
+- 1994 Journal of Computational Biology
 
-<span class="small">See https://www.yourgenome.org/facts/timeline-history-of-genomics</span>
 ---
-<!--
-<div class="row">
-<div class="col">
-1871: Discovery of DNA
+#### 1965 Atlas of protein sequence and structure
 <img
-	src="images/introduction/avery_macleod_mccarty_experiment_02_yourgenome.png"
-	height="520"
+	src="images/introduction/dayhoff1965toc.png"
+	maxwidth="1100"
 	style="background:white; padding: 10px; margin: 0px"><br>
-<span class="small">Avery et al. 1944</span>
-</div>
-<div class="col">
-1910: Nucleotides 
-<img
-	src="images/introduction/bases.png"
-	height="320"
-	style="background:white; padding: 10px; margin: 0px"><br>
-<span class="small">Kossell 1910</span>
-</div>
-</div>
-<span class="small">Image credits: Genome Research Limited, nobelprize.org</span> -->
-
-<div class="row">
-<div class="col">
-1910: Nucleotides
-<img
-	src="images/introduction/bases.png"
-	height="320"
-	style="background:white; padding: 10px; margin: 0px"><br>
-<span class="small">Albrecht Kossel Nobel Prize:<br><a href="https://www.nobelprize.org/prizes/medicine/1910/summary/">The Chemical Composition of the Cell Nucleus</a></span>
-</div>
-<div class="col">
-1944: DNA is genetic
-<img
-	src="images/introduction/avery_macleod_mccarty_experiment_02_yourgenome.png"
-	height="520"
-	style="background:white; padding: 10px; margin: 0px"><br>
-<span class="small">Avery et al. 1944</span>
-</div>
-</div>
-<span class="small">Image credits: Nobel, Genome Research Limited</span>
 
 ---
-<div class="row">
-<div class="col">
-1953: Structure of DNA
+#### 1965 Atlas of protein sequence and structure
 <img
-	src="images/introduction/dna_structure.png"
-	height="520"
+	src="images/introduction/dayhoff1965.png"
+	maxwidth="1100"
 	style="background:white; padding: 10px; margin: 0px"><br>
-<span class="small"><a href="https://www.nature.com/articles/171737a0">Watson and Crick</a>, <i>Nature</i>, 1953</span>
-</div>
-<div class="col">
-1957: Central dogma
+
+---
+# 1969
 <img
-	src="images/introduction/dna_central_dogma_yourgenome.png"
-	height="520"
+	src="images/introduction/dayhoff1969title.png"
+	maxwidth="1100"
 	style="background:white; padding: 10px; margin: 0px"><br>
-<span class="small">Crick 1957</span>
-</div>
-</div>
-<span class="small">Image credits: Genome Research Limited</span>
+
+---
+# 1969
+<img
+	src="images/introduction/dayhoff1969alignment.png"
+	width="1100"
+	style="background:white; padding: 10px; margin: 0px"><br>
+
+---
+# 1969
+<img
+	src="images/introduction/dayhoff1969figure.png"
+	width="1100"
+	style="background:white; padding: 10px; margin: 0px"><br>
+
+---
+<img
+	src="images/introduction/crovello1974.png"
+	height="680"
+	style="background:white; padding: 10px; margin: 0px"><br>
+
+---
+# 1974
+
+Computers can be used for:
+
+1. information retrieval
+2. data accumulation
+3. data analysis
+4. systems analysis
+5. simulate biological phenomena
+6. control experiments
+7. course review
 
 
 ---
-### Genomics is intertwined with sequencing technology
+# 1982
 
-> DNA sequencing is the process of determining the *sequence* of nucleotides (ACTG) in a strand of DNA
+Genbank started by Walter Goad   
+at Los Alamos National Laboratory. 
 
-DNA sequencing = measurement  (like a microscope)
+<https://www.ncbi.nlm.nih.gov/genbank/statistics/>
+
+
+---
+<img
+	src="images/introduction/cabios1985.png"
+	height="660"
+	style="background:white; padding: 0px; margin: 0px"><br>
+
+---
+<img
+	src="images/introduction/cabios1toc.png"
+	height="660"
+	style="background:white; padding: 0px; margin: 0px"><br>
+
+---
+<img
+	src="images/introduction/beynon1985.png"
+	height="680"
+	style="background:white; padding: 10px; margin: 0px"><br>
+
+
+---
+<img
+	src="images/introduction/cabios2toc.png"
+	height="660"
+	style="background:white; padding: 0px; margin: 0px"><br>
+
+---
+<img
+	src="images/introduction/davis2023.png"
+	height="660"
+	style="background:white; padding: 0px; margin: 0px"><br>
+
+
+---
+<img
+	src="images/introduction/pearson1988.png"
+	height="660"
+	style="background:white; padding: 0px; margin: 0px"><br>
+
+
+---
+# 1988
+
+The NCBI was created by  
+the Health Omnibus Extension Act P.L.100-607  
+with $8 million.
+
+
+---
+<img
+	src="images/introduction/ncbi.png"
+	maxwidth="1100"
+	style="background:white; padding: 0px; margin: 0px"><br>
+
+
+---
+### ISMB 1993
+
+We spent a lot of time until at least ’96, arguing about the name. ‘Intelligent Systems for Molecular Biology’ came about because we thought at the time that it was going to be artificial intelligence for the software piece and laboratory robotics was going to be a big piece, instrumentation. Intelligent systems was supposed to include robotics.
+
+---
+We had all these grand ideas -- it was sort of [based on] how the genome project was going to advance, there would be both instruments and computer science. So that’s where the Intelligent Systems piece came from—it was supposed to be not just AI, but also robotics.
+
+- Lawrence Hunter ([10.1371/journal.pcbi.1002679](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3431341/))
+
+
+---
+<img
+	src="images/introduction/compbio1994.png"
+	height="600"
+	style="background:white; padding: 0px; margin: 0px"><br>
+
+
+
+---
+# 2004 
+
+Bioconductor project is launched.
+
+
+---
+## What is bioinformatics?
+
+Early applications include:
+
+- Structural biology
+- Phylogenetics
+- Data management and databases
+- Systems analysis
+- Software
+- Simulation
+- Artificial Intelligence
+- Genome sequences
+
+---
+Its history is intertwined with:
+
+<div class="fragment">Data</div>
+<div class="fragment">Genome sequences</div>
+<div class="fragment">Computer hardware</div>
 
 ---
 ### History of genome sequencing
+
+- Discovery of structure of DNA (1953)
 - Sanger sequencing (1977-1980)
 - The [Human Genome Project](https://www.genome.gov/human-genome-project) (1990-2003)
 - The [ENCODE project](https://www.genome.gov/Funded-Programs-Projects/ENCODE-Project-ENCyclopedia-Of-DNA-Elements) (2003-2021)
 - Sequencing by synthesis (2008-2012)
-- Single-molecule sequencing
-- 100k genomes sequenced
 
 ---
+## Definitions
+
+> the study of information processing in biological systems. Hesper and Hogeweg (1970)
 
 
-
-<div class="row">
-<div class="col">
-1977: Sanger sequencing
+---
+Altman 1998  
 <img
-	src="images/introduction/Radioactive_Fluorescent_Seq.jpg"
-	height="520"
-	style="background:white; padding: 10px; margin: 0px"><br>
-<span class="small">Chain Termination Method</span>
-</div>
-<div class="col">
-2001: Human genome
+	src="images/introduction/altman1998.png"
+	height="600"
+	style="background:white; padding: 0px; margin: 0px"><br>
+
+---
+NIH 2000
 <img
-	src="images/introduction/Logo_HGP.jpg"
-	height="320"
-	style="background:white; padding: 10px; margin-top: 90px"><br>
-<span class="small"></span>
-</div>
-</div>
-<span class="small">Image credits: Wikipedia</span>
+	src="images/introduction/nih2000.png"
+	maxwidth="1100"
+	style="background:white; padding: 0px; margin: 0px"><br>
 
 ---
-### 2008: Sequencing by synthesis
+Luscombe et al. 2001
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/v10bUR2aL5g?start=35" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<a href="https://www.youtube.com/embed/v10bUR2aL5g?start=35" class="small">Illumina</a>
+> Bioinformatics is conceptualizing biology in terms of macromolecules (in the sense of physical-chemistry) and then applying “informatics” techniques (derived from disciplines such as applied maths, computer science, and statistics) to understand and organize the information associated with these molecules, on a large-scale. 
 
 ---
-### Single-molecule sequencing
+Moore 2007  
+<img
+	src="images/introduction/moore2007.png"
+	height="600"
+	style="background:white; padding: 0px; margin: 0px"><br>
 
-<div class="row">
-<div class="col">
-<img src="images/introduction/pavlovic2020.png" height=620>
-</div>
-<div class="col">
-<li>2004: Helicos</li>
-<li>2009: SMRT</li>
-<li>2009: Nanoball</li>
-<li>2016: Nanopore</li>
-
-<span class="small"><a href="https://doi.org/10.1016/B978-0-12-816664-2.00009-8">Pavlovic et al. 2020. Microbiomics.</a></span>
-</div>
-</div>
 
 ---
-<div class="row">
-<div class="col">
+## Introduction to computational biology
 
-### Contrasting sequencing platforms
+What is computational biology?
 
-- Size of machine
-- Length of reads
-- Number of reads
-- Cost of machine
-- Cost of reads
-- Accuracy of reads
-- Technician time
-
-</div>
-<div class="col">
-<img src="images/introduction/levy2016.png" height=340>
-<span class="small"><a href="https://doi.org/10.1146/annurev-genom-083115-022413">Levy and Myers 2016</a></span>
-
-<h4>Other systems</h4>
-<div class="small">
-	<li><a href="http://www.biorxiv.org/content/early/2016/04/13/048603">Bionano: Saphyr system</a></li>
-	<li><a href="https://en.wikipedia.org/wiki/Pyrosequencing">Roche 454 Pyrosequencing</a></li>
-	<li><a href="https://www.thermofisher.com/us/en/home/brands/ion-torrent.html">ThermoFisher IonTorrent</a></li>
-	<li><a href="https://en.wikipedia.org/wiki/Polony_sequencing">Polony sequencing</a>
-</div>
-</div>
-</div>
-
+bioinformatics?
 
 
 
 ---
+## What is Bioconductor?
 
-### Sequencing costs
+Source: [software carpentry](https://github.com/carpentries-incubator/bioc-project
+)
 
-<iframe src="https://databio.org/seqcosts/cost.html" width="1250" height="550"></iframe>
-<a style="font-size:0.6em" href="https://databio.org/seqcosts">databio.org/seqcosts</a>
----
-### Sequencing
-
-- Sequencing technology doesn't just measure DNA
-
-Genome &rarr; transcriptome &rarr; epigenome
-
-
-<div class="fragment">Convert what you want to measure to DNA, then use DNA sequencing technology.</div>
-
----
-### Transcriptomics
-
-> The study of the RNA molecules produced by a cell.
-
-<span class="fragment">
-Complementary DNA (cDNA) is a DNA copy of a messenger RNA (mRNA) molecule produced by reverse transcriptase, a DNA polymerase that can use either DNA or RNA as a template. (Encyclopedia of Genetics)
-</span>
-
----
-### Epigenomics
-
-> The study of the chemical modification and physical conformation of cellular DNA and bound proteins
-
----
-
-<img src="images/introduction/rosa2013_chromatin.png" width="550"><br>
-<span class="small">Protocols: Bisulfite-seq, ChIP-seq, ATAC-seq, Hi-C</span>
-<br><span class="small">Rosa et al. 2013</span>
-
+1. A repository of R packages for biology
+2. A core project with core maintainers
+3. A community
 
 
 ---
-### Units
-<div class="row">
-	<div class="col">
-		<b>Genomics</b>
-		<li class="small">sequence alignment</li>
-		<li class="small">genome assembly</li>
-		<li class="small">variant calling</li>
-	</div>
-	<div class="col">
-		<b>Epigenomics</b>
-		<li class="small">short-read reference mapping</li>
-		<li class="small">string models </li>
-		<li class="small">genomic intervals</li>
-	</div>
-	<div class="col">
-		<b>Transcriptomics</b>
-		<li class="small">dimensionality reduction</li>
-		<li class="small">k-mer algorithms</li>
-		<li class="small">differential expression</li>
-	</div>
-</div><br><br>
+## What is Bioconductor?
 
-### Focus
-
-Algorithms and methods motivated by biology
-
-
-<!-- 
-- Public human genome funding comes from the [National Human Genome Research Institute](https://www.genome.gov).
-
- -->
+- Started in 2001
+- NIH-funded
+- Core packages maintained by the project
+- Contributed packages maintained by the community
+- 6-month release cycle
 
 ---
-### Genomics today
+## Package types
 
-- Genomics and health
-- Genomics and business
-- Genomics and evolution
-- Genomics and privacy
-- Genomics and ethics
-- Genomics and computing
+- *Software* packages are the heart of Bioconductor
+- *Annotation* data packages provide self-contained databases of diverse genomic annotations 
+- *Experiment* data packages provide self-contained datasets that are often used by software
+- *Workflow* packages collect vignettes that demonstrate the combined analysis, but do not provide any new source code or functionality themselves.
 
 ---
-### Genomics and health: traits
-![](images/introduction/polygenic.svg)
----
-### Genomics and health: GWAS
-![](images/introduction/GWAS_Fact-sheet2020.jpg)
----
-### Genomics and health: GWAS
+## Dig in!
 
- <video width="960" height="620" controls autoplay="true">
-  <source src="http://cloud.databio.org.s3.amazonaws.com/courses/GWAS_slideshow.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video> 
+1. How many packages does the current release of the Bioconductor project include?
 
+2. How many packages of each type does this number include?
 
 ---
-### Genomics and health: gene/environment
-![](images/introduction/gene-by-env.svg)
----
-### Genomics and health:<br>personalized medicine
-![](images/introduction/all_of_us.png)
----
-### Genomics and health: epigenetics
-- epimutations
-- cancer classification
-- clinical epigenetic assays
----
-### Genomics and business
-- Genome-stratified clinical trials
-- mRNA vaccines: Pfizer, Moderna
-- Clinical genetic tests
-- Direct-to-consumer (DTC) genetic testing:
-	- 23andme, ancestry.com, etc.
----
-### Genomics and law
-- Celera and the Human Genome Project
-	- intended to patent human genes in the race to finish the genome
----
-### Genomics and law
-- Uni. of Utah/NIEHS/Myriad patent BRCA1 (1994)
-- Myriad sold diagnostic tests for BCRA genes
-- Supreme Court struck down gene patents (2013)
 
-> A naturally occurring DNA segment is a product of nature and not patent eligible merely because it has been isolated, but cDNA is patent eligible because it is not naturally occurring.
----
-### Genomics and law
-- Lawrence Berkeley Laboratory tested employees without consent
-- Norman-Bloodsaw v. Lawrence Berkeley Laboratory (1998)
+## What are biocViews?
 
-> Holds that unauthorized employer testing for sensitive medical information [specifically including genetic testing] violates employees' right to informational privacy
+- a set of terms from a controlled vocabulary
+- used to classify Bioconductor packages
+- can help you find useful packages for your use case
 
 ---
-### Genomics and law
-- In the US: The Genetic Information Nondiscrimination Act of 2008
+## Dig in!
 
-> To prohibit discrimination on the basis of genetic information with respect to health insurance and employment.
-
-See also: [Genetic Information Nondiscrimination Act](https://www.eeoc.gov/statutes/genetic-information-nondiscrimination-act-2008)
----
-### Genomics and ethics
-- genetic ownership (patents, family dynamics)
-- genetic discrimination (employment, insurance)
-- genetically modified babies
-- identification and privacy
+In the RNASeq category, two very popular packages are `DESeq2` and `edgeR`. Which one is more popular in terms of download statistics (i.e., lower rank)?
 
 ---
-### Genomics and privacy: Crypt4GH
 
-![](images/introduction/Crypt4GH_comic.png)
+## Core packages
 
-See also: [Genome.gov on Genomic Privacy](https://www.genome.gov/about-genomics/policy-issues/Privacy)
+The [core team](https://www.bioconductor.org/about/core-team/) maintains the project.  
+A project core provides:
+
+- unified build system
+- cohesion of releases
+- software review
+- interoperability of packages
+- training materials
+
 ---
-### Computing is everywhere in genomics
 
-<div class="row">
-	<div class="col small">
-		<li>Genome assembly</li>
-		<li>Genome alignment</li>
-		<li>Variant identification</li>
-		<li>Variant associations</li>
-		<li>Phylogenetics</li>
-		<li>Viral evolution</li>
-		<li>Comparative genomics</li>
-		<li>Microbiome</li>		
-	</div>
-	<div class="col small">
-		<li>Data privacy and encryption</li>
-		<li>Data models</li>
-		<li>Data integration</li>
-		<li>Data sharing</li>
-		<li>Data compression</li>
-		<li>Data storage</li>
-		<li>Computing reproducibility</li>
-		<li>Single-cell sequencing</li>
-	</div>
-	<div class="col small">
-		<li>Genomic data structures</li>
-		<li>Outcome prediction</li>
-		<li>Disease subtyping</li>
-		<li>Gene prediction</li>
-		<li>Gene network regulation</li>
-		<li>Cell-type definition</li>
-		<li>Epigenetics</li>
-		<li>Metagenomics</li>
-	</div>
-</div>
+## Community Resources
+
+- Course materials: <https://www.bioconductor.org/help/>
+- Support site: <https://support.bioconductor.org/>
+- Mailing list
+- Slack channel
+
+---
+
+## Installing Bioconductor packages
+
+```R
+install.packages("BiocManager")
+BiocManager::install("GenomicRanges")
+```
+
+This can also handle CRAN packages
+
+---
+
+
+## Core package: Biostrings
+
+```R
+BiocManager::install("Biostrings")
+library("Biostrings")
+DNAString("ATCG")
+
+dna1 <- DNAString("ATCGCTTTGA")
+matchPattern("GM", dna1, fixed = TRUE)
+matchPattern("GM", dna1, fixed = FALSE)  # allow ambiguity
+```
+
+---
+
+```R
+adapters = readDNAStringSet(filepath = "TruSeq3-PE-2.fa")
+```
+
+```R
+DNAStringSet object of length 6:
+    width seq                                               names               
+[1]    34 TACACTCTTTCCCTACACGACGCTCTTCCGATCT                PrefixPE/1
+[2]    34 GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT                PrefixPE/2
+[3]    34 TACACTCTTTCCCTACACGACGCTCTTCCGATCT                PE1
+[4]    34 AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA                PE1_rc
+[5]    34 GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT                PE2
+[6]    34 AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC                PE2_rc
+```
+---
+## Documentation 
+
+Find documentation, vignettes, etc. on the website:
+
+<https://bioconductor.org/packages/release/bioc/html/Biostrings.html>
+
+
+---
+## Core package: GenomicRanges
+
+```R
+BiocManager::install("GenomicRanges")
+```
+
+GRanges stores a set of intervals plus sequence name.
+
+IRanges stores a set of intervals over a range of integer coordinates, without sequence names. 
+
+So: A GRanges object is an IRanges object plus a vector of sequence names.
+
+---
+```R
+demo_iranges <- IRanges(start = c(10, 15), width = c(10, 5))
+demo_iranges
+```
+
+```R
+IRanges object with 2 ranges and 0 metadata columns:
+          start       end     width
+      <integer> <integer> <integer>
+  [1]        10        19        10
+  [2]        15        19         5
+```
+
+---
+```R
+demo_granges <- GRanges(
+  seqnames = c("chr1", "chr2"),
+  ranges = IRanges(
+    start = c(10, 20),
+    end   = c(25, 35))
+)
+demo_granges
+```
+
+```R
+GRanges object with 2 ranges and 0 metadata columns:
+      seqnames    ranges strand
+         <Rle> <IRanges>  <Rle>
+  [1]     chr1     10-25      *
+  [2]     chr2     20-35      *
+  -------
+  seqinfo: 2 sequences from an unspecified genome; no seqlengths
+```
+
+---
+## Other popular packages
+
+- SummarizedExperiment - a data structure for one or more assays, each represented by a matrix-like object of numeric or other mode. The rows typically represent genomic ranges of interest and the columns represent samples. 
+- limma - Data analysis, linear models and differential expression for microarray data. 
+- BiocFileCache - creates a persistent on-disk cache of files for managing resources that are costly or difficult to create.
+
+---
+## Other popular packages
+
+- GenomicAlignments - efficient containers for storing and manipulating short genomic alignments (
+clusterProfiler - 
+- SingleCellExperiment - class for storing data from single-cell experiments
+- ComplexHeatmap - provides a highly flexible way to arrange multiple heatmaps and supports various annotation graphics
+
 ---
 ### Conclusion
 
-It's an interesting time for computational genomics.<br>
+It's an exciting time for computational biology.<br>
 
 <div class="fragment">
-	The world is starving for people who can apply advanced computation to growing genomic data.
+	The world is starving for people who can apply advanced computation to growing biological data.
 </div><br>
 
 
 <div class="fragment">
-	Looking forward to a fun and enlightening semester.
+	Looking forward to a fun and enlightening course.
 </div>
+
