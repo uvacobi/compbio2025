@@ -6,7 +6,7 @@ lectures:
     details: Course overview, history of computational biology, introduction to Bioconductor
     instructor: Nathan Sheffield
     links:
-      - url: slides/introduction
+      - url: #
         title: Lecture slides
       - url: https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2002050
         title: All biology is computational biology
@@ -26,12 +26,16 @@ lectures:
         title: Lecture slides
       - url: https://www.nature.com/articles/506150a
         title: Statistical errors
+        required: true
       - url: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004961
         title: Ten Simple Rules for Effective Statistical Practice
+        required: true
       - url: https://www.nature.com/articles/nbt1209-1135
         title: How does multiple testing correction work?
+        required: true
       - url: https://www.nature.com/articles/s41587-023-01794-9
         title: How the Monty Hall problem is similar to the false discovery rate in high-throughput data analysis
+        required: true
   - lecture_number: 3
     date: 2024-02-19
     topic: Sequence alignment
@@ -39,6 +43,7 @@ lectures:
     instructor: Aakrosh Ratan
     assignments:
       - title: Quiz 1
+        url: https://forms.gle/Led6u86Fq7NnemWr8
       - title: Assignment 1 due
     links:
       - url: slides/alignments
