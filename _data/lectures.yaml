@@ -40,7 +40,7 @@ lectures:
         required: true
     assignments:
       - title: Assignment 1
-        url: resources/Assignment 1.pdf
+        url: resources/Assignment1.pdf
   - lecture_number: 3
     date: 2024-02-19
     topic: Sequence alignment
