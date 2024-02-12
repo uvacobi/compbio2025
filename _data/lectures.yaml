@@ -36,6 +36,9 @@ lectures:
       - url: https://www.nature.com/articles/s41587-023-01794-9
         title: How the Monty Hall problem is similar to the false discovery rate in high-throughput data analysis
         required: true
+    assignments:
+      - title: Assignment 1
+        url: resources/Assignment1.pdf
   - lecture_number: 3
     date: 2024-02-19
     topic: Sequence alignment
