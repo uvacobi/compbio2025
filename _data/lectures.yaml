@@ -35,38 +35,53 @@ lectures:
   - lecture_number: 3
     date: 2024-02-19
     topic: Sequence alignment
-    details: Local vs. global alignment, Dynamic programming, Heuristic approaches, BLAST 
+    details: Local vs. global alignment, Dynamic programming, Heuristic approaches, BLAST, Short-read alignments
     instructor: Aakrosh Ratan
     assignments:
       - title: Quiz 1
       - title: Assignment 1 due
     links:
-      - url: #
+      - url: slides/alignments
         title: Lecture slides
+      - url: https://www.nature.com/articles/nbt0509-455
+        title: How to map billions of short reads onto genomes
+      - url: https://samtools.github.io/hts-specs/SAMv1.pdf
+        title: Sequence Alignment/Map Format Specification
   - lecture_number: 4
     date: 2024-02-21
     topic: Sequence alignment lab
-    details: null
+    details: Smith-Waterman algorithm
     instructor: Aakrosh Ratan
+    links:
+      - url: slides/alignments_lab
+        title: Lecture slides
+      - url: https://www.ncbi.nlm.nih.gov/books/NBK464187/
+        title: Chapter on Sequence Alignment 
+      - url: https://www.ncbi.nlm.nih.gov/BLAST/tutorial/Altschul-1.html
+        title: The Statistics of Sequence Similarity Scores
   - lecture_number: 5
     date: 2024-02-26
     topic: Genome assembly
-    details: null
+    details: Pairwise overlaps, Overlap-layout-consensus strategy, De Bruijn graphs
     instructor: Aakrosh Ratan
     links:
-      - url: #
+      - url: slides/assembly
         title: Lecture slides
+      - url: https://www.nature.com/articles/nmeth.1935
+        title: What every biologist should know about genome assembly
     assignments:
       - title: Quiz 2
       - title: Assignment 2 due
   - lecture_number: 6
     date: 2024-02-28
     topic: Genome assembly lab
-    details: null
+    details: Shortest superstring problem, Removal of transitive edges, Eulerian walks
     instructor: Aakrosh Ratan
     links:
-      - url: #
+      - url: slides/assembly_lab
         title: Lecture slides
+      - url: https://www.annualreviews.org/doi/10.1146/annurev-genom-090314-050032
+        title: The Theory and Practice of Genome Sequence Assembly
   - lecture_number: 7
     date: 2024-03-04
     topic: Molecular evolution and phylogenetics
