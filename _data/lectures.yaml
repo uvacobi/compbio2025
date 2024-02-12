@@ -50,8 +50,10 @@ lectures:
         title: Lecture slides
       - url: https://www.nature.com/articles/nbt0509-455
         title: How to map billions of short reads onto genomes
+        required: true
       - url: https://samtools.github.io/hts-specs/SAMv1.pdf
         title: Sequence Alignment/Map Format Specification
+        required: true
   - lecture_number: 4
     date: 2024-02-21
     topic: Sequence alignment lab
@@ -74,6 +76,7 @@ lectures:
         title: Lecture slides
       - url: https://www.nature.com/articles/nmeth.1935
         title: What every biologist should know about genome assembly
+        required: true
     assignments:
       - title: Quiz 2
       - title: Assignment 2 due
