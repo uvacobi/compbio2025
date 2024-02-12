@@ -13,6 +13,8 @@ lectures:
         required: true
       - url: https://www.nature.com/articles/nbt.2740
         title: So you want to be a computational biologist?
+      - url: https://www.degruyter.com/document/doi/10.7208/9780226080345/html?lang=en#contents
+        title: "Life Out of Sequence: A Data-Driven History of Bioinformatics"
     assignments:
       - title: Quiz 0
         url: https://docs.google.com/forms/d/e/1FAIpQLSepqDRD2htGRLupXRybXMbDsfOu5ipQrFU4pkgKeAVPWxl6nA/viewform?usp=sf_link

@@ -1,6 +1,6 @@
 ---
 layout: reveal_markdown
-title: "Course overview and introduction to computational biology"
+title: "Course overview, introduction to computational biology and bioconductor"
 tags: slides 
 date: 2021-12-09
 ---
@@ -10,8 +10,8 @@ date: 2021-12-09
 ## Course overview
 
 - Course website: https://cphg.github.io/compbio/
-- Quizzes
-- Programming assignments
+- Quizzes: on "required" readings plus assignment topics.
+- Programming assignments: please attempt on your own first
 
 
 ---
@@ -22,7 +22,7 @@ What is computational biology?
 <div class="fragment">bioinformatics?</div>
 
 ---
-## History of biology + computers
+## Some history
 
 - 1950-1960s Margaret Dayhoff
 - 1970 First use of term bioinformatics (in dutch)
@@ -32,6 +32,22 @@ What is computational biology?
 - 1988 FASTA published
 - 1988 NCBI is founded
 - 1993 Intelligent Systems in Molecular Biology (ISMB) 
+- 1994 Journal of Computational Biology
+
+---
+#### 1965 Atlas of protein sequence and structure
+<img
+	src="images/introduction/dayhoff1965toc.png"
+	maxwidth="1100"
+	style="background:white; padding: 10px; margin: 0px"><br>
+
+---
+#### 1965 Atlas of protein sequence and structure
+<img
+	src="images/introduction/dayhoff1965.png"
+	maxwidth="1100"
+	style="background:white; padding: 10px; margin: 0px"><br>
+
 ---
 # 1969
 <img
@@ -52,13 +68,6 @@ What is computational biology?
 	src="images/introduction/dayhoff1969figure.png"
 	width="1100"
 	style="background:white; padding: 10px; margin: 0px"><br>
-
-
-
----
-# 1970
-
-Bio-informatics
 
 ---
 <img
@@ -142,6 +151,32 @@ with $8 million.
 	maxwidth="1100"
 	style="background:white; padding: 0px; margin: 0px"><br>
 
+
+---
+### ISMB 1993
+
+We spent a lot of time until at least ’96, arguing about the name. ‘Intelligent Systems for Molecular Biology’ came about because we thought at the time that it was going to be artificial intelligence for the software piece and laboratory robotics was going to be a big piece, instrumentation. Intelligent systems was supposed to include robotics.
+
+---
+We had all these grand ideas -- it was sort of [based on] how the genome project was going to advance, there would be both instruments and computer science. So that’s where the Intelligent Systems piece came from—it was supposed to be not just AI, but also robotics.
+
+- Lawrence Hunter ([10.1371/journal.pcbi.1002679](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3431341/))
+
+
+---
+<img
+	src="images/introduction/compbio1994.png"
+	height="600"
+	style="background:white; padding: 0px; margin: 0px"><br>
+
+
+
+---
+# 2004 
+
+Bioconductor project is launched.
+
+
 ---
 ## What is bioinformatics?
 
@@ -154,252 +189,63 @@ Early applications include:
 - Software
 - Simulation
 - Artificial Intelligence
+- Genome sequences
 
 ---
-## What is bioinformatics?
+Its history is intertwined with:
 
-History is intertwined with:
-
-<div class="fragment">data</div>
-<div class="fragment">computer hardware</div>
-<div class="fragment">genome sequences</div>
-
----
-> the study of information processing in biological systems. Hesper and Hogeweg (1970)
-
----
-> The NIH Biomedical Information Science and Technology Initiative Consortium agreed on the following definitions of bioinformatics and computational biology recognizing that no definition could completely eliminate overlap with other activities or preclude variations in interpretation by different individuals and organizations. (Huerta 2000)
-
----
-> Bioinformatics: Research, development, or application of computational tools and approaches for expanding the use of biological, medical, behavioral or health data, including those to acquire, store, organize, archive, analyze, or visualize such data.
-
----
-> Computational Biology: The development and application of data-analytical and
-theoretical methods, mathematical modeling and computational simulation techniques to the study of biological, behavioral, and social systems.
-
----
-> an interdisciplinary field that blends computer science and biostatistics with biological and biomedical sciences such as biochemistry, cell biology, developmental biology, genetics, genomics, and physiology. Bioinformatics emerged as an important discipline shortly after the development of
-high-throughput DNA sequencing technologies in the 1970s (Moore 2007)
-
----
-> Bioinformatics is conceptualizing biology in terms of macromolecules
-(in the sense of physical-chemistry) and then applying “informatics” techniques (derived from disciplines such as applied maths, computer science, and statis-
-tics) to understand and organize the information associated with these molecules, on a large-scale. (Luscombe et al. 2001)
-
----
-> Bioinformatics can generally be defined as the study of how information technologies are used to solve problems in biology. The precise definition of bioinformatics is a matter of some debate. The most narrow usage of the term refers to the creation and management of biological databases in support of genomic sequences. The most broad usage includes essentially all applications of computers and information sciences to problems in biology. (Altman 1998)
-
----
-
----
-### Early history of genomics
-
-- Discovery of DNA (1871)
-- Discovery of nucleotides (1910)
-- DNA is the genetic material (1944)
-- Discovery of structure of DNA (1953)
-- The central dogma (1957)
-
-<span class="small">See https://www.yourgenome.org/facts/timeline-history-of-genomics</span>
----
-<!--
-<div class="row">
-<div class="col">
-1871: Discovery of DNA
-<img
-	src="images/introduction/avery_macleod_mccarty_experiment_02_yourgenome.png"
-	height="520"
-	style="background:white; padding: 10px; margin: 0px"><br>
-<span class="small">Avery et al. 1944</span>
-</div>
-<div class="col">
-1910: Nucleotides 
-<img
-	src="images/introduction/bases.png"
-	height="320"
-	style="background:white; padding: 10px; margin: 0px"><br>
-<span class="small">Kossell 1910</span>
-</div>
-</div>
-<span class="small">Image credits: Genome Research Limited, nobelprize.org</span> -->
-
-<div class="row">
-<div class="col">
-1910: Nucleotides
-<img
-	src="images/introduction/bases.png"
-	height="320"
-	style="background:white; padding: 10px; margin: 0px"><br>
-<span class="small">Albrecht Kossel Nobel Prize:<br><a href="https://www.nobelprize.org/prizes/medicine/1910/summary/">The Chemical Composition of the Cell Nucleus</a></span>
-</div>
-<div class="col">
-1944: DNA is genetic
-<img
-	src="images/introduction/avery_macleod_mccarty_experiment_02_yourgenome.png"
-	height="520"
-	style="background:white; padding: 10px; margin: 0px"><br>
-<span class="small">Avery et al. 1944</span>
-</div>
-</div>
-<span class="small">Image credits: Nobel, Genome Research Limited</span>
-
----
-<div class="row">
-<div class="col">
-1953: Structure of DNA
-<img
-	src="images/introduction/dna_structure.png"
-	height="520"
-	style="background:white; padding: 10px; margin: 0px"><br>
-<span class="small"><a href="https://www.nature.com/articles/171737a0">Watson and Crick</a>, <i>Nature</i>, 1953</span>
-</div>
-<div class="col">
-1957: Central dogma
-<img
-	src="images/introduction/dna_central_dogma_yourgenome.png"
-	height="520"
-	style="background:white; padding: 10px; margin: 0px"><br>
-<span class="small">Crick 1957</span>
-</div>
-</div>
-<span class="small">Image credits: Genome Research Limited</span>
-
-
----
-### Genomics is intertwined with sequencing technology
-
-> DNA sequencing is the process of determining the *sequence* of nucleotides (ACTG) in a strand of DNA
-
-DNA sequencing = measurement  (like a microscope)
+<div class="fragment">Data</div>
+<div class="fragment">Genome sequences</div>
+<div class="fragment">Computer hardware</div>
 
 ---
 ### History of genome sequencing
+
+- Discovery of structure of DNA (1953)
 - Sanger sequencing (1977-1980)
 - The [Human Genome Project](https://www.genome.gov/human-genome-project) (1990-2003)
 - The [ENCODE project](https://www.genome.gov/Funded-Programs-Projects/ENCODE-Project-ENCyclopedia-Of-DNA-Elements) (2003-2021)
 - Sequencing by synthesis (2008-2012)
-- Single-molecule sequencing
-- 100k genomes sequenced
 
 ---
+## Definitions
+
+> the study of information processing in biological systems. Hesper and Hogeweg (1970)
 
 
-
-<div class="row">
-<div class="col">
-1977: Sanger sequencing
+---
+Altman 1998  
 <img
-	src="images/introduction/Radioactive_Fluorescent_Seq.jpg"
-	height="520"
-	style="background:white; padding: 10px; margin: 0px"><br>
-<span class="small">Chain Termination Method</span>
-</div>
-<div class="col">
-2001: Human genome
+	src="images/introduction/altman1998.png"
+	height="600"
+	style="background:white; padding: 0px; margin: 0px"><br>
+
+---
+NIH 2000
 <img
-	src="images/introduction/Logo_HGP.jpg"
-	height="320"
-	style="background:white; padding: 10px; margin-top: 90px"><br>
-<span class="small"></span>
-</div>
-</div>
-<span class="small">Image credits: Wikipedia</span>
+	src="images/introduction/nih2000.png"
+	maxwidth="1100"
+	style="background:white; padding: 0px; margin: 0px"><br>
 
 ---
-### 2008: Sequencing by synthesis
+Luscombe et al. 2001
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/v10bUR2aL5g?start=35" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<a href="https://www.youtube.com/embed/v10bUR2aL5g?start=35" class="small">Illumina</a>
+> Bioinformatics is conceptualizing biology in terms of macromolecules (in the sense of physical-chemistry) and then applying “informatics” techniques (derived from disciplines such as applied maths, computer science, and statistics) to understand and organize the information associated with these molecules, on a large-scale. 
 
 ---
-### Single-molecule sequencing
-
-<div class="row">
-<div class="col">
-<img src="images/introduction/pavlovic2020.png" height=620>
-</div>
-<div class="col">
-<li>2004: Helicos</li>
-<li>2009: SMRT</li>
-<li>2009: Nanoball</li>
-<li>2016: Nanopore</li>
-
-<span class="small"><a href="https://doi.org/10.1016/B978-0-12-816664-2.00009-8">Pavlovic et al. 2020. Microbiomics.</a></span>
-</div>
-</div>
-
----
-<div class="row">
-<div class="col">
-
-### Contrasting sequencing platforms
-
-- Size of machine
-- Length of reads
-- Number of reads
-- Cost of machine
-- Cost of reads
-- Accuracy of reads
-- Technician time
-
-</div>
-<div class="col">
-<img src="images/introduction/levy2016.png" height=340>
-<span class="small"><a href="https://doi.org/10.1146/annurev-genom-083115-022413">Levy and Myers 2016</a></span>
-
-<h4>Other systems</h4>
-<div class="small">
-	<li><a href="http://www.biorxiv.org/content/early/2016/04/13/048603">Bionano: Saphyr system</a></li>
-	<li><a href="https://en.wikipedia.org/wiki/Pyrosequencing">Roche 454 Pyrosequencing</a></li>
-	<li><a href="https://www.thermofisher.com/us/en/home/brands/ion-torrent.html">ThermoFisher IonTorrent</a></li>
-	<li><a href="https://en.wikipedia.org/wiki/Polony_sequencing">Polony sequencing</a>
-</div>
-</div>
-</div>
-
-
+Moore 2007  
+<img
+	src="images/introduction/moore2007.png"
+	height="600"
+	style="background:white; padding: 0px; margin: 0px"><br>
 
 
 ---
+## Introduction to computational biology
 
-### Sequencing costs
+What is computational biology?
 
-<iframe src="https://databio.org/seqcosts/cost.html" width="1250" height="550"></iframe>
-<a style="font-size:0.6em" href="https://databio.org/seqcosts">databio.org/seqcosts</a>
----
-### Sequencing
-
-- Sequencing technology doesn't just measure DNA
-
-Genome &rarr; transcriptome &rarr; epigenome
-
-
-<div class="fragment">Convert what you want to measure to DNA, then use DNA sequencing technology.</div>
-
----
-### Transcriptomics
-
-> The study of the RNA molecules produced by a cell.
-
-<span class="fragment">
-Complementary DNA (cDNA) is a DNA copy of a messenger RNA (mRNA) molecule produced by reverse transcriptase, a DNA polymerase that can use either DNA or RNA as a template. (Encyclopedia of Genetics)
-</span>
-
----
-### Epigenomics
-
-> The study of the chemical modification and physical conformation of cellular DNA and bound proteins
-
----
-
-<img src="images/introduction/rosa2013_chromatin.png" width="550"><br>
-<span class="small">Protocols: Bisulfite-seq, ChIP-seq, ATAC-seq, Hi-C</span>
-<br><span class="small">Rosa et al. 2013</span>
-
-
-
-
+bioinformatics?
 
 
 
@@ -455,10 +301,12 @@ In the RNASeq category, two very popular packages are `DESeq2` and `edgeR`. Whic
 
 ## Core packages
 
-The [core team](https://www.bioconductor.org/about/core-team/) maintains the project. A project core provides:
+The [core team](https://www.bioconductor.org/about/core-team/) maintains the project.  
+A project core provides:
 
 - unified build system
 - cohesion of releases
+- software review
 - interoperability of packages
 - training materials
 
