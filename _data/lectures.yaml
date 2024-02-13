@@ -118,6 +118,9 @@ lectures:
         title: Lecture slides
       - url: https://doi.org/10.1186/s13059-014-0550-8
         title: "Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2"
+        required: true
+      - url: https://doi.org/10.1186/gb-2010-11-10-r106
+        title: "Differential expression analysis for sequence count data"
     assignments:
       - title: Quiz 4
       - title: Assignment 4 due
