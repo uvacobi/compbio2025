@@ -38,6 +38,8 @@ lectures:
       - url: https://www.nature.com/articles/s41587-023-01794-9
         title: How the Monty Hall problem is similar to the false discovery rate in high-throughput data analysis
         required: true
+      - url: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-022-02648-4
+        title: Exaggerated false positives by popular differential expression methods when analyzing human population samples
     assignments:
       - title: Assignment 1
         url: resources/Assignment1.pdf
