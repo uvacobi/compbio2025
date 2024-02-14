@@ -24,7 +24,7 @@ lectures:
     details: Random Variables, Probability Distributions, Central Limit Theorem, Hypothesis Testing, P-value, Type I and Type II Errors, Multiple Testing Correction, FDR
     instructor: Chongzhi Zang
     links:
-      - url: #
+      - url: resources/2 Statistics review.pdf
         title: Lecture slides
       - url: https://www.nature.com/articles/506150a
         title: Statistical errors
