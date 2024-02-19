@@ -154,7 +154,7 @@ for i in range(0, len(y)):
 print(max_run_length)
 ```
 
-Note: So this requires comparing all letters at each offset, and it would be quadratic in the length of the shorter sequence
+Note: So this requires comparing all letters at each offset, and it would be quadratic in the length of the shorter sequence.
 
 ---
 
@@ -197,14 +197,21 @@ Note: Enumerating and scoring them is not an option. Need a polynomial algorithm
 * Hallmarks of dynamic programming
   * Optimal substructure
   * Overlapping sub-problems
-* For optimization problems
+
+<!-- * For optimization problems
   * Optimal choice is made locally
   * Score is added through the search space
-  * Traceback common, find optimal path based on the individual choices
+  * Traceback common, find optimal path based on the individual choices -->
 
 Note: Optimal substructure: Optimal solution to problems contains optimal solution to sub-problems. Overlapping sub-problems : Limited number of distinct sub-problems, repeated many times. Another set of algorithms that operate on problems with optimal substructure are called greedy algorithms. Faster, easier to set up, but often you are not guaranteeing optimal solution, and when looking at subproblems, you are never revising your solution. An example is the Dijkstra’s shortest path algorithm 
 
 ---
+
+## Sequence alignments: Optimal substructure
+![matrix](images/alignments/dpmatrix.svg)
+
+---
+
 
 ## Sequence alignments: Overlapping subproblems
 ![additivescores](images/alignments/recursive.svg) <!-- .element height="70%" width="70%" -->
@@ -451,6 +458,17 @@ Recurrence equation with modifications can accomodate these variations
 
 ---
 
+## Dynamic Programming
+
+* https://github.com/cphg/sequence_alignment
+* Implement local alignment of two sequences that can use affine gap penalties
+* Skeleton code is provided in python 
+* Simple test cases are also provided 
+* Clone the repo, implement the `smith_waterman` function in `align_sequences.py`
+* You can test your work by running `python3 testdriver`
+
+---
+
 ## Linear time exact matching 
 * gene in chromosome (local alignment is expensive)
 * Karp-Rabin algorithm
@@ -485,6 +503,14 @@ Compute next number based on the previous one
 * Worst case runtime $O(mn)$
 
 Note: if every position is a match or false-positive
+
+---
+
+## Karp-Rabin algorithm
+
+![karp-robin](images/alignments/rk3.png) <!-- .element height="50%" width="50%" -->
+
+
 
 ---
 
