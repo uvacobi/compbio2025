@@ -9,11 +9,53 @@ tags: slides
               
 ---
 
+## Assignment
+
+* https://github.com/cphg/sequence_alignment
+* Implement local alignment of two sequences that can use affine gap penalties
+* Skeleton code is provided in python
+* Simple test cases are also provided  
+* Clone the repo, implement the `smith_waterman` function in `align_sequences.py`
+* You can test your work by running `python3 testdriver`
+
+---
+
+## Local alignment (Smith-Waterman algorithm) 
+**Initialization:** $F(i,0) = F(0,j) = 0$
+
+**Iteration:**
+
+`$$F(i,j) = max \left\{
+                \begin{array}{1}
+                  0\\
+                  F(i-1,j) - gap\\
+                  F(i-1, j-1) + score\\
+                  F(i, j-1) -gap
+                \end{array}
+              \right\} $$`
+
+**Termination:** Anywhere
+
+---
+
+## Local alignment (Smith-Waterman algorithm with affine gap)
+
+$$S = O + k*E$$
+* With affine gaps you could:
+    * open a gap
+    * extend a gap
+* So when considering a gap compare
+    * cost of opening a new gap
+    * cost of extending an already existing gap
+* [Smith-Waterman algorithm with pseudocode](https://en.wikipedia.org/wiki/Smith–Waterman_algorithm)
+
+---
+
 ## Algorithmic complexity
 
 Measure of how long an algorithm would take to complete given an input of size $n$.
 
-![growth](images/alignments/growth.pdf) <!-- .element height="50%" width="50%" -->
+![growth](images/alignments/growth.png) <!-- .element height="50%" width="50%" -->
 
 Note: You can talk about space complexity and/or time complexity. You assume that the underlying factor affecting your program's performance and efficiency is the hardware, OS, and CPU you use. There are also ways of talking about complexity in terms of the average case, best case (though that is never what you should concern yourself with), worst case.
 
@@ -123,14 +165,52 @@ Note: What is the time complexity here? O(n). This is a dynamic programming algo
 
 ---
 
-## Dynamic Programming
+## Seed, Anchor, Extend
 
-* https://github.com/cphg/sequence_alignment
-* Implement local alignment of two sequences that can use affine gap penalties
-* Skeleton code is provided in python 
-* Simple test cases are also provided 
-* Clone the repo, implement the `smith_waterman` function in `align_sequences.py`
-* You can test your work by running `python3 testdriver`
+![seeds and HSPs](images/alignments/seeds_and_hsps.png) <!-- .element height="50%" width="50%" -->
+
+<small>Source: [LASTZ documentation](https://www.bx.psu.edu/~rsharris/lastz/README.lastz-1.04.15.html)</small>
+
+Note: middle of the highest-scoring 31-bp interval in the HSP
+
+---
+
+## Seed, Anchor, Extend
+
+![ydrop](images/alignments/ydrop.png) <!-- .element height="50%" width="50%" -->
+
+<small>Source: [LASTZ documentation](https://www.bx.psu.edu/~rsharris/lastz/README.lastz-1.04.15.html)</small>
+
+---
+
+## BWA for alignments
+
+![BWA help](images/alignments/bwa_help.png)
+
+---
+
+## Reproducible alignments
+
+What could cause differences in alignments in different runs of the same set of reads?
+
+[On genomic repeats and reproducibility](https://academic.oup.com/bioinformatics/article/32/15/2243/1743552)
+
+Note: Equally likely alignments, one is selected at random; difference in number of threads used can cause differences in number of reads used to determine mean and sd of fragment length.
+
+---
+
+## Each read is aligned independently
+![alignment](images/alignments/realignment.png) <!-- .element height="50%" width="100%" -->
+
+---
+
+## Be careful in regions that are different
+![alignment](images/alignments/sv.png) <!-- .element height="50%" width="100%" -->
+
+---
+
+## Mind the gap
+![alignment](images/alignments/telomere.png) <!-- .element height="50%" width="100%" -->
 
 ---
 
@@ -170,13 +250,183 @@ Note: Indicates the number of hits or alignments that are expected to be seen by
 
 ---
 
+## Short-read alignment
+* Input
+  * Shorter sequences
+  * A sequencing run creates large number of reads
+  * Enough to cover genome multiple times
+* Output
+  * Position of each read $r$ of length $m$ in the reference.
+* Motivation
+  * Resequencing
+  * More is better!!
+
+---
+
+## `GATTACA` in the human genome
+* Brute-force
+  * Scan each *k*-mer in the reference
+* Analysis:
+  * Genome size: 3,000,000,000
+  * Query length:  7
+  * Number of comparisons: 21,000,000,000
+  * Assuming each comparison takes 1/1,000,000,000 of a second
+    * Running time: 0.24 days (for one 7bp read)
+
+Note: And a possible solution is an index
+ 
+---
+
+## Indices
+* Considerations
+  * Space for the index
+  * Time required to build index
+  * Time required for searching
+* Approaches
+  * Hash-table based 
+    * BFAST, MAQ, MOSIAK, SHRiMP, SOAP, $\ldots$
+  * Suffix-tree or BWT based
+    * Bowtie, BWA, SOAP2, $\ldots$
+
+---
+
+## Word position table
+* Encoding : A=$00_2$, C=$01_2$, G=$10_2$, T=$11_2$
+* Build an inverted index of every *k*-mer in the genome
+* `GATTACA` = $10001111000100_2$ = $9156_{10}$
+
+![word](images/alignments/word_position.svg) <!-- .element height="40%" width="40%" -->
+
+---
+
+## Burrows-Wheeler transform
+* Initially developed for compression
+* Reversible permutation of the characters of a string
+
+![BTW](images/alignments/BWT.png)
+
+---
+
+## Burrows-Wheeler transform
+```code
+def rotate(sequence, n):
+    return sequence[n:] + sequence[:n]
+
+def BWT(sequence):
+    seq = sequence + "$" 
+    perms = [rotate(seq,i) for i in range(len(seq))] 
+    return "".join([x[-1] for x in sorted(perms)])
+```
+
+```text
+>>> string = "abaaba"
+>>> BWT(string)
+'abba$aa'
+
+>>> string = "Let_me_tell_you_a_little_story_all_about_the_DNA"
+>>> BWT(string)
+'AN_$Deulyateetl___ahlmtLtlllt_ae_tybo_eu__tsioor_'
+```
+
+---
+
+## Insight: BWT provides "structure"
+$BWT(T)$ orders the characters of $T$ according to alphabetical order of their right context (characters that come after it)
+
+![BWT_insight](images/alignments/BWT_insight.png)
+
+---
+
+## Reversing the BWT
+
+![reversing](images/alignments/BWT_reversing.png)
+
+---
+
+## Reversing the BWT
+![reversing](images/alignments/inverting1.svg)
+$T=abaaba$
+
+---
+
+## Reversing the BWT
+![reversing](images/alignments/inverting2.svg)
+$T=abaaba$
+
+---
+
+## Reversing the BWT
+![reversing](images/alignments/inverting3.svg)
+$T=abaaba$
+
+---
+
+## Reversing the BWT
+![reversing](images/alignments/inverting4.svg)
+$T=abaaba$
+
+---
+
+## Reversing the BWT
+![reversing](images/alignments/inverting5.svg)
+$T=abaaba$
+
+---
+
+## Reversing the BWT
+![reversing](images/alignments/inverting6.svg)
+$T=abaaba$
+
+---
+
+## Reversing the BWT
+```code
+def invert_BWT(bw):
+    '''Given BWT(T) return T.'''
+    table = [""] * len(bw) 
+    for i in range(len(bw)):
+        table = sorted(bw[i] + table[i] for i in range(len(bw)))
+    s = [x for x in table if x[-1] == '$']
+    assert len(s) == 1
+    return s[0][:-1]
+```
+
+```text
+>>> bw = "abba$aa"
+>>> invert_BWT(bw)
+'abaaba'
+
+>>> bw = "AN_$Deulyateetl___ahlmtLtlllt_ae_tybo_eu__tsioor_" 
+>>> invert_BWT(string)
+'Let_me_tell_you_a_little_story_all_about_the_DNA'
+```
+
+---
+
+## Insight : LF mapping
+* The $i^{th}$ occurrence of $c$ in the last column of the BWM is the same exact
+ character as the $i^{th}$ occurrence of $c$ in the first column.
+
+![LF](images/alignments/LF2.png)
+
+---
+
+## FM index
+* combining BWT with a few auxilliary data structures
+* core of the index is $F$ and $L$ from BWM
+* $L$ is the same size as $T$
+* $F$ can be represented as an array of $|\sum|$ integers
+* $L$ is compressible
+
+---
+
 ## More on short-read alignment algorithms
 
 https://cphg.github.io/compgen/slides/short_read.html
 
 ---
 
-## Dynamic Programming
+## Assignment
 
 * https://github.com/cphg/sequence_alignment
 * Implement local alignment of two sequences that can use affine gap penalties
