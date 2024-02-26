@@ -52,6 +52,8 @@ lectures:
       - title: Quiz 1
         url: https://forms.gle/Led6u86Fq7NnemWr8
       - title: Assignment 1 due
+      - title: Assignment 2
+        url: https://github.com/cphg/sequence_alignment
     links:
       - url: slides/alignments
         title: Lecture slides
@@ -86,6 +88,7 @@ lectures:
         required: true
     assignments:
       - title: Quiz 2
+        url: https://forms.gle/NV6rLBURAt4YJrdv5
       - title: Assignment 2 due
   - lecture_number: 6
     date: 2024-02-28
@@ -102,8 +105,22 @@ lectures:
     topic: Molecular evolution and phylogenetics
     details: 
     instructor: Nathan Sheffield
+    links:
+      - title: Phylogenetic tree building in the genomic age
+        url: https://doi.org/10.1038/s41576-020-0233-0
+        required: true
+      - title: Cases in which parsimony or compatibility methods will be positively misleading
+        url: https://www.jstor.org/stable/2412923
+        required: true
+      - title: "Evolutionary Trees from DNA Sequences: A Maximum Likelihood Approach"
+        url: http://nematodes.org/teaching/tutorials/phylogenetics/Bayesian_Workshop/PDFs/Felsenstein%20J%20Mol%20Evol%201981.pdf
+      - title: "A Simple, Fast, and Accurate Algorithm to Estimate Large Phylogenies by Maximum Likelihood"        
+        url: https://doi.org/10.1080/10635150390235520
+      - title: "MEGA11: Molecular Evolutionary Genetics Analysis Version 11"
+        url: https://doi.org/10.1093/molbev/msab120
     assignments:
       - title: Quiz 3
+        url: https://forms.gle/hjUGnwXHRHyKNNb6A
       - title: Assignment 3 due
   - lecture_number: 8
     date: 2024-03-06

@@ -91,7 +91,7 @@ Resources include both required reading as well as additional secondary sources 
 
 ## Assignments
 
-Each module includes 6 homework assignments. These assignments will include programming, theoretical problems, and data analysis. The assignments be assigned each week, and will be due one week later. Each assignment is worth 12.5% of the final grade for the module.
+Each module includes 6 homework assignments. These assignments will include programming, theoretical problems, and data analysis. The assignments will be assigned each week, and will be due one week later. Each assignment is worth 12.5% of the final grade for the module.
 
 <!-- Students should complete assignments individually. We want you to work together at the level of sharing ideas, concepts, or suggested functions or reading material. You should not share or seek out completed solutions to the assignments. -->
 
