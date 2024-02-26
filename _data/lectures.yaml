@@ -90,6 +90,8 @@ lectures:
       - title: Quiz 2
         url: https://forms.gle/NV6rLBURAt4YJrdv5
       - title: Assignment 2 due
+      - title: Assignment 3
+        url: https://github.com/cphg/genome_assembler
   - lecture_number: 6
     date: 2024-02-28
     topic: Genome assembly lab
