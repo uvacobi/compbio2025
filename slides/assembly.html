@@ -88,8 +88,11 @@ Note: Shotgun sequencing requires multiple copies of the genome, which are effec
 ## Statistics
 
 * The probability that one of the $N$ reads starts at any specific nucleotide is $N/G$.
-* Expected # of reads starting with $[x-L+1,x]$ is $NG/L = a$
+* Expected # of reads starting in interval $I$ of length $L$ is $NG/L = a$
 * We can assume a poisson distribution
+    * $\lambda$ events in a given interval
+    * probability of k events = ${\frac {\lambda ^{k}e^{-\lambda }}{k!}}$
+
 * $p$ = $P$(no read starts in $I$) = $e^{-a}$
 * $q$ = $P$(at least one read starts in $I$) = $1 - e^{-a}$
 
@@ -157,13 +160,6 @@ Overlap : Suffix of a read is similar to the prefix of another read
 ![intro](images/assembly/graph2.svg) <!-- .element width="50%" height="50%" -->
 
 Note: We can represent such an overlap with a directed graph, where directed edges connect overlapping nodes (reads). The suffix of source is similar to the prefix of sink. Effectively, we want to do this for all pair of reads to build our overlap graph.
-
----
-
-## Finding all overlaps
-![intro](images/assembly/find_overlaps.png) <!-- .element width="70%" height="70%" -->
-
-Note: Count k occurences of P in O(n) time and it does not need T. There are of course other ways to get layouts, for example as in YASRA.
 
 ---
 
@@ -256,7 +252,7 @@ Note: Mismatch could be due to sequencing error or repeat. Since the path throug
 ---
 
 ## Consensus
-![intro](images/assembly/consensus.png) <!-- .element width="80%" height="80%" -->
+![intro](images/assembly/introduction5.svg) <!-- .element width="70%" height="70%" -->
 
 Note: At each position, ask: what nucleotide (and/or gap) is here? Complications: (a) sequencing error, (b) ploidy. 
 
