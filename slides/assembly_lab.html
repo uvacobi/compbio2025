@@ -9,6 +9,43 @@ tags: slides
 
 ---
 
+## NCBI assembly model
+
+![Assembly Model](images/assembly/GRCh38p1_Assembly_Model.png)
+
+<small>Source: [NCBI Genome Assembly Model](https://www.ncbi.nlm.nih.gov/assembly/model/)</small>
+
+Notes: Sequence updates that are released outside of the major assembly cycle are called patches. There are two types of patches: Fix patch: This patch is made in a region where the Tiling Path File (TPF) will change in the next major assembly update. These scaffolds will be withdrawn at the next major assembly update, the accessions will be made secondary to the chromosome and the sequence will be incorporated into the Primary Assembly TPF. Novel patch: These represent new alternate loci. At the next major assembly update, these sequences will be moved to the appropriate assembly-unit and the accession will remain stable. A sequence that provides an alternate representation of a locus found in the haploid assembly is called a alt loci. PAR Pseudo-autosomal region. A region found on the X and Y chromosomes of mammals that allows recombination between the sex chromosomes
+
+---
+
+## Which human genome should I use?
+
+* [Heng Li: Which human reference genome to use](https://lh3.github.io/2017/11/13/which-human-reference-genome-to-use)
+* GRCh37 or hg19: use hs37-1kg or hs37d5
+* GRCh38 of hg38: use the version at [here](ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.15_GRCh38/seqs_for_alignment_pipelines.ucsc_ids/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz)
+
+Potential issues
+* Inclusion of ALT contigs
+* Inclusion of multi-placed sequences (e.g., PAR)
+* Chromosome names
+* Unplaced and unlocalized contigs
+
+---
+
+## Assignment
+
+* [https://github.com/cphg/genome_assembler](https://github.com/cphg/genome_assembler)
+* Implement an algorithm to simplify overlap graph by iteratively removing transitively-inferrible edges
+    * implement the `simplify` function in `remove_transitive_edges.py`
+    * test your work `python3 test_remove_transitive_edges`
+* Skeleton code is provided in python
+* A simple graph data structure has already been implemented for you. Use it.
+* Simple test cases are also provided
+* Clone the repo before making changes
+
+---
+
 ## Shortest Common Superstring
 Given set of strings $S$ find $SCS(S)$: shortest string containing the strings in $S$ as substrings
 ![SCS](images/assembly/scs1.png)
@@ -56,14 +93,11 @@ Note: Greedy algorithm is not guaranteed to choose overlaps yielding SCS
 
 ---
 
-## Programming Problems
+## Programming Problem for fun
 * [https://github.com/cphg/genome_assembler](https://github.com/cphg/genome_assembler)
 * Skeleton code is provided in python
 * Simple test cases are also provided
 * Clone the repo and then make changes
-* Implement an algorithm to simplify overlap graph by iteratively removing transitively-inferrible edges
-    * implement the `simplify` function in `remove_transitive_edges.py`
-    * test your work `python3 test_remove_transitive_edges`
 * Implement parts of the Shortest common superstring problem
     * implement the `calculate_scs` function in `shortest_common_superstring.py`
     * test your work `python3 test_shortest_common_superstring`
