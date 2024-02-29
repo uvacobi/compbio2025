@@ -1,0 +1,188 @@
+---
+layout: reveal_markdown
+title: "Phylogenetics and molecular evolution"
+tags: slides 
+date: 2021-12-09
+---
+
+## {{ page.title }}
+---
+
+Tree thinking (1827) and Origin of Species (1859)
+
+<img alt="Darwin's notebook" src="images/phylogenetics/darwin_notebook.jpg" style="max-height: 450px; float:left; padding:5px"/>
+
+<img alt="Darwin's notebook" src="images/phylogenetics/Origin_of_Species.svg" style="max-height: 450px; background-color: white; padding:5px; float:right"/>
+
+---
+What makes evolution molecular?
+
+
+---
+
+1955 paper showed that insulin from different species had different amino acid sequences
+
+---
+<img alt="Modern Tree of Life" src="images/phylogenetics/hug2016_fig2.jpg" style="max-height: 650px;"/>
+
+Hug et al 2016, Nature Microbiology
+
+---
+<img alt="Primate Tree of Life" src="images/phylogenetics/shao2023_fig1.jpg" style="max-height: 650px;"/>
+
+Shao et al. 2023, Science <10.1126/science.abn6919>
+
+---
+
+
+---
+
+Homology
+
+> Two characters are homologous if they are related by descent from a common ancestor
+
+
+---
+## Sequence distance
+
+How different are they?
+
+```console
+ACCTGTAATC
+ACGTGCGATC
+  *  **   
+```
+
+<span class="fragment">Count the proprtion of differences, $D=3/10$</span>
+
+---
+## Problems with $D$
+
+$D$ does not increase linearly with time
+
+
+<div class="mermaid">
+flowchart TB
+    A --x C
+    A --> X[A]
+</div>
+
+
+<div class="mermaid">
+  flowchart TB
+      A --x X2[C]
+      A --x X[C]
+  </div>
+
+
+--
+$D$ is not additive
+
+
+
+---
+
+Instead, imagine a distance $d$: the average number of substitutions that have ~~been observed~~ occurred per site 
+
+(this increases linear with time, assuming random and constant mutation rate)
+
+(this is additive)
+
+<span class="fragment">Unfortunately, $d$ is not observable</span>
+
+---
+## Jukes-Cantor distance
+
+$$ 
+d = -\frac{3}{4} \log\left(1 - \frac{4}{3}D\right)
+$$
+
+---
+## Jukes-Cantor distance
+
+```R
+D = seq(0, 0.75, by=0.01)
+jcdist = function(D) { -3/4 * log(1-(4/3)*D) }
+plot(D, jcdist(D, type="l", xlab="Observed proportion of differences", ylab="Jukes-Cantor d")
+```
+<div class="fragment">
+<img alt="Jukes-Cantor distance" src="images/phylogenetics/jcdist.png" style="max-height: 450px; background-color: white;"/>
+</div>
+
+
+---
+Models of sequence evolution
+
+
+$$
+P_t = \begin{bmatrix} 
+  p_{AA} & p_{AC} & p_{AG} & p_{AT} \\\\
+  p_{CA} & p_{CC} & p_{CG} & p_{CT} \\\\
+  p_{GA} & p_{GC} & p_{GG} & p_{GT} \\\\
+  p_{TA} & p_{TC} & p_{TG} & p_{TT}
+  \end{bmatrix}
+$$
+
+
+---
+$$
+P_t = \begin{bmatrix} 
+  \frac{3}{4} & \frac{1}{12} & \frac{1}{12} & \frac{1}{12} \\\\
+  \frac{1}{12} & \frac{3}{4} & \frac{1}{12} & \frac{1}{12} \\\\
+  \frac{1}{12} & \frac{1}{12} & \frac{3}{4} & \frac{1}{12} \\\\
+  \frac{1}{12} & \frac{1}{12} & \frac{1}{12} & \frac{3}{4}
+  \end{bmatrix}
+$$
+
+$$ 
+d = -\frac{3}{4} \log\left(1 - \frac{4}{3}D\right)
+$$
+
+---
+## Kimura 2-parameter model
+
+$$
+P_t = \begin{bmatrix}\begin{smallmatrix}
+  \frac{1}{2}e^{-\frac{2}{3}t} + \frac{1}{2} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} \\\\
+  \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{2}e^{-\frac{2}{3}t} + \frac{1}{2} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} \\\\
+  \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{2}e^{-\frac{2}{3}t} + \frac{1}{2} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} \\\\
+  \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{2}e^{-\frac{2}{3}t} + \frac{1}{2}
+  \end{smallmatrix}\end{bmatrix}
+$$
+
+$$
+D = -\frac{1}{2} \log\left(1 - 2D\right) - \frac{1}{4} \log\left(1 - \frac{4}{3}D\right)
+$$
+
+---
+## GTR model
+
+$$
+P_t = \begin{bmatrix} 
+  p_{AA} & p_{AC} & p_{AG} & p_{AT} \\\\
+  p_{CA} & p_{CC} & p_{CG} & p_{CT} \\\\
+  p_{GA} & p_{GC} & p_{GG} & p_{GT} \\\\
+  p_{TA} & p_{TC} & p_{TG} & p_{TT}
+  \end{bmatrix}
+$$
+
+
+
+
+
+
+
+
+---
+# Deriving Jukes-Cantor distance
+
+
+
+
+<!-- 
+
+ 
+- Database of 16S sequences: https://www.ncbi.nlm.nih.gov/nuccore
+- MAFFT aligner software: https://mafft.cbrc.jp/alignment/software/linux.html
+
+ -->
