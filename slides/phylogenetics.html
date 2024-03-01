@@ -84,7 +84,7 @@ ACGTGCGATC
 ## Problems with $D$
 
 $D$ does not increase linearly with time
-
+$D$ is not additive
 
 <div class="mermaid">
 flowchart TB
@@ -100,10 +100,6 @@ flowchart TB
   </div>
 
 
---
-$D$ is not additive
-
-
 
 ---
 
@@ -113,7 +109,7 @@ Instead, imagine a distance $d$: the average number of substitutions that have ~
 
 (this is additive)
 
-<span class="fragment">Unfortunately, $d$ is not observable</span>
+<span class="fragment">Unfortunately, $d$ is not observable. But can we calculate it from $D$?</span>
 
 ---
 ## Jukes-Cantor distance
@@ -176,7 +172,7 @@ P_t = \begin{bmatrix}\begin{smallmatrix}
 $$
 
 $$
-D = -\frac{1}{2} \log\left(1 - 2D\right) - \frac{1}{4} \log\left(1 - \frac{4}{3}D\right)
+d = -\frac{1}{2} \log\left(1 - 2D\right) - \frac{1}{4} \log\left(1 - \frac{4}{3}D\right)
 $$
 
 ---
@@ -193,10 +189,111 @@ $$
 
 
 
+---
+# Tree building
+
+1. Parsimony
+2. Distance-based methods
+3. Maximum likelihood
+4. Bayesian inference
+
+---
+
+# Parsimony
+
+---
+# Distance-based methods
+
+---
+# Maximum likelihood
+
+
+---
+# Bayesian inference
 
 
 
 
+
+
+---
+# Bayes' theorem
+
+---
+Theorem 1: Conditional probability
+
+$$ 
+P(A|B) = \frac{P(A \cap B)}{P(B)}
+$$
+
+---
+Theorem 2: Intersection
+
+$$
+P(A \cap B) = P(A|B)P(B)
+$$
+
+---
+Theorem 3: The law of total probability
+
+$$
+P(A) = \sum_B P(A|B)P(B)
+$$
+
+---
+$$ 
+P(A|B) = \frac{P(A \cap B)}{P(B)}
+$$
+
+$$
+P(A \cap B) = P(A|B)P(B)
+$$
+
+$$
+P(A) = \sum_B P(A|B)P(B)
+$$
+
+
+---
+
+
+$$
+P(A \cap B) = P(B \cap A)  \\\\
+$$
+
+<div class="fragment">
+$$
+P(A|B)P(B) = P(B|A)P(A)  \\\\
+$$
+</div>
+<div class="fragment">
+$$
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+$$
+</div>
+
+
+---
+- Allows us to invert conditional probabilities
+- We have the probability of the data given the hypothesis
+- We want the probability of a hypothesis given the data
+
+$$
+P(H|D) = \frac{P(D|H)P(H)}{P(D)}
+$$
+
+---
+$$
+P(H|D) = \frac{P(D|H)P(H)}{P(D)}
+$$
+
+$P(H)$ - probability of the hypothesis before we see the data, prior probability
+
+$P(H|D)$ probability of the hypothesis after we see the data, posterior.
+
+$P(D|H)$ probability of the data under the hypothesis, likelihood.
+
+$P(D)$ - total probability of the data, under any hypothesis
 
 ---
 # Deriving Jukes-Cantor distance
