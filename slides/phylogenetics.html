@@ -43,11 +43,13 @@ Early evidence of species differ at the molecular level
 Contributed to Sanger's first Nobel prize in 1958 
 
 ---
+Sarich (1967): Molecular evidence of humans and apes
 
 <img alt="Albumin antiserum table" src="images/phylogenetics/sarich1967_table1.png" style="max-height: 330px;"/>
 <img alt="Proposed primate phylogeny" src="images/phylogenetics/sarich1967_fig1.png" style="max-height: 320px;" class="fragment"/>
 
 ---
+
 
 <img alt="DNA evidence" src="images/phylogenetics/wilson1969_abstract.png" style="max-height: 300px;"/>
 <img alt="Hemoglobin amino acid differences" src="images/phylogenetics/wilson1969_table1.png" style="max-height: 300px;"/>
@@ -72,6 +74,146 @@ Homology
 
 > Two characters are homologous if they are related by descent from a common ancestor
 
+<div class="fragment">
+Consider this MSA (Multiple Sequence Alignment)
+
+```
+Species 1  AAGTTTCCA
+Species 2  AAA---CCA
+Species 3  GGA---CCA
+Species 4  AGA---CCA
+```
+</div>  
+
+<div class="fragment">A MSA is a homology statement</div>
+
+---
+## Sequence distance
+
+How different are they?
+
+```console
+ACCTGTAATC
+ACGTGCGATC
+  *  **   
+```
+
+<span class="fragment">Count the proportion of differences, $D=3/10$</span>
+
+---
+## Problems with $D$
+
+<img src="images/phylogenetics/multiple-hits.svg" style="max-height: 250px; background-color: white;"/>
+<img src="images/phylogenetics/multiple-hits-2.svg" style="max-height: 250px; background-color: white;" class="fragment">
+<img src="images/phylogenetics/multiple-hits-3.svg" style="max-height: 250px; background-color: white;" class="fragment">
+<img src="images/phylogenetics/multiple-hits-4.svg" style="max-height: 250px; background-color: white;" class="fragment">
+
+---
+
+What this means: 
+
+$D$ does not increase linearly with time  
+$D$ is not additive
+
+---
+
+Instead, imagine a distance $d$:  
+the average number of substitutions that have  
+~~been observed~~ *occurred* per site 
+
+$d$ increases linear with time  
+(assuming random and constant mutation rate)
+
+$d$ is additive
+
+<span class="fragment">Unfortunately, $d$ is not observable.  
+  But can we calculate it from $D$?</span>
+
+---
+## Jukes-Cantor distance
+
+$$ 
+d = -\frac{3}{4} \log\left(1 - \frac{4}{3}D\right)
+$$
+
+---
+## Jukes-Cantor distance
+
+```R
+D = seq(0, 0.75, by=0.01)
+jcdist = function(D) { -3/4 * log(1-(4/3)*D) }
+plot(D, jcdist(D, type="l", xlab="Observed proportion of differences", ylab="Jukes-Cantor d")
+```
+<div class="fragment">
+<img alt="Jukes-Cantor distance" src="images/phylogenetics/jcdist.png" style="max-height: 450px; background-color: white;"/>
+</div>
+
+
+---
+Models of sequence evolution
+
+
+$$
+P_{X \rightarrow Y}(t) = \begin{bmatrix} 
+  p_{AA}(t) & p_{AC}(t) & p_{AG}(t) & p_{AT}(t) \\\\
+  p_{CA}(t) & p_{CC}(t) & p_{CG}(t) & p_{CT}(t) \\\\
+  p_{GA}(t) & p_{GC}(t) & p_{GG}(t) & p_{GT}(t) \\\\
+  p_{TA}(t) & p_{TC}(t) & p_{TG}(t) & p_{TT}(t)
+  \end{bmatrix}
+$$
+
+
+---
+$$
+P_t = \begin{bmatrix} 
+  \cdot & \alpha & \alpha & \alpha \\\\
+  \alpha & \cdot  & \alpha & \alpha \\\\
+  \alpha & \alpha & \cdot  & \alpha \\\\
+  \alpha & \alpha & \alpha & \cdot 
+  \end{bmatrix}
+$$
+
+$$ 
+\mathbf{\pi} = [\pi_A=\frac{1}{4}, \pi_C=\frac{1}{4}, \pi_G=\frac{1}{4}, \pi_T=\frac{1}{4}]
+$$
+
+---
+## Kimura 2-parameter model
+
+$$
+P_t = \begin{bmatrix}\begin{smallmatrix}
+  \frac{1}{2}e^{-\frac{2}{3}t} + \frac{1}{2} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} \\\\
+  \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{2}e^{-\frac{2}{3}t} + \frac{1}{2} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} \\\\
+  \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{2}e^{-\frac{2}{3}t} + \frac{1}{2} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} \\\\
+  \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{2}e^{-\frac{2}{3}t} + \frac{1}{2}
+  \end{smallmatrix}\end{bmatrix}
+$$
+
+$$
+d = -\frac{1}{2} \log\left(1 - 2D\right) - \frac{1}{4} \log\left(1 - \frac{4}{3}D\right)
+$$
+
+---
+## GTR model
+
+$$
+P_t = \begin{bmatrix} 
+  p_{AA} & p_{AC} & p_{AG} & p_{AT} \\\\
+  p_{CA} & p_{CC} & p_{CG} & p_{CT} \\\\
+  p_{GA} & p_{GC} & p_{GG} & p_{GT} \\\\
+  p_{TA} & p_{TC} & p_{TG} & p_{TT}
+  \end{bmatrix}
+$$
+
+
+
+---
+# Tree building
+
+1. Distance-based methods
+2. Parsimony
+3. Maximum likelihood
+4. Bayesian inference
 
 
 ---
@@ -175,137 +317,6 @@ possibleTrees = function(ntaxa) {
 <https://doi.org/10.2307/2412810>
 
 
----
-## Sequence distance
-
-How different are they?
-
-```console
-ACCTGTAATC
-ACGTGCGATC
-  *  **   
-```
-
-<span class="fragment">Count the proportion of differences, $D=3/10$</span>
-
----
-## Problems with $D$
-
-Multiple hits means: 
-
-$D$ does not increase linearly with time  
-$D$ is not additive
-
-<div class="mermaid">
-flowchart TB
-    A --x C
-    A --> X[A]
-</div>
-
-
-<div class="mermaid">
-  flowchart TB
-      A --x X2[C]
-      A --x X[C]
-  </div>
-
-
-
----
-
-Instead, imagine a distance $d$: the average number of substitutions that have ~~been observed~~ occurred per site 
-
-(this increases linear with time, assuming random and constant mutation rate)
-
-(this is additive)
-
-<span class="fragment">Unfortunately, $d$ is not observable. But can we calculate it from $D$?</span>
-
----
-## Jukes-Cantor distance
-
-$$ 
-d = -\frac{3}{4} \log\left(1 - \frac{4}{3}D\right)
-$$
-
----
-## Jukes-Cantor distance
-
-```R
-D = seq(0, 0.75, by=0.01)
-jcdist = function(D) { -3/4 * log(1-(4/3)*D) }
-plot(D, jcdist(D, type="l", xlab="Observed proportion of differences", ylab="Jukes-Cantor d")
-```
-<div class="fragment">
-<img alt="Jukes-Cantor distance" src="images/phylogenetics/jcdist.png" style="max-height: 450px; background-color: white;"/>
-</div>
-
-
----
-Models of sequence evolution
-
-
-$$
-P_t = \begin{bmatrix} 
-  p_{AA} & p_{AC} & p_{AG} & p_{AT} \\\\
-  p_{CA} & p_{CC} & p_{CG} & p_{CT} \\\\
-  p_{GA} & p_{GC} & p_{GG} & p_{GT} \\\\
-  p_{TA} & p_{TC} & p_{TG} & p_{TT}
-  \end{bmatrix}
-$$
-
-
----
-$$
-P_t = \begin{bmatrix} 
-  \frac{3}{4} & \frac{1}{12} & \frac{1}{12} & \frac{1}{12} \\\\
-  \frac{1}{12} & \frac{3}{4} & \frac{1}{12} & \frac{1}{12} \\\\
-  \frac{1}{12} & \frac{1}{12} & \frac{3}{4} & \frac{1}{12} \\\\
-  \frac{1}{12} & \frac{1}{12} & \frac{1}{12} & \frac{3}{4}
-  \end{bmatrix}
-$$
-
-$$ 
-d = -\frac{3}{4} \log\left(1 - \frac{4}{3}D\right)
-$$
-
----
-## Kimura 2-parameter model
-
-$$
-P_t = \begin{bmatrix}\begin{smallmatrix}
-  \frac{1}{2}e^{-\frac{2}{3}t} + \frac{1}{2} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} \\\\
-  \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{2}e^{-\frac{2}{3}t} + \frac{1}{2} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} \\\\
-  \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{2}e^{-\frac{2}{3}t} + \frac{1}{2} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} \\\\
-  \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{2}e^{-\frac{2}{3}t} + \frac{1}{2}
-  \end{smallmatrix}\end{bmatrix}
-$$
-
-$$
-d = -\frac{1}{2} \log\left(1 - 2D\right) - \frac{1}{4} \log\left(1 - \frac{4}{3}D\right)
-$$
-
----
-## GTR model
-
-$$
-P_t = \begin{bmatrix} 
-  p_{AA} & p_{AC} & p_{AG} & p_{AT} \\\\
-  p_{CA} & p_{CC} & p_{CG} & p_{CT} \\\\
-  p_{GA} & p_{GC} & p_{GG} & p_{GT} \\\\
-  p_{TA} & p_{TC} & p_{TG} & p_{TT}
-  \end{bmatrix}
-$$
-
-
-
----
-# Tree building
-
-1. Distance-based methods
-2. Parsimony
-3. Maximum likelihood
-4. Bayesian inference
 
 ---
 # Distance-based methods
@@ -323,22 +334,44 @@ UPGMA: Unweighted Pair Group Method with Arithmetic Mean
 5. Repeat until all sequences are joined
 
 ---
+Merging nearest neighbors
 
-If the data are ultrametric: the UPGMA tree is guaranteed to be correct
-ultrametric means: the distance between any two tips is the same
-  or, equivalently, for any 3 species on an ultrametric tree, the two largest distances will be equal
-  if sequences are evolving at a constant rate, the data will be approximately ultrametric
+<img src="images/phylogenetics/joining.svg" style="max-height: 550px; background-color: white;"/>
+
+---
+
+The UPGMA tree is guaranteed to be correct  
+*if the data are ultrametric*.  
+
+ultrametric means:
+  - the distance between any two tips is the same  
+  - equivalently, for any 3 species on an ultrametric tree, the two largest distances will be equal  
+
+
+<div class="fragment">
+
+if sequences evolve at a constant rate,  
+ the data will be approximately ultrametric
+
+</div>
+
+---
 
 Problems with UPGMA
 
-- assumes a molecular clock -- that the rate of evolution is constant across the tree
+assumes a molecular clock -- that the rate of evolution is constant across the tree
 
-In reality, the rate of evolution is not constant because selection varies:
+<div class="fragment">
+
+In reality, the rate of evolution is not constant  
+because selection varies:
 - among lineages
 - among types of genes
 - among genes in an organism
 - among sites in a gene
 - among times and locations with 
+
+</div>
 
 ---
 Problems with UPGMA
@@ -350,9 +383,12 @@ Also:
 ---
 Neighbor-joining (Saitou and Nei 1987)
 
+<div class="fragment">
 In UPGMA, the pair-to-merge is the one with the minimum $d(i,j)$.
+</div>
 
-In NJ, we also build a tree by interatively joinin nodes,  
+<div class="fragment">
+In NJ, we also build a tree by iteratively joining nodes,  
 but the pair-to-merge is the one that minimizes $Q$:
 
 $$
@@ -363,19 +399,23 @@ $$
 $n$ is the number of current taxa.  
 $k$ sums over all other taxa
 
+</div>
 
 ---
-If the data are additive: the neighbor-joining tree is guaranteed to be correct
 
-additive means: the distance between any two tips is the sum of the branch lengths between them
-ultrametric data is by definition additive, but not vice versa
+The NJ tree is guaranteed to be correct  
+*if the data are additive*.  
 
+additive means: 
+  - the distance between any two tips is the sum of the branch lengths between them
+  - ultrametric data is additive, but not vice versa
+  - additivity is thus a weaker assumption
 
 ---
 Problems with distance-based methods
 
 - they are greedy
-- they don't consider the sequences themselves, only the distances
+- they consider only distances, not actual sequences
 - they rely on restrictive assumptions not typically met in real data (ultrametricity or additivity)
 - they don't consider the possibility of multiple trees with the same score
 
@@ -387,7 +427,6 @@ Direct methods
 - Bayesian inference
 
 ---
-
 # Parsimony
 
 Choose the tree that requires the fewest evolutionary changes
@@ -435,30 +474,77 @@ Algorithms:
 
 
 ---
-Advantage of parsimony:
+Summary of parsimony criterion:
 
-- faster than likelihood methods
+- considers sequences themselves, not just distances
+- requires a tree search
+- slower than distance methods
 - simple, straightforward, logical  
 - lacks a model; suitable for morphological data
+- faster than likelihood methods
 
-Disadvantages of parsimony:
+---
+Also: Parsimony is sensitive to long-branch attraction
 
-- requires a tree-search
-- slower than distance methods
-- long-branch attraction
-- lacks a model
+<img src="images/phylogenetics/tree-which.svg" style="max-height: 450px; background-color: white;"/>
+
 
 ---
 # Maximum likelihood
 
 What is the most likely tree?
 
+Given: model of sequence evolution, tree, sequences  
+Compute: the likelihood of the tree given the data
+
 
 ---
-Disadvantages of maximum likelihood:  
+Computing the likelihood of the data on a tree
 
-Computationally intensive
+<img src="images/phylogenetics/ml-tree.svg" style="max-height: 350px; background-color: white;"/>
 
+What is the most likely state at position X? Y?
+
+---
+<img src="images/phylogenetics/ml-tree.svg" style="max-height: 350px; background-color: white;"/>
+
+$$
+L(X) = P_{X \rightarrow A}(t_1) \times P_{X \rightarrow C}(t_2)
+$$
+
+$$
+L(X=C) = P_{C \rightarrow A}(t_1) \times P_{C \rightarrow C}(t_2)
+$$
+
+---
+<img src="images/phylogenetics/ml-tree.svg" style="max-height: 250px; background-color: white;"/>
+
+$$
+L(Y) = P_{Y \rightarrow C}(t_4) \times \sum_{X}^{X \in TCGA}{L(X)P_{Y \rightarrow X}(t_3)}
+$$
+
+---
+
+For each site $n$, 
+$$ 
+L_{n} = \sum_{Y}^{Y \in TCGA}{L(Y) \times \pi_{Y}}
+$$
+
+---
+
+Likelihoods are multiplied across all sites:
+
+$$
+L_{total} = \sum_{n}{ln (L_{n})}
+$$
+
+---
+Summary of Maximum likelihood criterion:  
+
+- More computationally intensive than Parsimony
+- Requires a model of sequence evolution
+- Requires a tree-search
+- More robust to long-branch attraction
 
 ---
 Order of operations for phylogenetics
@@ -694,24 +780,25 @@ $$
 P(H|D) = \frac{P(D|H)P(H)}{P(D)}
 $$
 
-$P(H)$ - probability of the hypothesis before we see the data, prior probability
+<div style="font-size:0.8em">
 
-$P(H|D)$ probability of the hypothesis after we see the data, posterior.
+$P(H)$ - *prob.* of hypothesis before we see the data, prior probability
 
-$P(D|H)$ probability of the data under the hypothesis, likelihood.
+$P(H|D)$ - *prob.* of the hypothesis after we see the data, posterior.
 
-$P(D)$ - total probability of the data, under any hypothesis
+$P(D|H)$ - *prob.* of the data under the hypothesis, likelihood.
 
----
-# Deriving Jukes-Cantor distance
+$P(D)$ - total *prob.* of the data, under any hypothesis
 
-
+</div>
 
 
 <!-- 
+  ---
+# Deriving Jukes-Cantor distance
+ -->
 
- 
-- Database of 16S sequences: https://www.ncbi.nlm.nih.gov/nuccore
+<!-- 
+ - Database of 16S sequences: https://www.ncbi.nlm.nih.gov/nuccore
 - MAFFT aligner software: https://mafft.cbrc.jp/alignment/software/linux.html
-
  -->
