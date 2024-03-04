@@ -2,24 +2,35 @@
 layout: reveal_markdown
 title: "Phylogenetics and molecular evolution"
 tags: slides 
-date: 2021-12-09
+date: 2024-03-04
 ---
 
 ## {{ page.title }}
 ---
 
-# Outline
+## Outline
 
 1. Historical background of molecular evolution
 2. Sequence distances and sequence evolution models
 3. Phylogenetics and tree building
 
 ---
-# Sources
+## Sources
 
 - [Adam Smith's lecture of Phylogenetic Trees](https://pages.cs.wisc.edu/~aasmith/biolec/trees.html)
 - [Bioinformatics and Molecular Evolution by Higgs and Attwood](https://onlinelibrary.wiley.com/doi/book/10.1002/9781118697078)
 - [Molecular Evolution: A Phylogenetic Approach, by Page and Holmes](https://www.wiley.com/en-sg/Molecular+Evolution%3A+A+Phylogenetic+Approach-p-9780865428898)
+
+
+---
+## Review question
+
+Why might a reference genome mask the pseudoautosomal region (PAR) on chrY?
+
+
+---
+What makes evolution molecular?
+
 
 
 ---
@@ -28,9 +39,6 @@ Tree thinking (1827) and Origin of Species (1859)
 <img alt="Darwin's notebook" src="images/phylogenetics/darwin_notebook.jpg" style="max-height: 450px; float:left; padding:5px"/>
 
 <img alt="Darwin's notebook" src="images/phylogenetics/Origin_of_Species.svg" style="max-height: 450px; background-color: white; padding:5px; float:right"/>
-
----
-What makes evolution molecular?
 
 
 ---
@@ -45,8 +53,8 @@ Contributed to Sanger's first Nobel prize in 1958
 ---
 Sarich (1967): Molecular evidence of humans and apes
 
-<img alt="Albumin antiserum table" src="images/phylogenetics/sarich1967_table1.png" style="max-height: 330px;"/>
-<img alt="Proposed primate phylogeny" src="images/phylogenetics/sarich1967_fig1.png" style="max-height: 320px;" class="fragment"/>
+<img alt="Albumin antiserum table" src="images/phylogenetics/sarich1967_table1.png" style="max-height: 300px;"/>
+<img alt="Proposed primate phylogeny" src="images/phylogenetics/sarich1967_fig1.png" style="max-height: 300px;" class="fragment"/>
 
 ---
 
@@ -105,15 +113,18 @@ ACGTGCGATC
 
 <img src="images/phylogenetics/multiple-hits.svg" style="max-height: 250px; background-color: white;"/>
 <img src="images/phylogenetics/multiple-hits-2.svg" style="max-height: 250px; background-color: white;" class="fragment">
+
 <img src="images/phylogenetics/multiple-hits-3.svg" style="max-height: 250px; background-color: white;" class="fragment">
 <img src="images/phylogenetics/multiple-hits-4.svg" style="max-height: 250px; background-color: white;" class="fragment">
 
 ---
 
-What this means: 
+## Problems with $D$
 
-$D$ does not increase linearly with time  
-$D$ is not additive
+- homoplasy: the same character state arises independently in different lineages
+- multiple hits: the same character changes multiple times in the same lineage
+- $D$ does not increase linearly with time  
+- $D$ is not additive
 
 ---
 
@@ -142,7 +153,7 @@ $$
 ```R
 D = seq(0, 0.75, by=0.01)
 jcdist = function(D) { -3/4 * log(1-(4/3)*D) }
-plot(D, jcdist(D, type="l", xlab="Observed proportion of differences", ylab="Jukes-Cantor d")
+plot(D, jcdist(D), type="l", xlab="Observed proportion of differences", ylab="Jukes-Cantor d")
 ```
 <div class="fragment">
 <img alt="Jukes-Cantor distance" src="images/phylogenetics/jcdist.png" style="max-height: 450px; background-color: white;"/>
@@ -152,6 +163,8 @@ plot(D, jcdist(D, type="l", xlab="Observed proportion of differences", ylab="Juk
 ---
 Models of sequence evolution
 
+
+Transition matrix
 
 $$
 P_{X \rightarrow Y}(t) = \begin{bmatrix} 
@@ -163,7 +176,16 @@ P_{X \rightarrow Y}(t) = \begin{bmatrix}
 $$
 
 
+Equilibrium frequencies
+
+$$ 
+\mathbf{\pi} = [\pi_A, \pi_C, \pi_G, \pi_T]
+$$
+
+
 ---
+## Jukes-Cantor Model  (1969)
+
 $$
 P_t = \begin{bmatrix} 
   \cdot & \alpha & \alpha & \alpha \\\\
@@ -177,44 +199,149 @@ $$
 \mathbf{\pi} = [\pi_A=\frac{1}{4}, \pi_C=\frac{1}{4}, \pi_G=\frac{1}{4}, \pi_T=\frac{1}{4}]
 $$
 
+
+<div class="fragment">
+$$ 
+d = -\frac{3}{4} \log\left(1 - \frac{4}{3}D\right)
+$$
+</div>
 ---
-## Kimura 2-parameter model
+Are substitution rates equal?
+
+<div class="fragment">
+<img alt="transitions vs transversions" src="images/phylogenetics/transitions.svg" style="max-height: 450px; background-color: white;"/>
+
+Which is more common, transitions or transversions?  
+
+Source: wikipedia
+
+
+</div>
+
+---
+## Kimura 2-parameter model (1983)
+
+Parameterizes transitions and transversions separately
 
 $$
+P_t = \begin{bmatrix} 
+  \cdot & \beta & \alpha & \beta \\\\
+  \beta & \cdot  & \beta & \alpha \\\\
+  \alpha & \beta & \cdot  & \beta \\\\
+  \beta & \alpha & \beta & \cdot 
+  \end{bmatrix}
+$$
+
+$$ 
+\mathbf{\pi} = [\pi_A=\frac{1}{4}, \pi_C=\frac{1}{4}, \pi_G=\frac{1}{4}, \pi_T=\frac{1}{4}]
+$$
+
+
+<!-- $$
 P_t = \begin{bmatrix}\begin{smallmatrix}
   \frac{1}{2}e^{-\frac{2}{3}t} + \frac{1}{2} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} \\\\
   \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{2}e^{-\frac{2}{3}t} + \frac{1}{2} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} \\\\
   \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{2}e^{-\frac{2}{3}t} + \frac{1}{2} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} \\\\
   \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{4}e^{-\frac{2}{3}t} - \frac{1}{4} & \frac{1}{2}e^{-\frac{2}{3}t} + \frac{1}{2}
   \end{smallmatrix}\end{bmatrix}
+$$ -->
+
+if $\alpha = \beta$, the K2P model = the Jukes-Cantor model
+
+---
+## K2P distance
+
+$$
+D = D_{transitions} + D_{transversions}  \\\\
+D = S + V
 $$
 
 $$
-d = -\frac{1}{2} \log\left(1 - 2D\right) - \frac{1}{4} \log\left(1 - \frac{4}{3}D\right)
+d = -\frac{1}{2} \ln\left(1 - 2S - V\right) - \frac{1}{4} \ln\left(1 - 2V\right)
 $$
 
 ---
-## GTR model
+Test your understanding
+
+```console
+ACCTGTAATC
+ACGTGCGATC
+  *  **   
+```
+
+$D = $ <span class="fragment">3/10  </span>  
+<span class="fragment">$d_{JC} = ... $  > or < D? </span><span class="fragment">0.38</span>  
+<span class="fragment">$d_{K2P} = ...$   > or < D? $d_{JC}$ ? <span class="fragment">0.402</span>  
+
+<span class="fragment">Key point: distance depends on the model</span>
+
+---
+## HKY model (1985)
+
+$$ 
+\mathbf{\pi} = \sout{[0.25, 0.25, 0.25, 0.25]}
+$$
+
+$$
+\mathbf{\pi} = [\pi_A, \pi_C, \pi_G, \pi_T]
+$$
+
+$$ 
+P_t = \begin{bmatrix}
+  \cdot & \alpha\pi_C & \beta\pi_G & \alpha\pi_T \\\\
+  \alpha\pi_A & \cdot  & \beta\pi_G & \alpha\pi_T \\\\
+  \beta\pi_A & \alpha\pi_C & \cdot & \beta\pi_T \\\\
+  \alpha\pi_A & \beta\pi_C & \alpha\pi_G & \cdot
+  \end{bmatrix}
+$$
+
+
+---
+## GTR model (1990,1994)
+
+
 
 $$
 P_t = \begin{bmatrix} 
-  p_{AA} & p_{AC} & p_{AG} & p_{AT} \\\\
-  p_{CA} & p_{CC} & p_{CG} & p_{CT} \\\\
-  p_{GA} & p_{GC} & p_{GG} & p_{GT} \\\\
-  p_{TA} & p_{TC} & p_{TG} & p_{TT}
+  \cdot & \alpha_{CA}\pi_C & \alpha_{GA}\pi_G & \alpha_{TA}\pi_T \\\\
+  \alpha_{CA}\pi_A & \cdot  & \alpha_{GC}\pi_G & \alpha_{TC}\pi_T \\\\
+  \alpha_{GA}\pi_A & \alpha_{GC}\pi_C  & \cdot & \alpha_{TG}\pi_T \\\\
+  \alpha_{TA}\pi_A  & \alpha_{TC}\pi_C  & \alpha_{TG}\pi_G & \cdot
   \end{bmatrix}
 $$
+
+Time-reversible: $P_{ij}(t) = P_{ji}(t)$
+
+---
+So: which model should you use?
+
+---
+How many parameters in each model?
+
+rate parameters + equilibrium frequencies:
+
+JC: 1 + 1 = 2  
+K2P: 2 + <span class="fragment">1 = 3</span>  
+HKY: <span class="fragment">2 + 3 = 5</span>  
+GTR: <span class="fragment">6 + 3 = 9</span>  
+
+<span class="fragment">
+Model testing:  
+choose the simplest model that fits the data
+</span>
 
 
 
 ---
 # Tree building
 
-1. Distance-based methods
-2. Parsimony
-3. Maximum likelihood
-4. Bayesian inference
-
+- Distance-based methods
+  - UPGMA
+  - Neighbor-joining
+- Character-based methods
+  - Parsimony
+  - Maximum likelihood
+  - Bayesian inference
 
 ---
 ### Two types of tree
@@ -280,6 +407,8 @@ The root must be between the outgroup and the ingroup.
 
 
 ---
+## Tree building
+### For a given MSA,
 ### How can we find the optimal tree?
 
 <div class="fragment">
@@ -294,7 +423,8 @@ Brute force?
 
 
 ---
-# How many trees?
+# How many trees? 
+[Felsenstein 1978](https://doi.org/10.2307/2412810)
 
 $$
 T = \prod_{k=2}^{n} (2k-3)
@@ -309,12 +439,14 @@ possibleTrees = function(ntaxa) {
 }
 ```
 
+
+
 ---
 # How many trees?
 
 <img src="images/phylogenetics/felsenstein1978_table1.png" style="max-height: 550px;"/>
 
-<https://doi.org/10.2307/2412810>
+
 
 
 
@@ -322,7 +454,7 @@ possibleTrees = function(ntaxa) {
 # Distance-based methods
 
 1. Compute distances between all pairs of sequences
-2. Build a tree based on a distance MATRIX
+2. Build a tree based on a distance matrix
 
 ---
 UPGMA: Unweighted Pair Group Method with Arithmetic Mean
@@ -344,7 +476,7 @@ The UPGMA tree is guaranteed to be correct
 *if the data are ultrametric*.  
 
 ultrametric means:
-  - the distance between any two tips is the same  
+  - the distance from any two tips to their MRCA is the same  
   - equivalently, for any 3 species on an ultrametric tree, the two largest distances will be equal  
 
 
@@ -369,7 +501,6 @@ because selection varies:
 - among types of genes
 - among genes in an organism
 - among sites in a gene
-- among times and locations with 
 
 </div>
 
@@ -420,7 +551,7 @@ Problems with distance-based methods
 - they don't consider the possibility of multiple trees with the same score
 
 ---
-Direct methods
+Character-based methods
 
 - Parsimony
 - Maximum likelihood
@@ -509,11 +640,11 @@ What is the most likely state at position X? Y?
 <img src="images/phylogenetics/ml-tree.svg" style="max-height: 350px; background-color: white;"/>
 
 $$
-L(X) = P_{X \rightarrow A}(t_1) \times P_{X \rightarrow C}(t_2)
+L(X) = P_{X \rightarrow T}(t_1) \times P_{X \rightarrow C}(t_2)
 $$
 
 $$
-L(X=C) = P_{C \rightarrow A}(t_1) \times P_{C \rightarrow C}(t_2)
+L(X=C) = P_{C \rightarrow T}(t_1) \times P_{C \rightarrow C}(t_2)
 $$
 
 ---
@@ -525,18 +656,20 @@ $$
 
 ---
 
-For each site $n$, 
+Finally, at the root, for each site $n$, 
 $$ 
 L_{n} = \sum_{Y}^{Y \in TCGA}{L(Y) \times \pi_{Y}}
 $$
 
----
+<div class="fragment">
 
 Likelihoods are multiplied across all sites:
 
 $$
 L_{total} = \sum_{n}{ln (L_{n})}
 $$
+
+</div>
 
 ---
 Summary of Maximum likelihood criterion:  
@@ -545,6 +678,16 @@ Summary of Maximum likelihood criterion:
 - Requires a model of sequence evolution
 - Requires a tree-search
 - More robust to long-branch attraction
+
+
+---
+Tree confidence
+
+All methods considered so far yield  
+a *point estimate*: a single tree.
+
+They do not provide a measure of confidence.
+
 
 ---
 Order of operations for phylogenetics
@@ -577,7 +720,7 @@ tgcatgactgctagctatgcatgcataccatatagc
 FASTA format: aligned sequences
 
 ```console
-mafft dummy.fasta > dummy_aligned.clusta
+mafft dummy.fasta > dummy_aligned.fasta
 ```
 
 ```console
@@ -593,7 +736,7 @@ tgcatg-actgctagctatgcatgcatac--catatagc
 CLUSTAL format
 
 ```console
-mafft --clustalout dummy.fasta > dummy_aligned.clusta
+mafft --clustalout dummy.fasta > dummy_aligned.clustal
 ```
 
 ```console
@@ -634,7 +777,7 @@ sequence3  tgcatg-actgctagctatgcatgcatac--catatagc
 ```
 
 ---
-## Newick format
+## Newick (parenthetic) format
 
 ```console
 ((x,y),z);
@@ -706,91 +849,9 @@ mafft --auto input.fasta > output.fasta
 sbatch slurm_script.sh
 ```
 
----
+<!-- ---
 Basic HPC
-
-
----
-# Bayesian inference
-
-Bayes' theorem
-
----
-Theorem 1: Conditional probability
-
-$$ 
-P(A|B) = \frac{P(A \cap B)}{P(B)}
-$$
-
----
-Theorem 2: Intersection
-
-$$
-P(A \cap B) = P(A|B)P(B)
-$$
-
----
-Theorem 3: The law of total probability
-
-$$
-P(A) = \sum_B P(A|B)P(B)
-$$
-
----
-$$ 
-P(A|B) = \frac{P(A \cap B)}{P(B)}
-$$
-
-$$
-P(A \cap B) = P(A|B)P(B)
-$$
-
-$$
-P(A) = \sum_B P(A|B)P(B)
-$$
-
----
-
-$$
-P(A \cap B) = P(B \cap A)  \\\\
-$$
-
-<div class="fragment">
-$$
-P(A|B)P(B) = P(B|A)P(A)  \\\\
-$$
-</div>
-<div class="fragment">
-$$
-P(A|B) = \frac{P(B|A)P(A)}{P(B)}
-$$
-</div>
-
----
-- Allows us to invert conditional probabilities
-- We have the probability of the data given the hypothesis
-- We want the probability of a hypothesis given the data
-
-$$
-P(H|D) = \frac{P(D|H)P(H)}{P(D)}
-$$
-
----
-$$
-P(H|D) = \frac{P(D|H)P(H)}{P(D)}
-$$
-
-<div style="font-size:0.8em">
-
-$P(H)$ - *prob.* of hypothesis before we see the data, prior probability
-
-$P(H|D)$ - *prob.* of the hypothesis after we see the data, posterior.
-
-$P(D|H)$ - *prob.* of the data under the hypothesis, likelihood.
-
-$P(D)$ - total *prob.* of the data, under any hypothesis
-
-</div>
+ -->
 
 
 <!-- 

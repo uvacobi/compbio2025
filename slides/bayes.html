@@ -1,0 +1,88 @@
+---
+layout: reveal_markdown
+title: "Bayesian inference"
+tags: slides 
+date: 2024-03-04
+---
+
+
+# Bayesian inference
+
+Bayes' theorem
+
+---
+Theorem 1: Conditional probability
+
+$$ 
+P(A|B) = \frac{P(A \cap B)}{P(B)}
+$$
+
+---
+Theorem 2: Intersection
+
+$$
+P(A \cap B) = P(A|B)P(B)
+$$
+
+---
+Theorem 3: The law of total probability
+
+$$
+P(A) = \sum_B P(A|B)P(B)
+$$
+
+---
+$$ 
+P(A|B) = \frac{P(A \cap B)}{P(B)}
+$$
+
+$$
+P(A \cap B) = P(A|B)P(B)
+$$
+
+$$
+P(A) = \sum_B P(A|B)P(B)
+$$
+
+---
+
+$$
+P(A \cap B) = P(B \cap A)  \\\\
+$$
+
+<div class="fragment">
+$$
+P(A|B)P(B) = P(B|A)P(A)  \\\\
+$$
+</div>
+<div class="fragment">
+$$
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+$$
+</div>
+
+---
+- Allows us to invert conditional probabilities
+- We have the probability of the data given the hypothesis
+- We want the probability of a hypothesis given the data
+
+$$
+P(H|D) = \frac{P(D|H)P(H)}{P(D)}
+$$
+
+---
+$$
+P(H|D) = \frac{P(D|H)P(H)}{P(D)}
+$$
+
+<div style="font-size:0.8em">
+
+$P(H)$ - *prob.* of hypothesis before we see the data, prior probability
+
+$P(H|D)$ - *prob.* of the hypothesis after we see the data, posterior.
+
+$P(D|H)$ - *prob.* of the data under the hypothesis, likelihood.
+
+$P(D)$ - total *prob.* of the data, under any hypothesis
+
+</div>
