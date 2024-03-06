@@ -130,9 +130,12 @@ lectures:
       - title: Assignment 3 due
   - lecture_number: 8
     date: 2024-03-06
-    topic: Molecular evolution and phylogenetics lab
+    topic: Molecular evolution and phylogenetics lab, Perspective by Bill Pearson
     details: 
-    instructor: Nathan Sheffield
+    instructor: Nathan Sheffield, Bill Pearson
+    links:
+      - title: Lecture slides
+        url: slides/bims_wrp_persp2024.pdf
   - lecture_number: 9
     date: 2024-03-11
     topic: Differential expression analysis
