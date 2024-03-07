@@ -97,7 +97,7 @@ Each module includes 6 homework assignments. These assignments will include prog
 
 ## Class participation
 
-Students are expected to attend class. There is no textbook, but each lecture will have reading material posted. Students should read the lecture material before the lecture. You should plan to invest roughly 3 hours per week on reading the posted outside material. We will not have exams or test your reading, so it's on your own and this is our guideline to make sure you get the most benefit from the class. You should feel flexible to increase/decrease this moderately according to topics where you have greater or less interest. The lectures will be most useful if you do the reading before the accompanying lecture so that you can come prepared with some background to ask questions.
+Students are expected to attend class. There is no textbook, but each lecture will have reading material posted. Students should read the lecture material before the lecture. You should plan to invest roughly 3 hours per week on reading the posted outside material. Quizzes are there to convince you to prepare for the lectures. The lectures will be most useful if you do the reading before the accompanying lecture so that you can come prepared with some background to ask questions.
 
 ## Quizzes
 
