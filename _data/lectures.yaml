@@ -207,7 +207,7 @@ lectures:
     details: null
     instructor: Chongzhi Zang
     links: null
-    - lecture_number: 16
+  - lecture_number: 16
     date: 2024-04-03
     topic: Deep learning in biology
     details: 
@@ -260,7 +260,7 @@ lectures:
     links:
       - url: #
         title: Lecture slides
-    - lecture_number: 22
+  - lecture_number: 22
     date: 2024-04-24
     topic: Network analysis
     details: null
