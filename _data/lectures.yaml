@@ -205,25 +205,21 @@ lectures:
     details: null
     instructor: Chongzhi Zang
     links: null
-  - lecture_number: 16
+    - lecture_number: 16
     date: 2024-04-03
-    topic: Network analysis
-    details: null
-    instructor: Aakrosh Ratan
-    links:
-      - url: #
-        title: Lecture slides
+    topic: Deep learning in biology
+    details: 
+    instructor: Stefan Bekiranov
+    links: null
     assignments:
       - title: Quiz 7
       - title: Assignment 7 due
   - lecture_number: 17
     date: 2024-04-08
-    topic: Network analysis lab
+    topic: Deep learning lab
     details: null
-    instructor: Aakrosh Ratan
-    links:
-      - url: #
-        title: Lecture slides
+    instructor: Stefan Bekiranov
+    links: null
   - lecture_number: 18
     date: 2024-04-10
     topic: Genomic interval analysis
@@ -262,21 +258,25 @@ lectures:
     links:
       - url: #
         title: Lecture slides
-  - lecture_number: 22
-    date: 2024-04-22
-    topic: Deep learning in biology
-    details: 
-    instructor: Stefan Bekiranov
-    links: null
+    - lecture_number: 22
+    date: 2024-04-24
+    topic: Network analysis
+    details: null
+    instructor: Aakrosh Ratan
+    links:
+      - url: #
+        title: Lecture slides
     assignments:
       - title: Quiz 10
       - title: Assignment 10 due
   - lecture_number: 23
     date: 2024-04-29
-    topic: Deep learning lab
+    topic: Network analysis lab
     details: null
-    instructor: Stefan Bekiranov
-    links: null
+    instructor: Aakrosh Ratan
+    links:
+      - url: #
+        title: Lecture slides
   - lecture_number: 24
     date: 2024-05-01
     topic: Protein structure prediction
