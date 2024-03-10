@@ -149,6 +149,8 @@ lectures:
         required: true
       - url: https://doi.org/10.1186/gb-2010-11-10-r106
         title: "Differential expression analysis for sequence count data"
+      - ulr: https://doi.org/10.1093/bib/bbx008
+        title: "Selecting between-sample RNA-Seq normalization methods from the perspective of their assumptions"
     assignments:
       - title: Quiz 4
       - title: Assignment 5
