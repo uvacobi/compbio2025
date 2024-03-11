@@ -276,7 +276,7 @@ where the variance has a Poisson/"shot noise" term $\mu$ and a overdispersion/"b
 ### RNA-SEQ Analysis
 
 1. DESeq2: Assumes read count $K_{ij}$ for gene $i$ in sample $j$ is described by a generalized linear model 
-2. $K_{ij} \sim NB(\mu_{ij}, \alpha_{i})$ (Negative Binomial with mean $\mu_{ij}$ and disperion $\alpha_{i}$)
+2. $K_{ij} \sim NB(\mu_{ij}, \alpha_{i})$ (Negative Binomial with mean $\mu_{ij}$ and dispersion $\alpha_{i}$)
 3. $Var(K_{ij}) = \mu_{ij} + \alpha_{i} \mu_{ij}^2$
 4. $\mu_{ij} = s_{ij} q_{ij}$ where $q_{ij}$ is proportional to gene $i$'s concentraton of cDNA fragments in sample $j$ and $s_{ij}$ is a size or normalization factor 
 
