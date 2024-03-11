@@ -153,6 +153,7 @@ lectures:
         title: "Selecting between-sample RNA-Seq normalization methods from the perspective of their assumptions"
     assignments:
       - title: Quiz 4
+        url: https://forms.gle/RZNdprNFrapMoumj6
       - title: Assignment 5
         url: resources/Assignment_5.pdf
       - title: Assignment 4 due
@@ -176,6 +177,7 @@ lectures:
         title: What are DNA sequence motifs?
     assignments:
       - title: Quiz 5
+        url: https://forms.gle/WoShFjywgYCNRr1g9
       - title: Assignment 5 due
   - lecture_number: 12
     date: 2024-03-20
