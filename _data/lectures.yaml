@@ -175,6 +175,7 @@ lectures:
         title: Lecture slides
       - url: https://www.nature.com/articles/nbt0406-423
         title: What are DNA sequence motifs?
+        required: true
     assignments:
       - title: Quiz 5
         url: https://forms.gle/WoShFjywgYCNRr1g9
