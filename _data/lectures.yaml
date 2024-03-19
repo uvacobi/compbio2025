@@ -151,6 +151,8 @@ lectures:
         title: "Differential expression analysis for sequence count data"
       - url: https://doi.org/10.1093/bib/bbx008
         title: "Selecting between-sample RNA-Seq normalization methods from the perspective of their assumptions"
+      - title: Differential Expression Notes
+        url: resources/Differential_Expression_Notes.pdf
     assignments:
       - title: Quiz 4
         url: https://forms.gle/RZNdprNFrapMoumj6
