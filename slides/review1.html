@@ -1,0 +1,66 @@
+---
+layout: aakrosh_markdown
+title: ""
+tags: slides 
+---
+
+## {{page.title}}
+![assemble](images/review1/title.jpg)
+
+---
+
+## Dynamic Programming vs Greedy algorithms
+
+1. Popular choice for optimization problems
+2. Both require optimal substructure: optimal solution contains within it optimal solutions to subproblems
+3. Greedy-choice property: a globally optimal solution can be arrived at by making locally optimal choices
+4. Overlapping sub-problems: limited number of distinct sub-problems, repeated many times
+
+Note: A greedy algorithm tries to solve an optimisation problem by making a sequence of choices. At each decision point, it chooses the locally optimal choice in the hope that it will lead to a globally optimal solution. This is such a simple approach that it is what one usually tries first. Greedy algorithms do not always yield optimal solutions, but for many problems they do. The choices made by greedy algorithms may depend on choices already made, but it cannot depend on the outcome of future unmade choices. This contrasts with dynamic programming, which solves subproblems before making the first choice. In contrast, a greedy algorithm makes a choice before solving any subproblems. Thus, dynamic programming can be seen as bottom-up, making a choice after assembling smaller solutions, whereas greedy programming is top-down, making one greedy choice after another, reducing each given problem instance to a smaller one. Example of greedy algorithms: Huffman codes, Dijkstra’s shortest path algorithm. DP examples: alignments, matrix chain multiplication, knapsack problem.
+
+---
+
+## Gapped Alignment 
+
+![matrix](images/alignments/dpmatrix.svg)
+
+---
+
+## Exploring the search space
+![matrix](images/alignments/dpmatrix2.svg)
+
+---
+
+## Exploring the search space
+![matrix](images/alignments/dpmatrix3.svg)
+
+---
+
+## Dynamic Programming 
+* Create a large table indexed by $(i,j)$
+* Decide on the recursion formula
+* Decide on optimal traversal order
+* Compute each sub-alignment once
+* Remember the choices 
+
+Note: Use memoization (storing the results of expensive function calls and returning the cached result) for sub-problem if they are reused. If the subproblems are not reused, then maybe DP is not the right choice as an algorithm. Computation order matters, and most times bottom up will work though it is not obvious a lot of the times. Once you have the set up, then start filling the table, find the optimal score. Traceback to find the optimal solution.
+
+---
+
+##  Computing alignment recursively
+* Local update rules, only look at neighboring cells
+* Computing the score of a cell from smaller neighbors
+
+`$$M(i,j) = max \left\{
+                \begin{array}{1}
+                  M(i-1,j) - gap\\
+                  M(i-1, j-1) + score\\
+                  M(i, j-1) -gap
+                \end{array}
+              \right\} $$`
+* Compute scores for prefixes of increasing length$\ \ \ \ \ \ $
+
+---
+
+
+

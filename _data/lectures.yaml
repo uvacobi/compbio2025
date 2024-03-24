@@ -197,7 +197,9 @@ lectures:
     topic: Module I Review
     details:
     instructor: Aakrosh Ratan
-    links: null
+    links: 
+      - url: slides/review1
+        title: Lecture slides
     assignments:
       - title: Quiz 6
       - title: Assignment 6 due
