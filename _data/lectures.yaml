@@ -213,6 +213,12 @@ lectures:
     links:
       - url: #
         title: Lecture slides
+      - url: https://arxiv.org/abs/1802.03426
+        title: UMAP
+      - url: https://www.nature.com/articles/s41467-019-13056-x
+        title: The art of using t-SNE for single-cell transcriptomics
+      - url: https://www.nature.com/articles/s41467-024-45891-y
+        title: Statistical method scDEED for detecting dubious 2D single-cell embeddings and optimizing t-SNE and UMAP hyperparameters
   - lecture_number: 15
     date: 2024-04-01
     topic: Dimensionality reduction lab
