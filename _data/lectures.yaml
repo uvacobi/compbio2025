@@ -213,6 +213,8 @@ lectures:
     links:
       - url: #
         title: Lecture slides
+      - url: https://jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf
+        title: t-SNE
       - url: https://arxiv.org/abs/1802.03426
         title: UMAP
       - url: https://www.nature.com/articles/s41467-019-13056-x
