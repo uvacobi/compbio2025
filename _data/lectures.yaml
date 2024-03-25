@@ -202,6 +202,7 @@ lectures:
         title: Lecture slides
     assignments:
       - title: Quiz 6
+        url: https://forms.gle/TgCmZEiYN83hhUVz6
       - title: Assignment 6 due
   - lecture_number: 14
     section: "Computational Biology II"
