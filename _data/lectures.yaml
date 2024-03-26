@@ -230,11 +230,22 @@ lectures:
   - lecture_number: 16
     date: 2024-04-03
     topic: Deep learning in biology
-    details: 
+    details: null 
     instructor: Stefan Bekiranov
-    links: null
+    links:
+      - url: resources/Deep_Learning_1.pdf
+        title: Deep Learning Lecture Notes 1
+        required: true
+      - url: resources/Deep_Learning_2.pdf
+        title: Deep Learning Lecture Notes 2
+        required: true
+      - url: https://doi.org/10.1038/nature14539
+        title: Deep learning
+        required: true
     assignments:
       - title: Quiz 7
+      - title: Assignment 8
+        url: https://pytorch.org/tutorials/beginner/basics/intro.html
       - title: Assignment 7 due
   - lecture_number: 17
     date: 2024-04-08
