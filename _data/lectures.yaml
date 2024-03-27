@@ -221,6 +221,9 @@ lectures:
         title: The art of using t-SNE for single-cell transcriptomics
       - url: https://www.nature.com/articles/s41467-024-45891-y
         title: Statistical method scDEED for detecting dubious 2D single-cell embeddings and optimizing t-SNE and UMAP hyperparameters
+    assignments:
+      - url: resources/Assignment 7.pdf
+        title: Assignment 7
   - lecture_number: 15
     date: 2024-04-01
     topic: Dimensionality reduction lab
