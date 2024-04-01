@@ -271,6 +271,7 @@ lectures:
         title: Lecture slides
     assignments:
       - title: Quiz 8
+        url: https://forms.gle/TkZxFjVQLwJLXUgs5
       - title: Assignment 8 due
   - lecture_number: 19
     date: 2024-04-15
@@ -290,6 +291,7 @@ lectures:
         title: Lecture slides 
     assignments:
       - title: Quiz 9
+        url: https://forms.gle/FFmsA9hRoUkzrVyq5
       - title: Assignment 9 due
   - lecture_number: 21
     date: 2024-04-22
@@ -309,6 +311,7 @@ lectures:
         title: Lecture slides
     assignments:
       - title: Quiz 10
+        url: https://forms.gle/XQqhc2ztMZ4SZBtx5
       - title: Assignment 10 due
   - lecture_number: 23
     date: 2024-04-29
@@ -325,6 +328,7 @@ lectures:
     instructor: Gloria Sheynkman
     assignments:
       - title: Quiz 11
+        url: https://forms.gle/PvfBVJ45opGZk8Li9
       - title: Assignment 11 due
   - lecture_number: 25
     date: 2024-05-06
@@ -338,6 +342,7 @@ lectures:
     instructor: Nathan Sheffield
     assignments:
       - title: Quiz 12
+        url: https://forms.gle/VMhThyeWaHCFSjU56
       - title: Assignment 12 due
 
 
