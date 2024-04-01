@@ -251,6 +251,7 @@ lectures:
         title: Neural Networks/Deep Learning StatQuest Video Series
     assignments:
       - title: Quiz 7
+        url: https://forms.gle/7HbocotR6Z1Qg5u68
       - title: Assignment 8
         url: https://pytorch.org/tutorials/beginner/basics/intro.html
       - title: Assignment 7 due
