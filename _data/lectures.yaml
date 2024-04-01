@@ -269,6 +269,9 @@ lectures:
     links:
       - url: #
         title: Lecture slides
+      - url: https://doi.org/10.1093/bioinformatics/btq351
+        title: BigWig and BigBed: enabling browsing of large distributed datasets
+        required: true
     assignments:
       - title: Quiz 8
         url: https://forms.gle/TkZxFjVQLwJLXUgs5
