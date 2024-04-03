@@ -249,6 +249,8 @@ lectures:
         title: Deep Learning (book)
       - url: https://www.youtube.com/watch?v=CqOfi41LfDw&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1
         title: Neural Networks/Deep Learning StatQuest Video Series
+      - url: https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi
+        title: Neural Networks (3Blue1Brown)
     assignments:
       - title: Quiz 7
         url: https://forms.gle/7HbocotR6Z1Qg5u68
