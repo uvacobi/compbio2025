@@ -266,24 +266,25 @@ lectures:
   - lecture_number: 18
     date: 2024-04-10
     topic: Genomic interval analysis
-    details: null
+    details: Algorithms and data structures for genomic interval arithmetic, enrichment analysis.
     instructor: Nathan Sheffield
     links:
+      - url: slides/genomic-intervals
+        title: Lecture slides
       - url: https://doi.org/10.1093/bioinformatics/btq351
         title: "BigWig and BigBed: enabling browsing of large distributed datasets"
         required: true
       - title: "Opportunities and challenges in sharing and reusing genomic interval data"
         url: https://doi.org/10.3389/fgene.2023.1155809 
-      - url: #
-        title: Lecture slides
     assignments:
       - title: Quiz 8
         url: https://forms.gle/TkZxFjVQLwJLXUgs5
+      - title: Assignment 9
+        url: https://github.com/cphg/interval_basics
       - title: Assignment 8 due
   - lecture_number: 19
     date: 2024-04-15
     topic: Genomic interval analysis lab
-    details: null
     instructor: Nathan Sheffield
     links:
       - url: #
@@ -291,11 +292,18 @@ lectures:
   - lecture_number: 20
     date: 2024-04-17
     topic: Hidden Markov Models
-    details: null
+    details: Markov chains, Hidden Markov Models, Viterbi, Baum-Welch, and forward-backward algorithms
     instructor: Nathan Sheffield
     links:
       - url: #
-        title: Lecture slides 
+        title: Lecture slides
+      - url: resources/hmm.pdf
+        title: Markov chains and hidden Markov models
+        required: true
+      - url: https://www.nature.com/articles/nbt1004-1315
+        title: What is a hidden Markov model?
+      - url: resources/RABINER1989.pdf
+        title: A tutorial on Hidden Markov Models and Selected Applications in Speech Recognition
     assignments:
       - title: Quiz 9
         url: https://forms.gle/FFmsA9hRoUkzrVyq5
@@ -303,7 +311,6 @@ lectures:
   - lecture_number: 21
     date: 2024-04-22
     topic: Hidden Markov Models lab
-    details: Mircoarray and Bulk RNA-seq Analysis
     instructor: Nathan Sheffield
     links:
       - url: #
