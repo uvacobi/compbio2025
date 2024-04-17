@@ -295,7 +295,7 @@ lectures:
     details: Markov chains, Hidden Markov Models, Viterbi, Baum-Welch, and forward-backward algorithms
     instructor: Nathan Sheffield
     links:
-      - url: #
+      - url: slides/hmm
         title: Lecture slides
       - url: resources/hmm.pdf
         title: Markov chains and hidden Markov models
