@@ -1,6 +1,6 @@
 ---
 layout: reveal_markdown
-title: "Genomic Intervals"
+title: "Genomic Intervals: data structures, file formats, compression, and algorithms"
 tags: slides 
 date: 2021-12-09
 ---
@@ -10,6 +10,40 @@ date: 2021-12-09
 </style>
 
 ## {{ page.title }}
+
+
+---
+
+Lower costs &rarr; More data
+
+<iframe src="https://databio.org/seqcosts/sra.html" width="950" height="550"></iframe>
+---
+### Scalable computing in genomics
+
+Genomics can be 'big data'.<br>
+
+<img src="images/genomic-intervals/performance-importance-heatmap.svg" height="400" style="background:white">
+
+---
+## Compressing BigBed files
+
+> The compression would not be very efficient if each item was compressed separately, 
+and it would not support random access if the entire data area were compressed all at once. 
+Instead the regions between indexed items (containing 512 items by default) are individually compressed. 
+This maintains the same degree of random accessibility that was enabled by the sparse R tree index while 
+still achieving nearly the same level of compression as compressing the entire file would.
+
+<span class="fragment">Why?</span>
+
+
+---
+
+## Strategies for scalability
+
+1. compression
+2. indexing
+
+
 ---
 ## Terminology
 
@@ -32,6 +66,17 @@ date: 2021-12-09
 ![](images/genomic-intervals/peaks.svg)
 
 Genomic intervals are often colloquially referred to as 'peaks'.
+
+
+---
+## Peaks
+
+
+![](images/genomic-intervals/peaks.svg)
+
+
+Which data type takes up more disk space: wiggle or peaks?
+
 
 ---
 ## What can be represented as an interval?
@@ -131,6 +176,7 @@ An interval comparison assumes a homology statement. A shared coordinate system 
 <span class="fragment">
 Because of the linear nature of DNA and RNA, many biological entities can be conceptualized as genomic intervals.
 </span>
+
 <span class="fragment">Genomic intervals are often a simplified abstraction of genomic sequence.</span>
 
 <span class="fragment">
@@ -373,13 +419,13 @@ $R_{start} = min(A_{start}, B_{start})$
 $R_{end} = max(A_{end}, B_{end})$  
 
 ---
-###
+### Key take-away
 
 If we make some assumptions, like pre-computing order, we can do things more efficiently.
 
 <div class="fragment">
 
-Beware of containment
+BUT: Beware of containment
 
 </div>
 
@@ -467,13 +513,29 @@ An $O(logN)$ option. Organize database as two lists:
 
 ---
 
-Say I have a series of regions in a BED file. Can I do a binary search on the file?
+Say I have a series of regions in a BED file.  
+Can I do a binary search on the file on disk?
 
 <div class="fragment">
 Binary search also requires random access.
 
-> Random access means the ability to access any element directly. This is contrast to *sequential access*, where I can only access elements in sequence.
+> Random access means the ability to access any element directly. This is in contrast to *sequential access*, where I can only access elements in sequence.
 </div>
+
+<div class="fragment">
+
+A vanilla BED file does not provide random access.  
+How can we provide random access to genomic regions?
+
+</div>
+
+---
+
+### Strategies for providing random access:
+
+- Use memory (an in-memory array has random access)
+- Indexing (BigBed)
+	- Data structures: Binary search trees, etc.
 
 ---
 ### Binary search trees
@@ -554,6 +616,76 @@ Augmented Interval List - <a href="https://doi.org/10.1093/bioinformatics/btz407
 ![](images/genomic-intervals/subject-query-containment.svg)
 
 ![](images/genomic-intervals/binary-search-maxE.svg)
+
+---
+### Compressing BigBed files
+
+> The data regions of the file (but not the index) are compressed using the same deflate techniques
+that are used in gzip as implemented in the zlib library, a very widespread, stable and fast library built into most Linux and UNIX installations. 
+
+
+---
+### GZIP
+
+Uses DEFLATE: a combination of LZ77 and Huffman Coding
+
+---
+### Run-length Encoding (RLE)
+
+```R
+> c(rep(1,20), rep(0,15))
+ [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+> rle(c(rep(1,20), rep(0,15)))
+Run Length Encoding
+  lengths: int [1:2] 20 15
+  values : num [1:2] 1 0
+```
+
+---
+### LZ77
+
+Duplicate string elimination
+
+1. Find the longest repeated sequences in string
+2. Replace repeats with relative references to earlier
+
+Input: "The compression and the decompression leave an impression. Hahahahaha!"
+
+Output: "The compression and t [20 | 3] de [22 | 12] leave [28 | 3] i [42 | 7] . Hah [2 | 7] !"
+
+<span style="font-size: 0.6em">Example credit: https://sudonull.com</span>
+
+---
+
+### [Huffman Coding](https://en.wikipedia.org/wiki/Huffman_coding)
+
+Minimum redundancy codes: assign the fewest bits to the most common characters.
+
+DNA Input: ACTGAACGATCAGTACAGAAG
+
+```
+Base   Freq     ASCII   2bit  HuffCode    
+   A      9  01000001     00         0    
+   G      5  01000111     01        10    
+   C      4  01000011     10       110    
+   T      3  01010100     11       111    
+```
+
+<span class="fragment">Requires prefix property for variable-width codes: a bit string representation is never a prefix of a different symbol</span>  
+<span class="fragment">Requires sequential reading (no random access)</span>
+
+
+<span style="font-size: 0.6em">See [Okaily et al](https://dx.doi.org/10.1089%2Fcmb.2016.0151)</span>
+
+
+---
+### Compressing BigBed files
+
+> The compression would not be very efficient if each item was compressed separately, 
+and it would not support random access if the entire data area were compressed all at once.
+Instead the regions between indexed items (containing 512 items by default) are individually compressed.
+This maintains the same degree of random accessibility that was enabled by the sparse R tree index
+while still achieving nearly the same level of compression as compressing the entire file would.
 
 
 
@@ -725,20 +857,13 @@ gr[2:3]  # subset
 
 Given a query region set (say, from a ChIP-seq experiment), what other, previously published region sets are most similar?
 
+
 ---
 ### Interval similarity metrics
 - Overlap count
 <li class="fragment">Jaccard index $\frac{A \cap B}{A \cup B}$</li>
 <li class="fragment">Fisher's Exact Test (LOLA, <a href="https://doi.org/10.1093/bioinformatics/btv612">Sheffield and Bock 2016</a>)</li>
 
----
-<img src="images/genomic-intervals/07-lola1.svg" />
----
-<img src="images/genomic-intervals/08-lola2.svg" />
----
-<img src="images/genomic-intervals/09-test.svg" />
----
-<img src="images/genomic-intervals/10-results.svg" />
 
 ---
 
@@ -750,6 +875,18 @@ Given a query region set (say, from a ChIP-seq experiment), what other, previous
 <div class="fragment">
 <img src="images/genomic-intervals/subject-query-one-vs-many-integrate.svg">
 </div>
+
+
+
+---
+<img src="images/genomic-intervals/07-lola1.svg" />
+---
+<img src="images/genomic-intervals/08-lola2.svg" />
+---
+<img src="images/genomic-intervals/09-test.svg" />
+---
+<img src="images/genomic-intervals/10-results.svg" />
+
 
 ---
 ### B+ trees
