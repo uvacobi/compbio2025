@@ -53,7 +53,7 @@ Consider a set of transformations $\mathbf{T} = { T_k }$,
 which are functions that transform $\mathbf{p}$  
 
 $$
-T_k(p)
+T_k(p) = p'
 $$
 
 We want to maximize our "return" -- the output of some scalar function $R(p)$ of the final state.
@@ -71,11 +71,13 @@ p_2 = T_2(p_1)  \\\\
 p_N = T_N(p_{N-1})
 $$
 
-The maximum value of $R(P_N)$, determined by an optimal policy, will only be a function of the initial vector $p_0$ and the number of stages N.
+The maximum value of $R(P_N)$, determined by an optimal policy, will only be a function of the initial vector $p_0$ and the number of stages N. The optimal return value is: 
 
 $$ 
 f_N(p) = Max_{P}R(p_N)
 $$
+
+
 
 ---
 
@@ -146,14 +148,14 @@ Note: Joint probability $P(A,B) = P(A|B)  P(B) = P(B|A)  P(A)$, Marginal probabi
 ---
 
 ## Markov Models
-* Set of states: ${s_1, s_2, \ldots, s_n}$
-* Process moves from one state to another generating a sequence of states: $s_{i1}, s_{i2}, \ldots, s_{ik}, \ldots$
-* Markov property:  The probability of each symbol depends only on the preceding symbol, not the entire previous sequence  
-  $$P(s_{ik}|s_{i1},s_{i2},\ldots,s_{i(k-1)}) = P(s_{ik}|s_{i(k-1)})$$
+* Set of states: $S \in {s_1, s_2, \ldots, s_n}$
+* Process moves from one state to another generating a sequence of $L$ states: $x_{1}, x_{2}, \ldots, x_{L}, $
+* Markov property:  The probability of a symbol depends only on the preceding symbol, not the entire previous sequence  
+  $$P(x_{L} = s|x_{1},x_{2},\ldots,x_{i(L-1)}) = P(x_{L}=s|x_{i(L-1)})$$
 
 * A Markov chain is defined by:
-  * transition probabilities $A=(a_{ij}), a_{ij} = P(s_i, s_j)$
-  * initial probabilities: $\pi=(\pi_i), \pi_i = P(s_i)$
+  * transition probabilities $a_{st} = P(x_i=t| x_{i-1}=s)$, $A=\\{a_{ij}\\}$
+  * initial probabilities: $a_{0s} = P(x_1=s)$
 
 ---
 
@@ -164,7 +166,7 @@ $A = \begin{bmatrix}
 0.7 & 0.3\\\\\\
 0.4 & 0.6
 \end{bmatrix}$,
-$\pi = (0.4, 0.6)$
+$a_{0s} = (0.4, 0.6)$
 
 Note: So let's consider I have two coins, one of them is fair and the other one is loaded. 
 
@@ -179,21 +181,28 @@ $$
 P(A, B) = P(A|B) P(B)
 $$
 
-By Markov property, probability of state sequence can be found by the formula
+$$
+\begin{eqnarray}
+P(x_{1}, \ldots, x_{L}) &=& P(x_{L} | x_{1}, \ldots, x_{(kL-1)}) P(x_{1}, \ldots, x_{(L-1)})\\\\\\
+\end{eqnarray}
+$$
 
-$$\begin{eqnarray}
-P(s_{i1}, \ldots, s_{ik}) &=& P(s_{ik} | s_{i1}, \ldots, s_{i(k-1)}) P(s_{i1}, \ldots, s_{i(k-1)})\\\\\\
-&=& P(s_{ik} | s_{i(k-1)}) P(s_{i1}, s_{i2}, \ldots, s_{i(k-1)})\\\\\\
+By Markov property, the probability of a state sequence is:
+
+$$
+\begin{eqnarray}
+&=& P(x_{L} | x_{(L-1)}) P(x_{1}, x_{2}, \ldots, x_{(L-1)})\\\\\\
 &=& \ldots\\\\\\
-&=& P(s_{ik} | s_{i(k-1)}) \ldots P(s_{i2} | s_{i1}) P(s_{i1}) 
-\end{eqnarray}$$
+&=& P(x_{L} | x_{(L-1)}) \ldots P(x_{2} | x_{1}) P(x_{1}) 
+\end{eqnarray}
+$$
 
 ---
 
 ## Calculation of sequence probability
 ![markov](images/hmm/markov.svg) <!-- .element width="80%" height="80%" -->
 
-$\pi = (0.4, 0.6)$
+$a_0 = (0.4, 0.6)$
 
 Suppose we want to calculate $P(L,L,F,F)$
 
@@ -207,23 +216,22 @@ P(L,L,F,F) &=& P(F|L,L,F) P(L,L,F) \\\\\\
 ---
 
 ## Hidden Markov Models
-* Set of states: ${s_1, s_2, \ldots, s_n}$
-* Process moves from one state to another generating a sequence of states: $s_{i1}, s_{i2}, \ldots, s_{ik}, \ldots$
-* Markov chain property: $$P(s_{ik}|s_{i1},s_{i2},\ldots,s_{i(k-1)}) = P(s_{ik}|s_{i(k-1)})$$
-* States are not visible, but each state randomly generates one of $M$ observations (or emissions): ${o_1, o_2, \ldots, o_l}$ <!-- .element : class="fragment" data-fragment-index="1" -->
+* Set of states: $S \in {s_1, s_2, \ldots, s_n}$
+* Process moves from one state to another generating a sequence of $L$  states: $x_{1}, x_{2}, \ldots, x_{L}$
+* Markov property: $$P(x_{k}|x_{1},x_{2},\ldots,x_{(L-1)}) = P(x_{L}|x_{(L-1)})$$
+* States are not visible, but each state randomly generates one of $L$ observations (or emissions): ${o_1, o_2, \ldots, o_L}$ <!-- .element : class="fragment" data-fragment-index="1" -->
 
 ---
 
 ## Components of Hidden Markov Models
 
-The following need to be defined for Model $M = (A, B, \pi)$:
+The following need to be defined for Model $M = (A, B, a_0)$:
 
 * transition probabilities:  
    $ \mathbf{A} = \\{ a_{ij} \\} $  
    $a_{ij} = P(s_i \rightarrow s_j)$
 * initial probabilities:  
-  $\pi= \\{ \pi_i \\}$  
-  $\pi_i = P(s_i)$
+  $a_{0s} = P(x_1 = s)$
 * observation/emission probabilities:  
   $\mathbf{B} = \\{ b_i(v_m) \\}$  
   $b_i(v_m) = P(v_m | s_i)$
@@ -233,7 +241,7 @@ The following need to be defined for Model $M = (A, B, \pi)$:
 ## Components of an HMM
 
 - transition from state $k$ to state $l$: $\mathbf{A} = {a_{kl}}$
-  - initiation probabilities: $a_{0k}$, or $\pi$
+  - initiation probabilities: $a_{0k}$, or $a_0$
 - emission probabilities: $\mathbf{B} = {e_k}$
  -->
 
@@ -250,7 +258,7 @@ $B = \begin{bmatrix}
 0.5 & 0.5\\\\\\
 0.3 & 0.7
 \end{bmatrix}$,
-$\pi = (0.4, 0.6)$
+$a_{0} = (0.4, 0.6)$
 
 ---
 
@@ -276,11 +284,11 @@ Note: Consider all possible hidden state sequences
 ## 3 Computational applications of HMMs
 * Decoding problem (aka uncovering, parsing, or inference)
 
-Given an HMM $M=(A,B,\pi)$, and an observation sequence $O$, find the sequence of states most likely to have produced $O$. <!-- .element : class="fragment" data-fragment-index="1" -->
+Given an HMM $M=(A,B,a_0)$, and an observation sequence $O$, find the sequence of states most likely to have produced $O$. <!-- .element : class="fragment" data-fragment-index="1" -->
 
 * Likelihood problem (aka evaluation, or scoring)
 
-Given an HMM $M=(A,B,\pi)$, and an observation sequence $O, o_i \in {v_1,v_2,\ldots,v_M}$, calculate likelihood $P(O|M)$. <!-- .element : class="fragment" data-fragment-index="2" -->
+Given an HMM $M=(A,B,a_0)$, and an observation sequence $O$, calculate likelihood $P(O|M)$. <!-- .element : class="fragment" data-fragment-index="2" -->
 
 
 * Learning problem (aka parameter estimation, or fitting)
@@ -308,7 +316,7 @@ Baum-Welch algorithm <!-- .element : class="fragment" data-fragment-index="3" --
 
 ## Decoding problem 
 
-Given HMM $M=(A,B,\pi)$ and observation sequence $O$, find the sequence of states most likely to produce $O$.
+Given HMM $M=(A,B,a_0)$ and observation sequence $O$, find the sequence of states most likely to produce $O$.
 
 ![decoding](images/hmm/decoding1.png)
 
@@ -331,16 +339,18 @@ Find $S_{1:T}$ that maximises $P(O_{1:T}|S_{1:T})$ over all possible paths in th
 
 ![decoding](images/hmm/decoding1.png)
 
-$M$ states, $T$ time steps: $M^T$ paths...
+$N$ states, $T$ time steps: $N^T$ paths...
 
 ---
 
 ## Viterbi algorithm
 
 * Dynamic programming
-* $M$ rows (number of states), $T$ columns (length of sequence)
-* Initialization: $S_{i, 1} = \pi_i B(O_1|S_i)$
-* Recursion: $S_{i,j} = \max_k S_{k,j-1} a_{ki} B(O_j|S_i)$
+* $N$ rows (number of states), $T$ columns (length of sequence)
+* Initialization: $v_0(i) = a_{0i} B(O_1|S_i) = a_{0i} e_l(x_i) $
+* Recursion: $ v_l(i) = e_l(x_i) \times max_k(v_k(i-1)a_{kl}) $
+
+Read as: the viterbi score at time $l$ for state $i$ is the emission probability for observation $x_i$ at state $l$ times the best of the previous scores times transition probability
 
 ![recursion](images/hmm/decoding1.png)
 
@@ -349,7 +359,7 @@ $M$ states, $T$ time steps: $M^T$ paths...
 ## Viterbi algorithm
 ![hidden_markov](images/hmm/hiddenmarkov.svg) <!-- .element width="50%" height="50%" -->
 
-Observations : HHTTTTTTTH, $\pi=(0.5,0.5)$
+Observations : HHTTTTTTTH, $a_0=(0.5,0.5)$
 
 ---
 
@@ -359,7 +369,7 @@ Use log space to avoid numerical underflow
 
 ![hidden_markov](images/hmm/hiddenmarkovlog.svg) <!-- .element width="40%" height="40%" -->
 
-Observations : HHTTTTTTTH, $\pi=c(-0.69,-0.69)$
+Observations : HHTTTTTTTH, $a_0=c(-0.69,-0.69)$
 
 ![dp](images/hmm/dp1.svg) <!-- .element : class="fragment" data-fragment-index="1" -->
 
@@ -368,7 +378,7 @@ Observations : HHTTTTTTTH, $\pi=c(-0.69,-0.69)$
 ## Viterbi algorithm
 ![hidden_markov](images/hmm/hiddenmarkovlog.svg) <!-- .element width="50%" height="50%" -->
 
-Observations : HHTTTTTTTH, $\pi=c(-0.69,-0.69)$
+Observations : HHTTTTTTTH, $a_0=c(-0.69,-0.69)$
 
 ![dp](images/hmm/dp2.svg) 
 
@@ -379,7 +389,7 @@ Note: log(state prior * state emission) -0.69 - 0.69
 ## Viterbi algorithm
 ![hidden_markov](images/hmm/hiddenmarkovlog.svg) <!-- .element width="50%" height="50%" -->
 
-Observations : HHTTTTTTTH, $\pi=c(-0.69,-0.69)$
+Observations : HHTTTTTTTH, $a_0=c(-0.69,-0.69)$
 
 ![dp](images/hmm/dp3.svg) 
 
@@ -434,7 +444,9 @@ Note: -1.39 - 1.20 - 1.20 = -3.79, -1.9 - 0.51 - 1.20 = -3.60
 ---
 
 ## Likelihood problem
-Given the HMM $M=(A,B,\pi)$, and an observation sequence $O$, calculate likelihood $P(O|M)$.
+Given the HMM $M=(A,B,a_0)$, and an observation sequence $O$, calculate likelihood $P(O|M)$.
+
+If we know the states, we can simply multiply probabilities of each observation: 
 
 $$P(O|S) = \prod_{i=1}^T P(O_i|S_i)$$  <!-- .element : class="fragment" data-fragment-index="1" -->
 
@@ -455,29 +467,21 @@ Note: we can compute the total probability of the observations just by summing o
 
 ---
 
-## Likelihood problem
+## Forward-backward algorithm
+
+* Again, dynamic programming
+* $N$ rows (number of states), $T$ columns (length of sequence)
+* Initialization: $f_0(i) = a_{0i} B(O_1|S_i) = a_{0i} e_l(x_i) $
+* Recursion: $ f_l(i) = e_l(x_i) \times \sum_{k}{f_k(i-1)a_{kl}} $
+
 ![trellis](images/hmm/decoding.png)
 
-Initialization: $\alpha_1(i) = \pi_i B(O_1|S_i)$
+<!-- Initialization: $\alpha_1(i) = a_{0i} B(O_1|S_i)$
 
 Recursion: $\alpha_{t+1}(i) = \sum_i \alpha_t(i) a_{ij} B(O_{t+1}|S_i)$
 
 $$P(O|M) = \sum_{i=1}^M \alpha_{T}(i)$$
-
----
-
-## Likelihood problem
-
-![trellis](images/hmm/decoding.png)
-
-Initialization: $\beta_{T^*}(i) = 1$
-
-Recursion: $\beta_{t}(i) = \sum_j \beta_{t+1}(j) a_{ij} B(O_{t+1}|S_j)$
-
-$$P(O|M) = \sum_{i=1}^M \pi_i B(O_1|S_i) \beta_{T}(i)$$
-
-Note: You can solve the likelihood problem using the forward procedure, or the backwards procedure.
-
+ -->
 
 ---
 # Forward vs viterbi
@@ -498,11 +502,14 @@ $ f_l(i) = e_l(x_i) \times \sum_{k}{f_k(i-1)a_{kl}} $
 
 ---
 
-## Forward-Backward algorithm
-$\alpha$ : Probability of the state for observations now and before this time<br>
-$\beta$  : Probability of the state for observations after this time
+### Forward-Backward algorithm: both directions
 
-![forwardbackward](images/hmm/forwardbackward.png)
+Forward: Probability of the state for observations now and preceding  
+Backward: Probability of the state for following observations 
+
+Then: The two results combined give the distribution over states at any specific point, given the all observations.
+
+The probability of being in a given state at a particular point is $P(\pi_i = k|x) = \frac{f_k(i)b_k(i)}{P(x)}$  <!-- .element : class="fragment" data-fragment-index="1" -->
 
 Note: Because we are interested in comparison of states at each time point, we have to scale it. So we will calculate alpha-3F * beta3F / sum(alpha_iF*beta_iF). So when using this method, we also get some confidence values associated with our determination of the most likely state
 
@@ -523,22 +530,6 @@ We could just use maximum likelihood. We could compute: <!-- .element : class="f
 
 We have defined the model. <!-- .element : class="fragment" data-fragment-index="1" -->
 
-Problem: What if we don't have known state sequences? <!-- .element : class="fragment" data-fragment-index="2" -->
-
----
-
-### Learning *without* annotated training data
-
-* Input is only observations: $O_1, O_2, \ldots, O_T$
-* Baum-Welch algorithm (EM algorithm)
-* not guaranteed to be optimal
-
-E-step (expectation):
-- Compute a best guess path through the model (state sequence)
-
-M-stem (maximization):
-- Adjust transition/emission probabilities as if the best guess is accurate.
-
 ---
 
 ## Estimating parameters for coin flips
@@ -549,62 +540,49 @@ M-stem (maximization):
 ## Estimating parameters for coin flips
 ![visible](images/hmm/baum2.svg)
 
-$P(H|F), P(T|F), P(H|L), P(T|L)$ <!-- .element : class="fragment" data-fragment-index="1" -->
+Emissions: $P(H|F), P(T|F), P(H|L), P(T|L)$ <!-- .element : class="fragment" data-fragment-index="1" -->
 
-$P(F|F), P(F|L), P(L|F), P(L|L)$ <!-- .element : class="fragment" data-fragment-index="2" -->
+Transitions: $P(F|F), P(F|L), P(L|F), P(L|L)$ <!-- .element : class="fragment" data-fragment-index="2" -->
+
+Problem: What if we don't have known state sequences? <!-- .element : class="fragment" data-fragment-index="3" -->
 
 Note: Consider a fully visible Markov model. This would easily allow us to compute the HMM parameters just by maximum likelihood estimation from the training data. For a real HMM, we cannot compute these counts directly from an observation sequence since we don’t know which path of states was taken through the machine for a given input. The Baum-Welch algorithm solves this by iteratively estimating the counts. We will start with an estimate for the transition and observation probabilities and then use these estimated probabilities and use the forward-backward procedure to determine the probability of the states at each observation. Then we can use that to determine better estimates of the transition and emission probabilities. 
 
 ---
 
-## Baum-Welch algorithm
+### Learning *without* annotated training data
 
-$$\hat{a_{ij}} = \frac{\textrm{expected number of transitions from state } i \textrm{ to state }j} {\textrm{expected number of transitions from state }i}$$
+What algorithm have we seen that can be used to compute maximum likelihood estimates with incomplete data?
 
-$P(S_t = i, S_{t+1} = j, O) = \alpha_t(i)a_{ij}B(O_{t+1}|S_j) \beta_{t+1}(j)$
-
-![joint](images/hmm/joint.png)
-
-Note: How do we compute the numerator? Here’s the intuition. Assume we had some estimate of the probability that a given transition i → j was taken at a particular point in time t in the observation sequence. If we knew this probability for each particular time t, we could sum over all times t to estimate the total count for the transition i → j.
+* Input is only observations: $o_1, o_2, \ldots, o_T$
+* Missing: The hidden state sequence
 
 ---
 
-## Baum-Welch algorithm
+### Learning *without* annotated training data
 
-$$\begin{eqnarray}
-P(S_t = i, S_{t+1} = j | O) &=& \frac{P(S_t = i, S_{t+1} = j, O)}{P(O)}\\\\\\
-&=& \frac{\alpha_t(i)a_{ij}B(O_{t+1}|S_j) \beta_{t+1}(j)}{\sum_{j=1}^N \alpha_t(j) \beta_t(j)}
-\end{eqnarray}$$
-
-$$\hat{a_{ij}} = \frac{\sum_{t=1}^{T-1} P(S_t = i, S_{t+1} = j | O)}{\sum_{t=1}^{T-1} \sum_{k=1}^M P(S_t = i, S_{t+1} = k | O)}$$
+* Baum-Welch algorithm (EM algorithm)
+* Iteratively estimates the missing data and maximizes parameters
+* guaranteed to converge to a local optimum
+* not guaranteed to be a global optimum
 
 ---
+### Baum-Welch
 
-## Baum-Welch algorithm
+Initialize parameters.
 
-$$\hat{b_j(v_k)} = \frac{\textrm{expected number of times in state } j \textrm{ and observing } v_k} {\textrm{expected number of times in state }j}$$
+E-step (expectation): Use forward-backward to estimate state probabilities
 
-$P(S_t = j, O) = \alpha_t(j) \beta_t(j)$
+M-stem (maximization): Adjust transition/emission probabilities in the model according to those estimated state probabilities.
 
-![joint2](images/hmm/joint2.png)
-
----
-
-## Baum-Welch algorithm
-
-$$\begin{eqnarray}
-P(S_t = j | O) &=& \frac{P(S_t = j, O)}{P(O)}\\\\\\
-&=& \frac{\alpha_t(j) \beta_{t}(j)}{\sum_{j=1}^N \alpha_t(j) \beta_t(j)}
-\end{eqnarray}$$
-
-$$\hat{b_j(v_k)} = \frac{\sum_{t=1\ s.t.\ O_t=v_k}^{T} P(S_t = j | O)}{\sum_{t=1}^{T} P(S_t = j | O)}$$
+Iterate until convergence
 
 ---
 
 ## Advantages and limitations
 
-* Modularity : HMMs can be combined into larger HMMs
-* Transparency : Based on a state model making it interpretable
+* Modularity: HMMs can be combined into larger HMMs
+* Transparency: Based on a state model making it interpretable
 * Prior knowledge: can be incorporated in the model
 
 * Need accurate, applicable, and sufficiently sized training sets of data
