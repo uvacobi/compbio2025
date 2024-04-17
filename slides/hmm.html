@@ -8,6 +8,114 @@ title: "Hidden Markov Models (HMMs)"
 
 Note: HMMs are well-known for their effectiveness in modeling the correlations between adjacent symbols, domains, or events, and they have been extensively used in various fields, especially in speech recognition and digital communication. Considering the remarkable success of HMMs in engineering, it is no surprise that a wide range of problems in biological sequence analysis have also benefited from them. 
 
+
+---
+
+## What do you remember about dynamic programming?
+
+What is dynamic programming really?
+
+
+- introduced in 1950s by Richard Bellman of Rand Corp <!-- .element : class="fragment" data-fragment-index="1" --> <!-- .element : class="fragment" data-fragment-index="1" -->
+- it's hard to define  <!-- .element : class="fragment" data-fragment-index="1" --> 
+- it's extremely broad <!-- .element : class="fragment" data-fragment-index="1" --> 
+
+
+[The theory of dynamic programming](https://www.ams.org/journals/bull/1954-60-06/S0002-9904-1954-09848-8/)  <!-- .element : class="fragment" data-fragment-index="1" --> 
+
+
+
+---
+
+## The setting
+
+![example](images/hmm/dynamic-programming-1.png)
+
+---
+
+## The insight
+
+![example](images/hmm/dynamic-programming-2.png)
+
+The essence of dynamic programming is "do the best you can from where you are" <!-- .element : class="fragment" --> 
+
+
+
+---
+
+Consider a process determined at any time by an M-dimensional vector
+
+$$
+\mathbf{p} = (x_0, x_1, x_2, ..., x_m)
+$$
+
+Consider a set of transformations $\mathbf{T} = { T_k }$,  
+which are functions that transform $\mathbf{p}$  
+
+$$
+T_k(p)
+$$
+
+We want to maximize our "return" -- the output of some scalar function $R(p)$ of the final state.
+
+---
+
+We want to select a series of transformations,  
+called "policy" $P=(T_1, T_2, ... T_N)$,  
+which will yield successive states:
+
+$$
+p_1 = T_1(p_0)  \\\\
+p_2 = T_2(p_1)  \\\\
+...... \\\\
+p_N = T_N(p_{N-1})
+$$
+
+The maximum value of $R(P_N)$, determined by an optimal policy, will only be a function of the initial vector $p_0$ and the number of stages N.
+
+$$ 
+f_N(p) = Max_{P}R(p_N)
+$$
+
+---
+
+$$ 
+f_N(p) = Max_{P}R(p_N)
+$$
+
+Choose our first transformation $T_1(p_0)$.  
+The maximum return from the following (N-1) stages is by definition:
+
+$$
+f_{N-1}(T_1(p_0)) \\\\
+= f_{N-1}(p_1)
+$$
+
+
+
+
+Thus:
+
+$$
+f_N(p) = Max_{P}R(p_N) = Max_{k} f_{N-1}(T_k(p))
+$$
+
+Which means: at any given time, we must choose the transformation that maximizes the return.
+
+
+---
+
+## Dynamic programming: the gist
+
+You have a sequence of states, and at each time step, you make a decision. You want to end optimally, for some definition of optimal. 
+
+The brute-force way is to consider all possible sequences of decisions and then pick the best one, but this is not possible for long sequences with many possible decisions. <!-- .element : class="fragment" --> 
+
+Instead, divide the problem into sub-problems: At any particular time determining your decision payoff depends only on the current state of the system, not on later states of the system. <!-- .element : class="fragment" --> 
+
+This concept can apply to a huge array of problems, from investing to aircraft control to...computational biology. <!-- .element : class="fragment" --> 
+
+
 ---
 
 ## A toy HMM for 5′ splice site recognition
@@ -40,12 +148,12 @@ Note: Joint probability $P(A,B) = P(A|B)  P(B) = P(B|A)  P(A)$, Marginal probabi
 ## Markov Models
 * Set of states: ${s_1, s_2, \ldots, s_n}$
 * Process moves from one state to another generating a sequence of states: $s_{i1}, s_{i2}, \ldots, s_{ik}, \ldots$
-* Markov chain property: $$P(s_{ik}|s_{i1},s_{i2},\ldots,s_{i(k-1)}) = P(s_{ik}|s_{i(k-1)})$$
-* The following need to be defined:
+* Markov property:  The probability of each symbol depends only on the preceding symbol, not the entire previous sequence  
+  $$P(s_{ik}|s_{i1},s_{i2},\ldots,s_{i(k-1)}) = P(s_{ik}|s_{i(k-1)})$$
+
+* A Markov chain is defined by:
   * transition probabilities $A=(a_{ij}), a_{ij} = P(s_i, s_j)$
   * initial probabilities: $\pi=(\pi_i), \pi_i = P(s_i)$
-
-Note: Markov chain property: probability of each subsequent state depends only on what was the previous state
 
 ---
 
@@ -64,7 +172,14 @@ Note: So let's consider I have two coins, one of them is fair and the other one 
 
 ## Calculation of sequence probability
 
-By Markov chain property, probability of state sequence can be found by the formula
+
+Multiplication Rule of probability:
+
+$$
+P(A, B) = P(A|B) P(B)
+$$
+
+By Markov property, probability of state sequence can be found by the formula
 
 $$\begin{eqnarray}
 P(s_{i1}, \ldots, s_{ik}) &=& P(s_{ik} | s_{i1}, \ldots, s_{i(k-1)}) P(s_{i1}, \ldots, s_{i(k-1)})\\\\\\
@@ -95,16 +210,32 @@ P(L,L,F,F) &=& P(F|L,L,F) P(L,L,F) \\\\\\
 * Set of states: ${s_1, s_2, \ldots, s_n}$
 * Process moves from one state to another generating a sequence of states: $s_{i1}, s_{i2}, \ldots, s_{ik}, \ldots$
 * Markov chain property: $$P(s_{ik}|s_{i1},s_{i2},\ldots,s_{i(k-1)}) = P(s_{ik}|s_{i(k-1)})$$
-* States are not visible, but each state randomly generates one of $M$ observations (or visible states): ${v_1, v_2, \ldots, v_M}$ <!-- .element : class="fragment" data-fragment-index="1" -->
+* States are not visible, but each state randomly generates one of $M$ observations (or emissions): ${o_1, o_2, \ldots, o_l}$ <!-- .element : class="fragment" data-fragment-index="1" -->
 
 ---
 
-## Hidden Markov Models
-* The following need to be defined:
-  * transition probabilities $A=(a_{ij}), a_{ij} = P(s_i, s_j)$
-  * initial probabilities: $\pi=(\pi_i), \pi_i = P(s_i)$
-  * observation probabilities: $B=(b_i(v_m)), b_i(v_m) = P(v_m | s_i)$
-* Model $M = (A, B, \pi)$
+## Components of Hidden Markov Models
+
+The following need to be defined for Model $M = (A, B, \pi)$:
+
+* transition probabilities:  
+   $ \mathbf{A} = \\{ a_{ij} \\} $  
+   $a_{ij} = P(s_i \rightarrow s_j)$
+* initial probabilities:  
+  $\pi= \\{ \pi_i \\}$  
+  $\pi_i = P(s_i)$
+* observation/emission probabilities:  
+  $\mathbf{B} = \\{ b_i(v_m) \\}$  
+  $b_i(v_m) = P(v_m | s_i)$
+
+<!-- ---
+
+## Components of an HMM
+
+- transition from state $k$ to state $l$: $\mathbf{A} = {a_{kl}}$
+  - initiation probabilities: $a_{0k}$, or $\pi$
+- emission probabilities: $\mathbf{B} = {e_k}$
+ -->
 
 ---
 
@@ -139,14 +270,6 @@ P( \\{ H,H \\}, \\{ F,F \\}) &=& P( \\{ H,H \\} | \\{ F,F \\}) P(\\{ F,F \\})\\\
 \end{eqnarray}$$
 
 Note: Consider all possible hidden state sequences
-
-
----
-
-- path: $\pi$
-- transition from state $k$ to state $l$: $a_{kl}$
-  - initiation probabilities: $a_{0k}$
-- emission probabilities: $e_k$
 
 ---
 
@@ -185,7 +308,7 @@ Baum-Welch algorithm <!-- .element : class="fragment" data-fragment-index="3" --
 
 ## Decoding problem 
 
-Given the HMM $M=(A,B,\pi)$, and an observation sequence $O$, calculate the most likely sequence of states that produced $O$.
+Given HMM $M=(A,B,\pi)$ and observation sequence $O$, find the sequence of states most likely to produce $O$.
 
 ![decoding](images/hmm/decoding1.png)
 
@@ -194,10 +317,11 @@ Given the HMM $M=(A,B,\pi)$, and an observation sequence $O$, calculate the most
 ## Decoding problem 
 ![decoding](images/hmm/decoding1.png)
 
-$P(O, S)$: the probability that HMM follows sequence of states $S$ and emit string $O$.
+$P(O, S)$: the probability that HMM follows sequence of states $S$ and emits string $O$.
 
 $$P(O,S) = P(O_{1:T}, S_{1:T}) = P(O_{1:T}|S_{1:T}) P(S_{1:T})$$
-$P(O_{1:T}|S_{1:T})$: product of emission probabilities, $P(S_{1:T})$: product of transition probabilities
+$P(O_{1:T}|S_{1:T})$: product of emission probabilities,  
+$P(S_{1:T})$: product of transition probabilities
 
 ---
 
@@ -214,7 +338,7 @@ $M$ states, $T$ time steps: $M^T$ paths...
 ## Viterbi algorithm
 
 * Dynamic programming
-* $M$ rows, $T$ columns
+* $M$ rows (number of states), $T$ columns (length of sequence)
 * Initialization: $S_{i, 1} = \pi_i B(O_1|S_i)$
 * Recursion: $S_{i,j} = \max_k S_{k,j-1} a_{ki} B(O_j|S_i)$
 
@@ -312,13 +436,15 @@ Note: -1.39 - 1.20 - 1.20 = -3.79, -1.9 - 0.51 - 1.20 = -3.60
 ## Likelihood problem
 Given the HMM $M=(A,B,\pi)$, and an observation sequence $O$, calculate likelihood $P(O|M)$.
 
-$$P(O|S) = \prod_{i=1}^T P(O_i|S_i)$$
+$$P(O|S) = \prod_{i=1}^T P(O_i|S_i)$$  <!-- .element : class="fragment" data-fragment-index="1" -->
 
-But we do not know the state sequence!
+But we do not know the state sequence! <!-- .element : class="fragment" data-fragment-index="2" -->
 
 ---
 
 ## Likelihood problem
+
+So, we must sum over all possible state sequences.
 
 $$\begin{eqnarray}
 P(O) &=& \sum_{S} P(O,S) \\\\\\
@@ -352,6 +478,24 @@ $$P(O|M) = \sum_{i=1}^M \pi_i B(O_1|S_i) \beta_{T}(i)$$
 
 Note: You can solve the likelihood problem using the forward procedure, or the backwards procedure.
 
+
+---
+# Forward vs viterbi
+
+The only difference between Forward and Viterbi is  
+you sum over all the possible paths instead of 
+choosing the maximum:
+
+
+Viterbi recursion step:
+
+$ v_l(i) = e_l(x_i) \times max_k(v_k(i-1)a_{kl}) $
+
+Forward algorithm recursion step:
+
+$ f_l(i) = e_l(x_i) \times \sum_{k}{f_k(i-1)a_{kl}} $
+
+
 ---
 
 ## Forward-Backward algorithm
@@ -365,17 +509,35 @@ Note: Because we are interested in comparison of states at each time point, we h
 ---
 
 ## Learning problem
+
 Given observation sequence $O$, and general structure of HMM, determine HMM parameters that best fit the training data. 
 
-* Inputs
-  * $O_1, O_2, \ldots, O_T$
-  * $v_1, v_2, \ldots, v_M$
-* Output
-  * $A$
-  * $B$
-  * $\pi$
-* Baum-Welch algorithm  (EM algorithm)
+### Learning with annotated training data <!-- .element : class="fragment" data-fragment-index="1" -->
+
+If we had training data: A sequence of observations, with a known state sequence <!-- .element : class="fragment" data-fragment-index="1" -->
+
+We could just use maximum likelihood. We could compute: <!-- .element : class="fragment" data-fragment-index="1" -->
+- emission probability for each state <!-- .element : class="fragment" data-fragment-index="1" -->
+- transition probabilities for each state  <!-- .element : class="fragment" data-fragment-index="1" -->
+- initial state probabilities <!-- .element : class="fragment" data-fragment-index="1" -->
+
+We have defined the model. <!-- .element : class="fragment" data-fragment-index="1" -->
+
+Problem: What if we don't have known state sequences? <!-- .element : class="fragment" data-fragment-index="2" -->
+
+---
+
+### Learning *without* annotated training data
+
+* Input is only observations: $O_1, O_2, \ldots, O_T$
+* Baum-Welch algorithm (EM algorithm)
 * not guaranteed to be optimal
+
+E-step (expectation):
+- Compute a best guess path through the model (state sequence)
+
+M-stem (maximization):
+- Adjust transition/emission probabilities as if the best guess is accurate.
 
 ---
 
