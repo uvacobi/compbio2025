@@ -121,9 +121,12 @@ This concept can apply to a huge array of problems, from investing to aircraft c
 ---
 
 ## A toy HMM for 5′ splice site recognition
+
 ![example](images/hmm/example.jpg.webp)
 
-<small>[What is a hidden Markov model?](https://www.nature.com/articles/nbt1004-1315)
+<small>From: [What is a hidden Markov model?](https://www.nature.com/articles/nbt1004-1315)  
+Don't confuse a state-space diagram with a [graphical model diagram](https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-018-0629-0/figures/2)
+</small>
 
 Note: Often, biological sequence analysis is just a matter of putting the right label on each residue. In gene identification, we want to label nucleotides as exons, introns, or intergenic sequence. In sequence alignment, we want to associate residues in a query sequence with homologous residues in a target database sequence. We can always write an ad hoc program for any given problem, but the same frustrating issues will always recur. One is that we want to incorporate heterogeneous sources of information. A genefinder, for instance, ought to combine splice-site consensus, codon bias, exon/ intron length preferences and open reading frame analysis into one scoring system. How should these parameters be set? How should different kinds of information be weighted? A second issue is to interpret results probabilistically. Finding a best scoring answer is one thing, but what does the score mean, and how confident are we that the best scoring answer is correct? A third issue is extensibility. The moment we perfect our ad hoc genefinder, we wish we had also modeled translational initiation consensus, alternative splicing and a polyadenylation signal. Too often, piling more reality onto a fragile ad hoc program makes it collapse under its own weight.
 
@@ -229,12 +232,13 @@ The following need to be defined for Model $M = (A, B, a_0)$:
 
 * transition probabilities:  
    $ \mathbf{A} = \\{ a_{ij} \\} $  
-   $a_{ij} = P(s_i \rightarrow s_j)$
+   $a_{st} = P(x_i=t |x_{i-1} =s)$
 * initial probabilities:  
   $a_{0s} = P(x_1 = s)$
 * observation/emission probabilities:  
-  $\mathbf{B} = \\{ b_i(v_m) \\}$  
-  $b_i(v_m) = P(v_m | s_i)$
+  $\mathbf{B} = \\{ e_k(b) \\}$  
+  $e_k(b) = P(x_i=b | \pi_i=k)$  
+  (probability of seeing symbol $b$ when in state $k$)
 
 <!-- ---
 
@@ -449,6 +453,9 @@ Given the HMM $M=(A,B,a_0)$, and an observation sequence $O$, calculate likeliho
 If we know the states, we can simply multiply probabilities of each observation: 
 
 $$P(O|S) = \prod_{i=1}^T P(O_i|S_i)$$  <!-- .element : class="fragment" data-fragment-index="1" -->
+
+$$ = \prod_{i=1}^T e_S(o_i)$$  <!-- .element : class="fragment" data-fragment-index="1" -->
+
 
 But we do not know the state sequence! <!-- .element : class="fragment" data-fragment-index="2" -->
 
