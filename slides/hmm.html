@@ -140,12 +140,46 @@ P( \\{ H,H \\}, \\{ F,F \\}) &=& P( \\{ H,H \\} | \\{ F,F \\}) P(\\{ F,F \\})\\\
 
 Note: Consider all possible hidden state sequences
 
+
 ---
 
-## Computational problems with HMMs
-* Decoding problem: Given the HMM $M=(A,B,\pi)$, and an observation sequence $O$, calculate the most likely sequence of states that produced $O$.
-* Likelihood problem: Given the HMM $M=(A,B,\pi)$, and an observation sequence $O, o_i \in {v_1,v_2,\ldots,v_M}$, calculate likelihood $P(O|M)$. <!-- .element : class="fragment" data-fragment-index="1" -->
-* Learning problem: Given observation sequence $O$, and general structure of HMM, determine HMM parameters that best fit the training data. <!-- .element : class="fragment" data-fragment-index="2" -->
+- path: $\pi$
+- transition from state $k$ to state $l$: $a_{kl}$
+  - initiation probabilities: $a_{0k}$
+- emission probabilities: $e_k$
+
+---
+
+## 3 Computational applications of HMMs
+* Decoding problem (aka uncovering, parsing, or inference)
+
+Given an HMM $M=(A,B,\pi)$, and an observation sequence $O$, find the sequence of states most likely to have produced $O$. <!-- .element : class="fragment" data-fragment-index="1" -->
+
+* Likelihood problem (aka evaluation, or scoring)
+
+Given an HMM $M=(A,B,\pi)$, and an observation sequence $O, o_i \in {v_1,v_2,\ldots,v_M}$, calculate likelihood $P(O|M)$. <!-- .element : class="fragment" data-fragment-index="2" -->
+
+
+* Learning problem (aka parameter estimation, or fitting)
+
+Given an HMM structure and observation sequence $O$, determine HMM parameters that best fit the training data. <!-- .element : class="fragment" data-fragment-index="3" -->
+
+
+---
+
+## Solutions to 3 applications of HMMs
+
+* Decoding problem (aka uncovering, parsing, or inference)
+
+Viterbi algorithm <!-- .element : class="fragment" data-fragment-index="1" -->
+
+* Likelihood problem (aka evaluation, or scoring)
+
+Forward-backward algorithm <!-- .element : class="fragment" data-fragment-index="2" -->
+
+* Learning problem (aka parameter estimation, or fitting)
+
+Baum-Welch algorithm <!-- .element : class="fragment" data-fragment-index="3" -->
 
 ---
 
@@ -291,8 +325,6 @@ P(O) &=& \sum_{S} P(O,S) \\\\\\
 &=& \sum_{S} P(O|S) P(S)
 \end{eqnarray}$$
 
-Where did we see $P(O,S)$ before?
-
 Note: we can compute the total probability of the observations just by summing over all possible hidden state sequences. Again, for M states and T time steps, we are talking M^T paths
 
 ---
@@ -359,7 +391,7 @@ $P(H|F), P(T|F), P(H|L), P(T|L)$ <!-- .element : class="fragment" data-fragment-
 
 $P(F|F), P(F|L), P(L|F), P(L|L)$ <!-- .element : class="fragment" data-fragment-index="2" -->
 
-Note: Consider a fully visible Markov model. This would easily allow us to compute the HMM parameters just by maximum likelihood estimation from the training data. For a real HMM, we cannot compute these counts directly from an observation sequence since we don’t know which path of states was taken through the machine for a given input. The Baum-Welch algorithm solves this by iteratively esti- mating the counts. We will start with an estimate for the transition and observation probabilities and then use these estimated probabilities and use the forward-backward procedure to determine the probability of the states at each observation. Then we can use that to determine better estimates of the transition and emission probabilities. 
+Note: Consider a fully visible Markov model. This would easily allow us to compute the HMM parameters just by maximum likelihood estimation from the training data. For a real HMM, we cannot compute these counts directly from an observation sequence since we don’t know which path of states was taken through the machine for a given input. The Baum-Welch algorithm solves this by iteratively estimating the counts. We will start with an estimate for the transition and observation probabilities and then use these estimated probabilities and use the forward-backward procedure to determine the probability of the states at each observation. Then we can use that to determine better estimates of the transition and emission probabilities. 
 
 ---
 
@@ -431,9 +463,15 @@ $$\hat{b_j(v_k)} = \frac{\sum_{t=1\ s.t.\ O_t=v_k}^{T} P(S_t = j | O)}{\sum_{t=1
 > ChromHMM is a Java program for learning and characterizing chromatin states using a multivariate Hidden Markov Model that models the combinatorial and spatial patterns in data from multiple chromatin marks.
 
 ---
-input example
+ChromHMM Input is a binary matrix of chromatin mark presence/absence across genomic tiles.
 
-```
+
+- Columns are chromatin marks  
+- Rows are genomic tiles
+
+Example:
+
+```console
 Cell chr1
 Mark1 Mark2 Mark3
 0 0 0
@@ -443,10 +481,11 @@ Mark1 Mark2 Mark3
 
 ---
 
-output example
+ChromHMM output is a segmentation that divides the genome into chromatin states.
+
+Example
 
 ![example](images/hmm/segments.png)
-
 
 ---
 
@@ -460,16 +499,26 @@ sequence databases for additional homologs, and to make deep multiple sequence a
 
 ---
 
-input
+HMMer input is a protein multiple-sequence alignment
+
+Example:
 
 ![example](images/hmm/hmmer-globins-sto.png)
 
 ---
 
+HMMer learns an HMM model from the input
+
 ```
 hmmbuild globins4.hmm globins4.sto
 ```
 ![example](images/hmm/hmmer-model.png)
+
+---
+
+Trained HMMer models can be used  
+to search sequence databases  
+for other sequences that match the alignment.
 
 ---
 
@@ -479,6 +528,11 @@ hmmbuild globins4.hmm globins4.sto
 
 ---
 
+Region set HMM input is a collection of region sets,  
+which is transformed into counts of starts, overlap, and ends
+
 ![example](images/hmm/universe-regions.svg) <!-- .element style="background:white" -->
+
+Output is a unified segmentation, a consensus region set
 
 ---

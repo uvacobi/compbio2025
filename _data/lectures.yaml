@@ -307,6 +307,8 @@ lectures:
     assignments:
       - title: Quiz 9
         url: https://forms.gle/FFmsA9hRoUkzrVyq5
+      - title: Assignment 10
+        url: https://github.com/cphg/hmm_lab
       - title: Assignment 9 due
   - lecture_number: 21
     date: 2024-04-22
