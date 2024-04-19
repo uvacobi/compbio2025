@@ -323,8 +323,15 @@ lectures:
     details: null
     instructor: Aakrosh Ratan
     links:
-      - url: #
+      - url: slides/networks
         title: Lecture slides
+      - url: "https://barabasi.com/f/147.pdf"
+        title: "Network Biology: Understanding the Cells Functional Organization"
+        required: true
+      - url: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007244
+        title: Ten simple rules to create biological network figures for communication
+      - url: "https://idekerlab.ucsd.edu/wp-content/uploads/publications/Cowen_NatReviews-Genetics_2017.pdf"
+        title: "Network propagation: a universal amplifier of genetic associations"
     assignments:
       - title: Quiz 10
         url: https://forms.gle/XQqhc2ztMZ4SZBtx5

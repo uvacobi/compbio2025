@@ -1,0 +1,351 @@
+---
+layout: aakrosh_markdown
+title: "Network analysis"
+tags: slides 
+---
+
+## {{page.title}}
+![networks](images/networks/title.png) <!-- .element height="60%" width="60%" -->
+
+---
+
+## Outline
+
+* Introduction to networks
+* Global/Local network properties
+* Guilt by association
+* Network diffusion kernels
+
+Note: Networks are everywhere in the world, including social networks, collaboration networks, transcoprtation networks, computer networks and biological networks. 
+
+---
+
+## Examples of biological netwworks
+
+Regulatory networks
+
+![example](images/networks/regulatory.png) <!-- .element height="50%" width="50%" -->
+
+<small>Source: PMC6302376</small>
+
+---
+
+## Examples of biological netwworks
+
+Protein-protein interaction network 
+![example](images/networks/ppi.png)<!-- .element height="50%" width="50%" -->
+
+Notes: STRING subnetwork of TP53 interactions with experimental evidence
+
+---
+
+## Examples of biological networks
+
+* Metabolic networks (enzymes and substrates)
+* Signaling networks (upstream of transcription factors)
+* Functional networks (co-expression network, ...)
+
+---
+
+## Networks
+
+* $G = (V,E)$
+* $V$: a set of vertices/nodes
+    * $|V| = n$
+* $E \subseteq \\{\\{x,y\\} | x,y \in V$ and $x \neq y\\}$
+    * $|E| = m$
+    * $m \leq n(n-1)$
+
+Note: There’s no difference. "graph" tends to be more common in math and other formal areas, and "network" more common in more applied areas.
+
+---
+
+## Representing networks as graphs
+
+![example](images/networks/ppi.png)<!-- .element height="30%" width="30%" -->
+![example](images/networks/regulatory.png) <!-- .element height="30%" width="30%" -->
+
+Undirected / Directed
+
+---
+
+## Representing networks as graphs
+
+* Weighted: weights associated with every edge
+* Multigraphs : multiple edges can exist among nodes
+* Digraphs : edges have directions
+* Simple graphs : no multiple edges or self-loops
+
+![example](images/networks/graphs.png)<!-- .element height="60%" width="60%" -->
+
+---
+
+## Matrix representation of graphs
+
+![matrix](images/networks/matrix.png)
+
+Notes: Adjacency list representation and matrix representation. Degree of unwgited vs weighted. Of directed vs undirected graphs.
+
+---
+
+## Matrix representation of graphs
+
+* What if its an unweighted network?
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+* What if its a directed network?
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+* What if it has a self loop?
+<!-- .element: class="fragment" data-fragment-index="3" -->
+
+* What about multiple edges?
+<!-- .element: class="fragment" data-fragment-index="4" -->
+
+---
+
+## Emergent properties of real-world networks
+
+* Presence of hubs: If a network is growing and the property of preferential attachment exists, then the distribution of nodes in the network will assume a "power law" distribution. 
+* Small world effect: The diameter of the network can be fairly small even in a network with many nodes. 
+* Robustness: because links are distributed disproportiontately, the failure of any single node will most likely not have a serious impact on the functioning of the network, making real-world networks "robust" 
+
+Notes: preferential attachment exists (that is, new nodes are free to associate with any node, but "prefer" to associate with well-connected nodes -- nodes that already have many connections). -- a few nodes have many links, and many nodes have few links. There is no meaningful "average", hence these are sometimes called "scale-free" networks. Remember, because of the importance of superconnectors, real-world networks can be vulnerable to targeted attacks.
+
+---
+
+## Centrality measures in networks
+
+How important is a node/edge to the structural characteristics of the system?
+
+![example](images/networks/centrality_example.png) <!-- .element height="40%" width="40%" -->
+
+<small>Source: PMC6762067</small>
+
+Notes: Several nodes show high conenctivity, but nodes with lower connectivity can still be important. For example, CD36 is a negative regulator of angiogenesis in endothelial cells, though it is not densely connected.
+
+---
+
+## Degree centrality
+
+![degree](images/networks/degree.png)
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+What about directed or weighted graphs?
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+---
+
+## Betweenness centrality
+
+The number of shortest paths in the graph that pass through the node divided by the total number of shortest paths.
+
+$BC(k) = \sum_i \sum_j \frac{\rho(i,k,j)}{\rho(i,j)}, i \neq j \neq k$ 
+
+![betweenness](images/networks/betweenness.png)
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+Shortest paths are AB, ABC, ABCD, ABE, BC, BCD, BE, CD, CE, DE
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+$BC(B) = 3/10$
+<!-- .element: class="fragment" data-fragment-index="3" -->
+
+Nodes with a high betweenness centrality control information flow in a network.
+<!-- .element: class="fragment" data-fragment-index="3" -->
+---
+
+## Closeness centrality
+
+The normalised inverse of the sum of topological distances in the graph.
+
+$CC(i) = \frac{N-1}{\sum_j d(i,j)}$
+
+![betweenness](images/networks/betweenness.png)
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+$CC(B) = 4 / 5$
+<!-- .element: class="fragment" data-fragment-index="3" -->
+
+Nodes with a high closeness centrality can spread information easily.
+<!-- .element: class="fragment" data-fragment-index="3" -->
+
+Notes: N is the number of nodes
+
+---
+
+## Degree centrality can be different from closeness or betweenness
+
+![example](images/networks/centrality_example.png) <!-- .element height="40%" width="40%" -->
+
+<small>Source: PMC6762067</small>
+
+---
+
+## Eigenvector centrality
+
+Make $x_i$ proportional to the average of the centralities of its $i$’s network neighbors
+
+$x_i = \frac{1}{\lambda} \sum_{j=1}^{n} A_{ij}x_j$
+
+In matrix-vector notation, we can write $X = \frac{1}{\lambda} AX$ or $AX = {\lambda}X$
+
+Connections to high-scoring nodes contribute more to the score of the node in question than equal connections to low-scoring nodes.
+
+---
+
+## Centrality measures in networks
+
+1. Degree centrality: number of in/out edges for $v$
+2. Closeness centrality: mean distance to other vertices
+3. Betweenness centrality: # of shortest paths
+4. Eigenvector centrality: sums of centrality of $v$'s neighbors
+5. Katz centrality: balances #1 and #4 using a weighting parameters
+<!-- .element: class="fragment" data-fragment-index="2" -->
+6. Page rank: dilutes centrality flow out of a vertex by its number of neighbor
+<!-- .element: class="fragment" data-fragment-index="3" -->
+7. ...
+<!-- .element: class="fragment" data-fragment-index="4" -->
+8. ...
+<!-- .element: class="fragment" data-fragment-index="4" -->
+
+---
+
+---
+
+## Correlation between protein functional distance and network distance
+
+![Distance](images/networks/msb4100129-fig-0003-m.jpg)
+
+<small>Source: PMC1847944</small>
+
+Note: Correlation between protein functional distance and network distance. X‐axis: distance in the network. Y‐axis: average functional similarity of protein pairs that lie at the specified distance. The functional similarity of two proteins is measured using the semantic similarity of their GO categories
+
+---
+
+## Guilt by association
+
+![GBA](images/networks/msb4100129-fig-0002-m.jpg)
+
+<small>Source: PMC1847944</small>
+
+Note: Direct versus module‐assisted approaches for functional annotation. The scheme shows a network in which the functions of some proteins are known (top), where each function is indicated by a different color. Unannotated proteins are in white. In the direct methods (left), these proteins are assigned a color that is unusually prevalent among their neighbors. The direction of the edges indicates the influence of the annotated proteins on the unannotated ones. In the module‐assisted methods (right), modules are first identified based on their density. Then, within each module, unannotated proteins are assigned a function that is unusually prevalent in the module. In both methods, proteins may be assigned with several functions.
+
+---
+
+## Random walks
+
+![Random walk](images/networks/start.png) <!-- .element height="60%" width="60%" -->
+
+---
+
+## Random walks 
+
+![Random walk](images/networks/random_walk.gif)
+
+---
+
+## Random walks
+
+![Random walk](images/networks/random_walk_some_restart.gif)
+
+---
+
+## Random walks
+
+![Random walk](images/networks/random_walk_lots_restart.gif)
+
+---
+
+## Random walks
+
+![Random walk](images/networks/random_walk_algo.png)
+
+<small>Source: 10.1145/1134030.1134042</small>
+
+---
+
+## Network Propagation
+
+![table](images/networks/propagation.png)
+
+<small>Source: 10.1038/nrg.2017.38</small>
+
+---
+
+---
+
+## Modularity of networks
+
+Modular: Graph with densely connected subgraphs. Genes in modules are involved in similar functions and are co-regulated.
+
+![modular](images/networks/modular.png) <!-- .element height="60%" width="60%" -->
+
+
+Modules can be identified using graph partitioning algorithms
+* Markov Clustering Algorithm
+* Girvan-Newman Algorithm
+* Spectral partitioning
+
+---
+## Community detection
+
+* Node-Centric Community
+    * Each node in a group satisfies certain properties
+* Group-Centric Community
+    * Consider the connections within a group as a whole. The group has to satisfy certain properties without zooming into node-level
+* Network-Centric Community
+    * Partition the whole network into several disjoint sets
+* Hierarchy-Centric Community
+    * Construct a hierarchical structure of communities
+
+---
+
+## Node-Centric : Cliques
+
+Clique: a maximum complete subgraph in which all nodes are adjacent to each other
+
+![clique](images/networks/clique.png) <!-- .element height="60%" width="60%" -->
+
+* Most versions of the clique problem are hard
+* The clique decision problem is NP-complete (input: G,k output: T/F)
+* listing all maximal cliques may require exponential time
+
+Notes: NP-complete problems are the hardest of the problems to which solutions can be verified quickly. A maximal clique, sometimes called inclusion-maximal, is a clique that is not included in a larger clique. A single maximal clique can be found by a straightforward greedy algorithm. Starting with an arbitrary clique (for instance, any single vertex or even the empty set), grow the current clique one vertex at a time by looping through the graph's remaining vertices. For each vertex v that this loop examines, add v to the clique if it is adjacent to every vertex that is already in the clique, and discard v otherwise. This algorithm runs in linear time.
+
+---
+
+## Group-Centric Community
+
+Whole group should satisfy a certain condition, e.g., group density $\geq t$ 
+
+* Subgraph $G_s (V_s, E_s)$ is $\gamma - dense$ quasi-clique if $$\frac{2|E_s|}{|V_s|(|V_s| - 1)} \geq \gamma$$ 
+* denominator is the maximum number of degrees
+* A strategy similar to that of cliques can be used
+
+---
+
+## Network-Centric Community Detection
+
+consider the connections within a network globally. Partition the nodes of the network into disjoint sets.
+
+* Laplacian matrix $L = D - A$
+* For undirected networks
+    * diagonal has degree of the node
+    * non-diagnoal elements are negative of the adjacency matrix
+* graph analogue to the Laplacian operator on multivariate, continuous functions
+
+Notes: the Laplace operator or Laplacian is a differential operator given by the divergence of the gradient of a scalar function on Euclidean space. In a Cartesian coordinate system, the Laplacian is given by the sum of second partial derivatives of the function with respect to each independent variable. In other coordinate systems, such as cylindrical and spherical coordinates, the Laplacian also has a useful form. Informally, the Laplacian Δf (p) of a function f at a point p measures by how much the average value of f over small spheres or balls centered at p deviates from f (p).
+
+
+---
+
+## Spectral clustering
+
+---
+
+## Network diffusion kernels
+
+---
+
+Network deconvolution
