@@ -310,6 +310,7 @@ Clique: a maximum complete subgraph in which all nodes are adjacent to each othe
 * Most versions of the clique problem are hard
 * The clique decision problem is NP-complete (input: G,k output: T/F)
 * listing all maximal cliques may require exponential time
+* in clique of size $k$, each node mantains degree $\geq k-1$
 
 Notes: NP-complete problems are the hardest of the problems to which solutions can be verified quickly. A maximal clique, sometimes called inclusion-maximal, is a clique that is not included in a larger clique. A single maximal clique can be found by a straightforward greedy algorithm. Starting with an arbitrary clique (for instance, any single vertex or even the empty set), grow the current clique one vertex at a time by looping through the graph's remaining vertices. For each vertex v that this loop examines, add v to the clique if it is adjacent to every vertex that is already in the clique, and discard v otherwise. This algorithm runs in linear time.
 
@@ -340,12 +341,90 @@ Notes: the Laplace operator or Laplacian is a differential operator given by the
 
 ---
 
-## Spectral clustering
+## Laplacian
+
+Given a multivariate function $f : \mathbb{R}^n \rightarrow \mathbb{R}$, Laplacian of f is defined as
+
+$$\Delta f(x) := \Delta \cdot \Delta f(x)$$
+
+So Laplacian of $f$ is the divergence of f’s gradient. 
+
+Note: The gradient of a multivariate function, returns a vector field where the vector at each point x, points in the direction of f’s steepest ascent at x. The divergence operator takes as input a vector field and produces a multivariate function. That is, given a vector field v(x), the divergence at point x, is a scalar that is computed from the vectors that are nearby x in the vector field. Intuitively, the divergence at x describes how much “flow” is coming into and out of x where the flow is described by the vectors in the vector field nearby x. Intuitively, what does the Laplacian describe? Well, following our understanding that f’s gradient provides vectors that point in f’s direction of steepest ascent with magnitude proportional to its steepness, we see that the “flow” at any point in this vector field will correspond to how much the steepness of f is changing. If at some point, x, the steepness is not changing – that is, x is located at a steady incline or a steady decline – then the divergence of the gradient at x will be zero. That is, the Laplacian will be zero. On the other hand, if at x, the steepness is shrinking or growing – for example, because we’re close to a local maximum/minimum – then the divergence (i.e. Laplacian) will be either large or small (large if we’re approaching a minimum and small if we’re approaching a maximum).
 
 ---
 
-## Network diffusion kernels
+## Network modularization
+
+![example](images/networks/modular_example.png)
 
 ---
 
-Network deconvolution
+## Network modularization
+
+![example](images/networks/modular_example2.png)
+
+---
+
+## Network modularization
+
+Decompose $L = U \Sigma U^{-1}$
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```{R}
+L = matrix(c(3,-1,-1, -1, 0,0,0,0,-1,3,-1,-1,0,0,0,0,
+            -1,-1,3,-1,0,0,0,0,-1,-1,-1,4,-1,0,0,0,
+            0,0,0,-1,4,-1,-1,-1,0,0,0,0,-1,3,-1,-1,
+            0,0,0,0,-1,-1,3,-1,0,0,0,0,-1,-1,-1,3), byrow=TRUE, nrow=8)
+
+sorteig <- function(X) {
+   vectors <- X$vectors
+   values <- X$values
+   vectors <- vectors[, order(values)]
+   values <- sort(values)
+   list(vectors = vectors, values = values)
+}
+
+eig <- function(X) {
+   res <- eigen(X)
+   sorteig(res)
+}
+
+eig(L)
+```
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+---
+
+## Network modularization
+
+![example](images/networks/modular_example3.png)
+
+```
+$vectors
+           [,1]       [,2]        [,3]          [,4]          [,5]       [,6]
+[1,] -0.3535534  0.3825277  0.83926025  0.000000e+00  0.000000e+00  0.0000000
+[2,] -0.3535534  0.3825277 -0.39356606  0.000000e+00 -7.791716e-17 -0.4218144
+[3,] -0.3535534  0.3825277 -0.28941826  0.000000e+00 -2.967711e-17 -0.1621762
+[4,] -0.3535534  0.2470177 -0.15627594  0.000000e+00  1.075943e-16  0.5839905
+[5,] -0.3535534 -0.2470177 -0.15627594  0.000000e+00  1.075943e-16  0.5839905
+[6,] -0.3535534 -0.3825277  0.05209198  8.756053e-17  8.164966e-01 -0.1946635
+[7,] -0.3535534 -0.3825277  0.05209198 -7.071068e-01 -4.082483e-01 -0.1946635
+[8,] -0.3535534 -0.3825277  0.05209198  7.071068e-01 -4.082483e-01 -0.1946635
+            [,7]       [,8]
+[1,] -0.06305206 -0.1426158
+[2,] -0.61279013 -0.1426158
+[3,]  0.77347870 -0.1426158
+[4,] -0.09763651  0.6625573
+[5,] -0.09763651 -0.6625573
+[6,]  0.03254550  0.1426158
+[7,]  0.03254550  0.1426158
+[8,]  0.03254550  0.1426158
+
+$values
+[1] -6.383782e-17  3.542487e-01  4.000000e+00  4.000000e+00  4.000000e+00
+[6]  4.000000e+00  4.000000e+00  5.645751e+00
+```
+
+Note: First eigenvalue of Laplacian matrix is always zero. Second eigenvector of Laplacian matrix characterizes a network partition. So all positive values in this case are one cluster, and the negative values are the second cluster
+
+---
