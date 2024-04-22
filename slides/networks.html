@@ -425,6 +425,6 @@ $values
 [6]  4.000000e+00  4.000000e+00  5.645751e+00
 ```
 
-Note: First eigenvalue of Laplacian matrix is always zero. Second eigenvector of Laplacian matrix characterizes a network partition. So all positive values in this case are one cluster, and the negative values are the second cluster
+Note: number of times 0 appears as an eigenvalue in the Laplacian is the number of connected components in the graph. Second eigenvalue called the algebraic connectivity, is greater than 0 if and only if G is a connected graph, and reflects how well connected the overall graph is. Second eigenvector of Laplacian matrix characterizes a network partition. So all positive values in this case are one cluster, and the negative values are the second cluster
 
 ---

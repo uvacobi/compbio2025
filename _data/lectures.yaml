@@ -335,6 +335,8 @@ lectures:
     assignments:
       - title: Quiz 10
         url: https://forms.gle/XQqhc2ztMZ4SZBtx5
+      - title: Assignment 11
+        url: https://github.com/cphg/network_analysis
       - title: Assignment 10 due
   - lecture_number: 23
     date: 2024-04-29
