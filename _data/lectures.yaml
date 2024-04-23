@@ -332,6 +332,8 @@ lectures:
         title: Ten simple rules to create biological network figures for communication
       - url: "https://idekerlab.ucsd.edu/wp-content/uploads/publications/Cowen_NatReviews-Genetics_2017.pdf"
         title: "Network propagation: a universal amplifier of genetic associations"
+      - url: "https://people.csail.mit.edu/dsontag/courses/ml14/notes/Luxburg07_tutorial_spectral_clustering.pdf"
+        title: "A tutorial on Spectral Clustering"
     assignments:
       - title: Quiz 10
         url: https://forms.gle/XQqhc2ztMZ4SZBtx5

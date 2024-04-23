@@ -12,25 +12,31 @@ tags: slides
 ## Outline
 
 * Introduction to networks
+    * Representations
 * Global/Local network properties
+    * Emergent properties
+    * Centrality
 * Guilt by association
-* Network diffusion kernels
+    * Direct methods
+    * Module-assisted
 
-Note: Networks are everywhere in the world, including social networks, collaboration networks, transcoprtation networks, computer networks and biological networks. 
+Note: Networks are everywhere in the world, including social networks, collaboration networks, transportation networks, computer networks and biological networks. 
 
 ---
 
-## Examples of biological netwworks
+## Examples of biological networks
 
 Regulatory networks
 
 ![example](images/networks/regulatory.png) <!-- .element height="50%" width="50%" -->
 
-<small>Source: PMC6302376</small>
+<small>Source: Modified from PMC6302376</small>
+
+Note: directed: who regulates what, signed: activation or repression, weighted: how much do I regulate.
 
 ---
 
-## Examples of biological netwworks
+## Examples of biological networks
 
 Protein-protein interaction network 
 ![example](images/networks/ppi.png)<!-- .element height="50%" width="50%" -->
@@ -41,9 +47,22 @@ Notes: STRING subnetwork of TP53 interactions with experimental evidence
 
 ## Examples of biological networks
 
-* Metabolic networks (enzymes and substrates)
+* Metabolic networks (enzyme interaction network,  or substrate graph)
 * Signaling networks (upstream of transcription factors)
 * Functional networks (co-expression network, ...)
+
+Notes: enzymes interaction network: Link between two enzymes if they catalyze reactions that have common metabolites. substrate graph: Nodes correspond to metabolites, and Connecting edge between two metabolites A and B denotes that there is a reaction where both occur as substrates, both occur as products or one as product and the other as substrate. Functional networks general class of networks that are not physically instantiated. These can include co-expression networks.
+
+---
+
+## Networks
+
+* Weighted: weights associated with every edge
+* Multigraphs : multiple edges can exist among nodes
+* Digraphs : edges have directions
+* Simple graphs : no multiple edges or self-loops
+
+![example](images/networks/graphs.png)<!-- .element height="60%" width="60%" -->
 
 ---
 
@@ -56,27 +75,7 @@ Notes: STRING subnetwork of TP53 interactions with experimental evidence
     * $|E| = m$
     * $m \leq n(n-1)$
 
-Note: There’s no difference. "graph" tends to be more common in math and other formal areas, and "network" more common in more applied areas.
-
----
-
-## Representing networks as graphs
-
-![example](images/networks/ppi.png)<!-- .element height="30%" width="30%" -->
-![example](images/networks/regulatory.png) <!-- .element height="30%" width="30%" -->
-
-Undirected / Directed
-
----
-
-## Representing networks as graphs
-
-* Weighted: weights associated with every edge
-* Multigraphs : multiple edges can exist among nodes
-* Digraphs : edges have directions
-* Simple graphs : no multiple edges or self-loops
-
-![example](images/networks/graphs.png)<!-- .element height="60%" width="60%" -->
+Note: There’s no difference. "graph" tends to be more common in math and other formal areas, and "network" more common in more applied areas. Graph is an ordered pair of two sets V,E
 
 ---
 
@@ -91,7 +90,6 @@ Notes: Adjacency list representation and matrix representation. Degree of unwgit
 ## Matrix representation of graphs
 
 * What if its an unweighted network?
-<!-- .element: class="fragment" data-fragment-index="1" -->
 
 * What if its a directed network?
 <!-- .element: class="fragment" data-fragment-index="2" -->
@@ -104,11 +102,20 @@ Notes: Adjacency list representation and matrix representation. Degree of unwgit
 
 ---
 
+Note: Another representation is an adjacency list format, though it is less flexible compared to the adjacency matrix representation
+
+---
+
 ## Emergent properties of real-world networks
 
 * Presence of hubs: If a network is growing and the property of preferential attachment exists, then the distribution of nodes in the network will assume a "power law" distribution. 
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
 * Small world effect: The diameter of the network can be fairly small even in a network with many nodes. 
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
 * Robustness: because links are distributed disproportiontately, the failure of any single node will most likely not have a serious impact on the functioning of the network, making real-world networks "robust" 
+<!-- .element: class="fragment" data-fragment-index="3" -->
 
 Notes: preferential attachment exists (that is, new nodes are free to associate with any node, but "prefer" to associate with well-connected nodes -- nodes that already have many connections). -- a few nodes have many links, and many nodes have few links. There is no meaningful "average", hence these are sometimes called "scale-free" networks. Remember, because of the importance of superconnectors, real-world networks can be vulnerable to targeted attacks.
 
@@ -128,10 +135,9 @@ Notes: Several nodes show high conenctivity, but nodes with lower connectivity c
 
 ## Degree centrality
 
-![degree](images/networks/degree.png)
-<!-- .element: class="fragment" data-fragment-index="1" -->
+![degree](images/networks/degree.png) <!-- .element height="60%" width="60%" -->
 
-What about directed or weighted graphs?
+What about weighted or directed graphs?
 <!-- .element: class="fragment" data-fragment-index="2" -->
 
 ---
@@ -142,10 +148,15 @@ The number of shortest paths in the graph that pass through the node divided by 
 
 $BC(k) = \sum_i \sum_j \frac{\rho(i,k,j)}{\rho(i,j)}, i \neq j \neq k$ 
 
+---
+
+## Betweenness centrality
+The number of shortest paths in the graph that pass through the node divided by the total number of shortest paths.
+
 ![betweenness](images/networks/betweenness.png)
 <!-- .element: class="fragment" data-fragment-index="2" -->
 
-Shortest paths are AB, ABC, ABCD, ABE, BC, BCD, BE, CD, CE, DE
+Shortest paths: AB,ABC,ABCD,ABE,BC,BCD,BE,CD,CE,DE
 <!-- .element: class="fragment" data-fragment-index="2" -->
 
 $BC(B) = 3/10$
@@ -184,7 +195,7 @@ Notes: N is the number of nodes
 
 ## Eigenvector centrality
 
-Make $x_i$ proportional to the average of the centralities of its $i$’s network neighbors
+Make $x_i$ proportional to the average of the centralities of $i$'s neighbors
 
 $x_i = \frac{1}{\lambda} \sum_{j=1}^{n} A_{ij}x_j$
 
@@ -213,7 +224,7 @@ Connections to high-scoring nodes contribute more to the score of the node in qu
 
 ---
 
-## Correlation between protein functional distance and network distance
+## Protein functional distance in networks
 
 ![Distance](images/networks/msb4100129-fig-0003-m.jpg)
 
@@ -259,9 +270,47 @@ Note: Direct versus module‐assisted approaches for functional annotation. The 
 
 ## Random walks
 
+$A$ : adjacency matrix
+
+$W$ : normalized version of $A$
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+$p_t = Wp_{t-1}$
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+With restart probability $c$
+<!-- .element: class="fragment" data-fragment-index="3" -->
+
+$p_t = cp_0 + (1 - c)Wp_{t-1}$
+<!-- .element: class="fragment" data-fragment-index="3" -->
+---
+
+## Random walks
+
 ![Random walk](images/networks/random_walk_algo.png)
 
 <small>Source: 10.1145/1134030.1134042</small>
+
+---
+
+## Diffusion models
+
+* Model continuous fluid flow over time instead of discrete time steps
+* Similarity matrix: $e^{-\alpha W}$ where $W =D - A$
+
+![Diffusion](images/networks/diffusion.png)
+
+<small>Source: 10.1038/nrg.2017.38</small>
+
+---
+
+## Network Propagation
+
+![Propagation](images/networks/network_propagation.png) <!-- .element height="50%" width="50%" -->
+
+<small>Source: 10.1038/nrg.2017.38</small>
+
+Note: Network propagation approaches take a vector the entries of which (0 or 1 or real‐values) indicate the prior information on each gene or node in the network. Following propagation, the scores on the nodes are examined using different approaches. a | 1D approaches rank or prioritize genes by their propagated scores. b | 2D approaches analyse a similarity matrix defined by the propagation and extract modules, or subnetworks, according to both the propagated scores and the topology of the network. c | Integrative approaches propagate prior information from different data sets, or individuals, across one or more networks, forming integrated scores that are used to rank genes and/or to extract modules
 
 ---
 
@@ -281,11 +330,7 @@ Modular: Graph with densely connected subgraphs. Genes in modules are involved i
 
 ![modular](images/networks/modular.png) <!-- .element height="60%" width="60%" -->
 
-
 Modules can be identified using graph partitioning algorithms
-* Markov Clustering Algorithm
-* Girvan-Newman Algorithm
-* Spectral partitioning
 
 ---
 ## Community detection
@@ -349,7 +394,7 @@ $$\Delta f(x) := \Delta \cdot \Delta f(x)$$
 
 So Laplacian of $f$ is the divergence of f’s gradient. 
 
-Note: The gradient of a multivariate function, returns a vector field where the vector at each point x, points in the direction of f’s steepest ascent at x. The divergence operator takes as input a vector field and produces a multivariate function. That is, given a vector field v(x), the divergence at point x, is a scalar that is computed from the vectors that are nearby x in the vector field. Intuitively, the divergence at x describes how much “flow” is coming into and out of x where the flow is described by the vectors in the vector field nearby x. Intuitively, what does the Laplacian describe? Well, following our understanding that f’s gradient provides vectors that point in f’s direction of steepest ascent with magnitude proportional to its steepness, we see that the “flow” at any point in this vector field will correspond to how much the steepness of f is changing. If at some point, x, the steepness is not changing – that is, x is located at a steady incline or a steady decline – then the divergence of the gradient at x will be zero. That is, the Laplacian will be zero. On the other hand, if at x, the steepness is shrinking or growing – for example, because we’re close to a local maximum/minimum – then the divergence (i.e. Laplacian) will be either large or small (large if we’re approaching a minimum and small if we’re approaching a maximum).
+Note: The gradient of a multivariate function, returns a vector field where the vector at each point x, points in the direction of f’s steepest ascent at x. The divergence operator takes as input a vector field and produces a multivariate function. That is, given a vector field v(x), the divergence at point x, is a scalar that is computed from the vectors that are nearby x in the vector field. Intuitively, the divergence at x describes how much “flow” is coming into and out of x where the flow is described by the vectors in the vector field nearby x. Intuitively, what does the Laplacian describe? Well, following our understanding that f’s gradient provides vectors that point in f’s direction of steepest ascent with magnitude proportional to its steepness, we see that the “flow” at any point in this vector field will correspond to how much the steepness of f is changing. If at some point, x, the steepness is not changing – that is, x is located at a steady incline or a steady decline – then the divergence of the gradient at x will be zero. That is, the Laplacian will be zero. On the other hand, if at x, the steepness is shrinking or growing – for example, because we’re close to a local maximum/minimum – then the divergence (i.e. Laplacian) will be either large or small (large if we’re approaching a minimum and small if we’re approaching a maximum). There exists a whole field dedicated to the study of those matrices, called spectral graph theory
 
 ---
 
@@ -368,7 +413,6 @@ Note: The gradient of a multivariate function, returns a vector field where the 
 ## Network modularization
 
 Decompose $L = U \Sigma U^{-1}$
-<!-- .element: class="fragment" data-fragment-index="1" -->
 
 ```{R}
 L = matrix(c(3,-1,-1, -1, 0,0,0,0,-1,3,-1,-1,0,0,0,0,
@@ -426,5 +470,20 @@ $values
 ```
 
 Note: number of times 0 appears as an eigenvalue in the Laplacian is the number of connected components in the graph. Second eigenvalue called the algebraic connectivity, is greater than 0 if and only if G is a connected graph, and reflects how well connected the overall graph is. Second eigenvector of Laplacian matrix characterizes a network partition. So all positive values in this case are one cluster, and the negative values are the second cluster
+
+---
+
+---
+
+## Outline
+
+* Introduction to networks
+    * Representations
+* Global/Local network properties
+    * Emergent properties
+    * Centrality
+* Guilt by association
+    * Direct methods
+    * Module-assisted
 
 ---
