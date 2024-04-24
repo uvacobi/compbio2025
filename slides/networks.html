@@ -81,7 +81,7 @@ Note: There’s no difference. "graph" tends to be more common in math and other
 
 ## Matrix representation of graphs
 
-![matrix](images/networks/matrix.png)
+![matrix](images/networks/matrix.png)<!-- .element height="70%" width="70%" -->
 
 Notes: Adjacency list representation and matrix representation. Degree of unwgited vs weighted. Of directed vs undirected graphs.
 
@@ -89,16 +89,31 @@ Notes: Adjacency list representation and matrix representation. Degree of unwgit
 
 ## Matrix representation of graphs
 
-* What if its an unweighted network?
+![matrix](images/networks/matrix.png)<!-- .element height="70%" width="70%" -->
 
-* What if its a directed network?
-<!-- .element: class="fragment" data-fragment-index="2" -->
+What if its an unweighted network?
 
-* What if it has a self loop?
-<!-- .element: class="fragment" data-fragment-index="3" -->
+---
+## Matrix representation of graphs
 
-* What about multiple edges?
-<!-- .element: class="fragment" data-fragment-index="4" -->
+![matrix](images/networks/matrix.png)<!-- .element height="70%" width="70%" -->
+
+What if its a directed network?
+
+---
+
+## Matrix representation of graphs
+
+![matrix](images/networks/matrix.png)<!-- .element height="70%" width="70%" -->
+
+What if it has a self loop?
+
+---
+## Matrix representation of graphs
+
+![matrix](images/networks/matrix.png)<!-- .element height="70%" width="70%" -->
+
+What about multiple edges?
 
 ---
 
@@ -203,6 +218,8 @@ In matrix-vector notation, we can write $X = \frac{1}{\lambda} AX$ or $AX = {\la
 
 Connections to high-scoring nodes contribute more to the score of the node in question than equal connections to low-scoring nodes.
 
+Note: eigenvector v of a linear transformation T is scaled by a constant factor  λ when the linear transformation is applied to it: 
+
 ---
 
 ## Centrality measures in networks
@@ -241,6 +258,18 @@ Note: Correlation between protein functional distance and network distance. X‐
 <small>Source: PMC1847944</small>
 
 Note: Direct versus module‐assisted approaches for functional annotation. The scheme shows a network in which the functions of some proteins are known (top), where each function is indicated by a different color. Unannotated proteins are in white. In the direct methods (left), these proteins are assigned a color that is unusually prevalent among their neighbors. The direction of the edges indicates the influence of the annotated proteins on the unannotated ones. In the module‐assisted methods (right), modules are first identified based on their density. Then, within each module, unannotated proteins are assigned a function that is unusually prevalent in the module. In both methods, proteins may be assigned with several functions.
+
+---
+
+## Random walks
+
+![Random walk](images/networks/start_0.png) <!-- .element height="60%" width="60%" -->
+
+---
+
+## Random walks
+
+![Random walk](images/networks/start_1.png) <!-- .element height="60%" width="60%" -->
 
 ---
 
@@ -285,7 +314,7 @@ $p_t = cp_0 + (1 - c)Wp_{t-1}$
 <!-- .element: class="fragment" data-fragment-index="3" -->
 ---
 
-## Random walks
+## Random walks with restart
 
 ![Random walk](images/networks/random_walk_algo.png)
 
