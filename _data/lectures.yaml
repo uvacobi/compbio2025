@@ -353,6 +353,13 @@ lectures:
     topic: Protein structure prediction
     details: null
     instructor: Gloria Sheynkman
+    links:
+      - url: "https://pubmed.ncbi.nlm.nih.gov/28284537/"
+        title: "Protein interactomes"
+        required: true
+      - url: "https://www.nature.com/articles/s41392-023-01381-z"
+        title: "Overview of alphafold"
+        required: true
     assignments:
       - title: Quiz 11
         url: https://forms.gle/PvfBVJ45opGZk8Li9
