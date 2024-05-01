@@ -362,7 +362,7 @@ lectures:
         required: true
     assignments:
       - title: Quiz 11
-        url: https://forms.gle/PvfBVJ45opGZk8Li9
+        url: https://docs.google.com/forms/d/e/1FAIpQLSc9vMqOh41xMz-H24-ZgiPfGG5VsZ6MyOLybuly1xUaHxw8rw/viewform?usp=sf_link
       - title: Assignment 11 due
   - lecture_number: 25
     date: 2024-05-06
@@ -376,7 +376,7 @@ lectures:
     instructor: Nathan Sheffield
     assignments:
       - title: Quiz 12
-        url: https://forms.gle/VMhThyeWaHCFSjU56
+        url: https://docs.google.com/forms/d/e/1FAIpQLSeqqnrh2HWzKW1YIv-fd5mQBer1wwvyGlAPkY8qq-TsPB7U4w/viewform?usp=sf_link
       - title: Assignment 12 due
 
 
