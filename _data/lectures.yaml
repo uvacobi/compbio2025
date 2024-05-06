@@ -363,6 +363,8 @@ lectures:
     assignments:
       - title: Quiz 11
         url: https://docs.google.com/forms/d/e/1FAIpQLSc9vMqOh41xMz-H24-ZgiPfGG5VsZ6MyOLybuly1xUaHxw8rw/viewform?usp=sf_link
+      - title: Assignment 12
+        url: resources/StructuralBiologyAssignment.md
       - title: Assignment 11 due
   - lecture_number: 25
     date: 2024-05-06
