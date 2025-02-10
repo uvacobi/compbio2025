@@ -1,7 +1,7 @@
 lectures:
   - lecture_number: 1
     section: "Computational Biology I"
-    date: 2024-02-12
+    date: 2025-02-10
     topic: Course overview and introduction to computational biology
     details: Course overview, history of computational biology, introduction to Bioconductor
     instructor: Nathan Sheffield
@@ -17,9 +17,11 @@ lectures:
         title: "Life Out of Sequence: A Data-Driven History of Bioinformatics"
     assignments:
       - title: Quiz 0
-        url: https://docs.google.com/forms/d/e/1FAIpQLSepqDRD2htGRLupXRybXMbDsfOu5ipQrFU4pkgKeAVPWxl6nA/viewform?usp=sf_link
+        url: https://docs.google.com/forms/d/e/1FAIpQLSfQZwNJxPHiiuQN6GUurPzi4syF8WyaLuvAZJK9FvWoA9F16A/viewform
+      - title: Assignment 1
+        url: null        
   - lecture_number: 2
-    date: 2024-02-14
+    date: 2025-02-12
     topic: Statistics and probability review
     details: Random Variables, Probability Distributions, Central Limit Theorem, Hypothesis Testing, P-value, Type I and Type II Errors, Multiple Testing Correction, FDR
     instructor: Chongzhi Zang
@@ -40,17 +42,16 @@ lectures:
         required: true
       - url: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-022-02648-4
         title: Exaggerated false positives by popular differential expression methods when analyzing human population samples
-    assignments:
-      - title: Assignment 1
-        url: resources/Assignment1.pdf
+    assignments: null 
+
   - lecture_number: 3
-    date: 2024-02-19
+    date: 2025-02-17
     topic: Sequence alignment
     details: Local vs. global alignment, Dynamic programming, Heuristic approaches, BLAST, Short-read alignments
     instructor: Aakrosh Ratan
     assignments:
       - title: Quiz 1
-        url: https://forms.gle/Led6u86Fq7NnemWr8
+        url: https://docs.google.com/forms/d/e/1FAIpQLSexn8za10FOQYtyjNEK9tVyl8HQczs6MX_ndoS5YM4ewzPEMw/viewform
       - title: Assignment 1 due
       - title: Assignment 2
         url: https://github.com/cphg/sequence_alignment
@@ -64,7 +65,7 @@ lectures:
         title: Sequence Alignment/Map Format Specification
         required: true
   - lecture_number: 4
-    date: 2024-02-21
+    date: 2025-02-19
     topic: Sequence alignment lab
     details: Smith-Waterman algorithm
     instructor: Aakrosh Ratan
@@ -76,7 +77,7 @@ lectures:
       - url: https://www.ncbi.nlm.nih.gov/BLAST/tutorial/Altschul-1.html
         title: The Statistics of Sequence Similarity Scores
   - lecture_number: 5
-    date: 2024-02-26
+    date: 2025-02-24
     topic: Genome assembly
     details: Pairwise overlaps, Overlap-layout-consensus strategy, De Bruijn graphs
     instructor: Aakrosh Ratan
@@ -88,12 +89,12 @@ lectures:
         required: true
     assignments:
       - title: Quiz 2
-        url: https://forms.gle/NV6rLBURAt4YJrdv5
+        url: https://docs.google.com/forms/d/e/1FAIpQLSfkhrjp49SkEEX_OJYesd_YlwghpM5SCdPCJcZiUQ7FqDrW1A/viewform?usp=sharing
       - title: Assignment 2 due
       - title: Assignment 3
-        url: https://github.com/cphg/genome_assembler
+        url: https://github.com/uvacobi/genome_assembler
   - lecture_number: 6
-    date: 2024-02-28
+    date: 2025-02-26
     topic: Genome assembly lab
     details: Shortest superstring problem, Removal of transitive edges, Eulerian walks
     instructor: Aakrosh Ratan
@@ -103,7 +104,64 @@ lectures:
       - url: https://www.annualreviews.org/doi/10.1146/annurev-genom-090314-050032
         title: The Theory and Practice of Genome Sequence Assembly
   - lecture_number: 7
-    date: 2024-03-04
+    date: 2025-03-03
+    topic: Transcription factors 
+    details: 
+    instructor: Chongzhi Zang
+    links:
+      - url: resources/11 Transcription factors.pdf
+        title: Lecture slides
+      - url: https://www.nature.com/articles/nbt0406-423
+        title: What are DNA sequence motifs?
+        required: true
+    assignments:
+      - title: Quiz 3
+        url: https://docs.google.com/forms/d/e/1FAIpQLSfXIZPSpsOaf5PLksuHMZDacfRFyOEY1lk3lrbEmQuR1MZH2Q/viewform?usp=sharing
+      - title: Assignment 3 due
+      - title: Assignment 4
+        url: null
+
+  - lecture_number: 8
+    date: 2025-03-05
+    topic: Transcription factor lab
+    details: 
+    instructor: Chongzhi Zang
+    links:
+      - url: #
+        title: Lecture slides
+  - lecture_number: 9
+    date: 2025-03-10
+    topic: Differential expression analysis
+    details: null
+    instructor: Stefan Bekiranov
+    links:
+      - url: slides/diff_exp
+        title: Lecture slides
+      - url: https://doi.org/10.1186/s13059-014-0550-8
+        title: "Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2"
+        required: true
+      - url: https://doi.org/10.1186/gb-2010-11-10-r106
+        title: "Differential expression analysis for sequence count data"
+      - url: https://doi.org/10.1093/bib/bbx008
+        title: "Selecting between-sample RNA-Seq normalization methods from the perspective of their assumptions"
+      - title: Differential Expression Notes
+        url: resources/Differential_Expression_Notes.pdf
+    assignments:
+      - title: Quiz 4
+        url: https://docs.google.com/forms/d/e/1FAIpQLSf0DCZUHegKt1tI4TZYUvJ1PWio6-V_LMfZLXg6tVxVePytqA/viewform?usp=sharing
+      - title: Assignment 4 due
+      - title: Assignment 5
+        url: null
+  - lecture_number: 10
+    date: 2025-03-12
+    topic: Differential expression lab
+    details: 
+    instructor: Stefan Bekiranov
+    links:
+      - url: #
+        title: Lecture slides
+  - lecture_number: 11
+    date: 2025-03-17
     topic: Molecular evolution and phylogenetics
     details: History of molecular evolution, Sequence divergence and models of sequence evolution, Tree-building, UPGMA, Neighbor-joining, parsimony, maximum likelihood.
     instructor: Nathan Sheffield
@@ -123,90 +181,41 @@ lectures:
       - title: "MEGA11: Molecular Evolutionary Genetics Analysis Version 11"
         url: https://doi.org/10.1093/molbev/msab120
     assignments:
-      - title: Quiz 3
-        url: https://forms.gle/hjUGnwXHRHyKNNb6A
-      - title: Assignment 4
-        url: https://github.com/cphg/phylogenetics_lab
-      - title: Assignment 3 due
-  - lecture_number: 8
-    date: 2024-03-06
-    topic: Molecular evolution and phylogenetics lab, Perspective by Bill Pearson
-    details: 
-    instructor: Nathan Sheffield, Bill Pearson
-    links:
-      - title: Lecture slides
-        url: slides/bims_wrp_persp2024.pdf
-  - lecture_number: 9
-    date: 2024-03-11
-    topic: Differential expression analysis
-    details: null
-    instructor: Stefan Bekiranov
-    links:
-      - url: slides/diff_exp
-        title: Lecture slides
-      - url: https://doi.org/10.1186/s13059-014-0550-8
-        title: "Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2"
-        required: true
-      - url: https://doi.org/10.1186/gb-2010-11-10-r106
-        title: "Differential expression analysis for sequence count data"
-      - url: https://doi.org/10.1093/bib/bbx008
-        title: "Selecting between-sample RNA-Seq normalization methods from the perspective of their assumptions"
-      - title: Differential Expression Notes
-        url: resources/Differential_Expression_Notes.pdf
-    assignments:
-      - title: Quiz 4
-        url: https://forms.gle/RZNdprNFrapMoumj6
-      - title: Assignment 5
-        url: resources/Assignment_5.pdf
-      - title: Assignment 4 due
-  - lecture_number: 10
-    date: 2024-03-13
-    topic: Differential expression lab
-    details: 
-    instructor: Stefan Bekiranov
-    links:
-      - url: #
-        title: Lecture slides
-  - lecture_number: 11
-    date: 2024-03-18
-    topic: Transcription factors 
-    details: 
-    instructor: Chongzhi Zang
-    links:
-      - url: resources/11 Transcription factors.pdf
-        title: Lecture slides
-      - url: https://www.nature.com/articles/nbt0406-423
-        title: What are DNA sequence motifs?
-        required: true
-    assignments:
       - title: Quiz 5
-        url: https://forms.gle/WoShFjywgYCNRr1g9
-      - title: Assignment 6
-        url: resources/Assignment 6.pdf
+        url: https://docs.google.com/forms/d/e/1FAIpQLSdLl0L-xbObtCHKEXI8TeXGAGXM9QqfZyKDYOJzGj5KpggFjQ/viewform?usp=sharing
       - title: Assignment 5 due
+      - title: Assignment 6
+        url: https://github.com/uvacobi/phylogenetics_lab
   - lecture_number: 12
-    date: 2024-03-20
-    topic: Transcription factor lab
+    date: 2025-03-19
+    topic: Molecular evolution and phylogenetics lab
     details: 
-    instructor: Chongzhi Zang
-    links:
-      - url: #
-        title: Lecture slides
+    instructor: Nathan Sheffield
+    links: null
   - lecture_number: 13
-    date: 2024-03-25
+    date: 2025-03-24
+    topic: "Special Topic: LLMs"
+    details:
+    instructor: Chirag Agarwal
+    links: 
+      - url: slides/review1
+        title: Lecture slides
+    assignments:
+      - title: Quiz 6
+        url: https://docs.google.com/forms/d/e/1FAIpQLSfXS6MS2OkWKoPMkr9wE2HStCz_RYGL3DRumuZaEWBSTTpHrw/viewform?usp=sharing
+      - title: Assignment 6 due
+  - lecture_number: 14
+    date: 2025-03-26
     topic: Module I Review
     details:
     instructor: Aakrosh Ratan
     links: 
       - url: slides/review1
         title: Lecture slides
-    assignments:
-      - title: Quiz 6
-        url: https://forms.gle/TgCmZEiYN83hhUVz6
-      - title: Assignment 6 due
-  - lecture_number: 14
+    assignments: null
+  - lecture_number: 15
     section: "Computational Biology II"
-    date: 2024-03-27
+    date: 2025-03-31
     topic: Dimensionality reduction
     details: 
     instructor: Chongzhi Zang
@@ -224,14 +233,40 @@ lectures:
     assignments:
       - url: resources/Assignment 7.pdf
         title: Assignment 7
-  - lecture_number: 15
-    date: 2024-04-01
+  - lecture_number: 16
+    date: 2025-04-02
     topic: Dimensionality reduction lab
     details: null
     instructor: Chongzhi Zang
     links: null
-  - lecture_number: 16
-    date: 2024-04-03
+  - lecture_number: 17
+    date: 2025-04-07
+    topic: Genomic interval analysis
+    details: Algorithms and data structures for genomic interval arithmetic, enrichment analysis.
+    instructor: Nathan Sheffield
+    links:
+      - url: slides/genomic-intervals
+        title: Lecture slides
+      - url: https://doi.org/10.1093/bioinformatics/btq351
+        title: "BigWig and BigBed: enabling browsing of large distributed datasets"
+        required: true
+      - title: "Opportunities and challenges in sharing and reusing genomic interval data"
+        url: https://doi.org/10.3389/fgene.2023.1155809 
+    assignments:
+      - title: Quiz 7
+        url: https://forms.gle/7HbocotR6Z1Qg5u68
+      - title: Assignment 7 due
+      - title: Assignment 8
+        url: https://github.com/uvacobi/interval_basics
+  - lecture_number: 18
+    date: 2025-04-09
+    topic: Genomic interval analysis lab
+    instructor: Nathan Sheffield
+    links:
+      - url: #
+        title: Lecture slides   
+  - lecture_number: 19
+    date: 2025-04-14
     topic: Deep learning in biology
     details: null 
     instructor: Stefan Bekiranov
@@ -252,76 +287,22 @@ lectures:
       - url: https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi
         title: Neural Networks (3Blue1Brown)
     assignments:
-      - title: Quiz 7
-        url: https://forms.gle/7HbocotR6Z1Qg5u68
-      - title: Assignment 8
+      - title: Quiz 8
+        url: https://docs.google.com/forms/d/e/1FAIpQLSc4mZimewcD9KKELlpG2lzNnGloS18iL1oZF3Z9Zmb69PgUeg/viewform?usp=sharing
+      - title: Assignment 8 due
+      - title: Assignment 9
         url: https://pytorch.org/tutorials/beginner/basics/intro.html
-      - title: Assignment 7 due
-  - lecture_number: 17
-    date: 2024-04-08
+  - lecture_number: 20
+    date: 2025-04-16
     topic: Deep learning lab
     details: null
     instructor: Stefan Bekiranov
     links: null
-  - lecture_number: 18
-    date: 2024-04-10
-    topic: Genomic interval analysis
-    details: Algorithms and data structures for genomic interval arithmetic, enrichment analysis.
-    instructor: Nathan Sheffield
-    links:
-      - url: slides/genomic-intervals
-        title: Lecture slides
-      - url: https://doi.org/10.1093/bioinformatics/btq351
-        title: "BigWig and BigBed: enabling browsing of large distributed datasets"
-        required: true
-      - title: "Opportunities and challenges in sharing and reusing genomic interval data"
-        url: https://doi.org/10.3389/fgene.2023.1155809 
-    assignments:
-      - title: Quiz 8
-        url: https://docs.google.com/forms/d/e/1FAIpQLSf-2ECOUf2u2eee5ZDF_Yrto_djZgV5r2MltqsBwY83RXIiPg/viewform?usp=sf_link
-      - title: Assignment 9
-        url: https://github.com/cphg/interval_basics
-      - title: Assignment 8 due
-  - lecture_number: 19
-    date: 2024-04-15
-    topic: Genomic interval analysis lab
-    instructor: Nathan Sheffield
-    links:
-      - url: #
-        title: Lecture slides
-  - lecture_number: 20
-    date: 2024-04-17
-    topic: Hidden Markov Models
-    details: Markov chains, Hidden Markov Models, Viterbi, Baum-Welch, and forward-backward algorithms
-    instructor: Nathan Sheffield
-    links:
-      - url: slides/hmm
-        title: Lecture slides
-      - url: resources/hmm.pdf
-        title: Markov chains and hidden Markov models
-        required: true
-      - url: https://www.nature.com/articles/nbt1004-1315
-        title: What is a hidden Markov model?
-      - url: resources/RABINER1989.pdf
-        title: A tutorial on Hidden Markov Models and Selected Applications in Speech Recognition
-    assignments:
-      - title: Quiz 9
-        url: https://forms.gle/FFmsA9hRoUkzrVyq5
-      - title: Assignment 10
-        url: https://github.com/cphg/hmm_lab
-      - title: Assignment 9 due
   - lecture_number: 21
-    date: 2024-04-22
-    topic: Hidden Markov Models lab
-    instructor: Nathan Sheffield
-    links:
-      - url: #
-        title: Lecture slides
-  - lecture_number: 22
-    date: 2024-04-24
+    date: 2025-04-21
     topic: Network analysis
     details: null
-    instructor: Aakrosh Ratan
+    instructor: John Platig
     links:
       - url: slides/networks
         title: Lecture slides
@@ -336,21 +317,40 @@ lectures:
         title: "A tutorial on Spectral Clustering"
     assignments:
       - title: Quiz 10
-        url: https://docs.google.com/forms/d/e/1FAIpQLSdGeri9alyTxPy2MHaVtxsO1gZ0MNZC8Ht6HUYuoWVUNtr8_A/viewform?usp=sf_link
-      - title: Assignment 11
-        url: https://github.com/cphg/network_analysis
-      - title: Assignment 10 due
-  - lecture_number: 23
-    date: 2024-04-29
+        url: https://docs.google.com/forms/d/e/1FAIpQLScWOsScEuwe9LReW5VvFZxiS3aADnOO_YbQDKsNIq5RSbvqDA/viewform?usp=sharing
+      - title: Assignment 9 due
+      - title: Assignment 10
+        url: https://github.com/uvacobi/network_analysis
+  - lecture_number: 22
+    date: 2025-04-23
     topic: Network analysis lab
     details: null
-    instructor: Aakrosh Ratan
+    instructor: John Platig
     links:
       - url: #
         title: Lecture slides
+  - lecture_number: 23
+    date: 2025-04-28
+    topic: RNA Binding proteins
+    details: 
+    instructor: John Platig
+    links: null
+    assignments:
+      - title: Quiz 9
+        url: https://docs.google.com/forms/d/e/1FAIpQLSdIEleijvJPFZiSsR0PtDjkgc7df9knO076_nSmRcpoHXfbyQ/viewform?usp=sharing
+      - title: Assignment 10 due
+      - title: Assignment 11
+        url: null
   - lecture_number: 24
+    date: 2024-04-22
+    topic: RNA Binding proteins lab
+    instructor: John Platig
+    links:
+      - url: #
+        title: Lecture slides     
+  - lecture_number: 25
     date: 2024-05-01
-    topic: Protein structure prediction
+    topic: Special topic
     details: null
     instructor: Gloria Sheynkman
     links:
@@ -362,23 +362,13 @@ lectures:
         required: true
     assignments:
       - title: Quiz 11
-        url: https://docs.google.com/forms/d/e/1FAIpQLSc9vMqOh41xMz-H24-ZgiPfGG5VsZ6MyOLybuly1xUaHxw8rw/viewform?usp=sf_link
-      - title: Assignment 12
-        url: resources/StructuralBiologyAssignment.md
+        url: https://docs.google.com/forms/d/e/1FAIpQLSegXadaGO6NVEzVUSvPsdl7_ivp_cRvXWIXj6DjdON9g4vwXg/viewform?usp=sharing
       - title: Assignment 11 due
-  - lecture_number: 25
-    date: 2024-05-06
-    topic: Protein structure prediction lab
-    details: null
-    instructor: Gloria Sheynkman
   - lecture_number: 26
     date: 2024-05-08
-    topic: Review
+    topic: Module II Review
     details: null
     instructor: Nathan Sheffield
     assignments:
       - title: Quiz 12
-        url: https://docs.google.com/forms/d/e/1FAIpQLSeqqnrh2HWzKW1YIv-fd5mQBer1wwvyGlAPkY8qq-TsPB7U4w/viewform?usp=sf_link
-      - title: Assignment 12 due
-
-
+        url: https://docs.google.com/forms/d/e/1FAIpQLScwzhJKMK2Xnb_wDSlKesZJqFYHIBW30lqQV21TjDfoHTeLMQ/viewform?usp=sharing
