@@ -1,6 +1,6 @@
 ---
 layout: reveal_markdown
-title: "Course overview, introduction to computational biology and bioconductor"
+title: "Introduction to computational biology and bioconductor"
 tags: slides 
 date: 2021-12-09
 ---
@@ -9,10 +9,7 @@ date: 2021-12-09
 ---
 ## Course overview
 
-- Course website: https://cphg.github.io/compbio/
-- Quizzes: on "required" readings plus assignment topics.
-- Programming assignments: please attempt on your own first
-
+The course website is your launching point.
 
 ---
 ## Introduction to computational biology
@@ -20,19 +17,6 @@ date: 2021-12-09
 What is computational biology?
 
 <div class="fragment">bioinformatics?</div>
-
----
-## Some history
-
-- 1950-1960s Margaret Dayhoff
-- 1970 First use of term bioinformatics (in dutch)
-- 1974 "Biocomputing" gains popularity
-- 1982 GenBank is founded
-- 1985 Computer Applications in the Biosciences
-- 1988 FASTA published
-- 1988 NCBI is founded
-- 1993 Intelligent Systems in Molecular Biology (ISMB) 
-- 1994 Journal of Computational Biology
 
 ---
 #### 1965 Atlas of protein sequence and structure
@@ -172,9 +156,17 @@ We had all these grand ideas -- it was sort of [based on] how the genome project
 
 
 ---
-# 2004 
+# 2001 
 
 Bioconductor project is launched.
+
+---
+
+<img
+  alt="Timeline of early Bioinformatics"
+  src="images/introduction/timeline.svg"
+  height="600"
+  style="background:white; padding: 0px; margin: 0px"><br>
 
 
 ---
@@ -208,9 +200,15 @@ Its history is intertwined with:
 - Sequencing by synthesis (2008-2012)
 
 ---
-## Definitions
+## What is Bioinformatics?
 
-> the study of information processing in biological systems. Hesper and Hogeweg (1970)
+Definitions
+
+---
+
+> the study of information processing in biological systems. 
+
+(Hesper and Hogeweg 1970)
 
 
 ---
@@ -231,6 +229,8 @@ NIH 2000
 Luscombe et al. 2001
 
 > Bioinformatics is conceptualizing biology in terms of macromolecules (in the sense of physical-chemistry) and then applying “informatics” techniques (derived from disciplines such as applied maths, computer science, and statistics) to understand and organize the information associated with these molecules, on a large-scale. 
+
+What is Bioinformatics? A Proposed Definition and Overview of the Field. Method Inform Med 2001.
 
 ---
 Moore 2007  
@@ -332,7 +332,7 @@ This can also handle CRAN packages
 
 ---
 
-
+## Dig in!
 ## Core package: Biostrings
 
 ```R
@@ -361,6 +361,9 @@ DNAStringSet object of length 6:
 [5]    34 GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT                PE2
 [6]    34 AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC                PE2_rc
 ```
+
+Download <a href="../resources/TruSeq3-PE-2.fa">TruSeq3-PE-2.fa</a> here.
+
 ---
 ## Documentation 
 
