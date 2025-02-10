@@ -19,7 +19,7 @@ lectures:
       - title: Quiz 0
         url: https://docs.google.com/forms/d/e/1FAIpQLSfQZwNJxPHiiuQN6GUurPzi4syF8WyaLuvAZJK9FvWoA9F16A/viewform
       - title: Assignment 1
-        url: null        
+        url: resources/Assignment_stats_review.txt
   - lecture_number: 2
     date: 2025-02-12
     topic: Statistics and probability review
