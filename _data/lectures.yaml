@@ -340,14 +340,14 @@ lectures:
       - title: Assignment 11
         url: null
   - lecture_number: 24
-    date: 2024-04-22
+    date: 2025-04-30
     topic: RNA Binding proteins lab
     instructor: John Platig
     links:
       - url: #
         title: Lecture slides     
   - lecture_number: 25
-    date: 2024-05-01
+    date: 2025-05-05
     topic: Special topic
     details: null
     instructor: Gloria Sheynkman
@@ -363,7 +363,7 @@ lectures:
         url: https://docs.google.com/forms/d/e/1FAIpQLSegXadaGO6NVEzVUSvPsdl7_ivp_cRvXWIXj6DjdON9g4vwXg/viewform?usp=sharing
       - title: Assignment 11 due
   - lecture_number: 26
-    date: 2024-05-08
+    date: 2025-05-07
     topic: Module II Review
     details: null
     instructor: Nathan Sheffield
