@@ -208,10 +208,16 @@ Note: Optimal substructure: Optimal solution to problems contains optimal soluti
 ---
 
 ## Sequence alignments: Optimal substructure
-![matrix](images/alignments/dpmatrix.svg)
+
+Let $X=[x_1,\...,x_m]$ and $Y=[y_1,\...,y_n]$ be sequences, and $Z=[z_1,\...,z_k]$ be a LCS of $X$ and $Y$.
+
+1. If $x_m = y_n$, then $z_k = x_m = y_n$ and $Z_{k-1}$ is a LCS of $X_{m-1}$ and $Y_{n-1}$.
+
+2. If $x_m \neq y_n$, then $z_k \neq x_m$ implies $Z$ is a LCS of $X_{m-1}$ and $Y$.
+
+3. If $x_m \neq y_n$, then $z_k \neq y_n$ implies $Z$ is a LCS of $X$ and $Y_{n-1}$.
 
 ---
-
 
 ## Sequence alignments: Overlapping subproblems
 ![additivescores](images/alignments/recursive.svg) <!-- .element height="70%" width="70%" -->
@@ -350,6 +356,11 @@ Note: Use memoization (storing the results of expensive function calls and retur
 
 ---
 
+## Returning the actual/alternate path 
+![matrix](images/alignments/nw14alt.svg) <!-- .element height="40%" width="40%" -->
+
+---
+
 ## Sequence alignment
 * Allow gaps 
   * Insertions and deletions
@@ -460,7 +471,7 @@ Recurrence equation with modifications can accomodate these variations
 
 ## Dynamic Programming
 
-* https://github.com/cphg/sequence_alignment
+* https://github.com/uvacobi/sequence_alignment
 * Implement local alignment of two sequences that can use affine gap penalties
 * Skeleton code is provided in python 
 * Simple test cases are also provided 
