@@ -109,7 +109,7 @@ Note: We will often want to talk about how long does an algorithm take to comple
 ---
 
 ## Order of growth
-![complexity](images/alignments/growth.png)
+![complexity](images/alignments/growth.png) <!-- .element height="50%" width="50%" -->
 
 Note: Constant runtime is represented by O(1), linear growth is O(n), logarithmic growth is O(log n), log-linear growth is O(n log n), quadratic growth is O(n^2), exponential growth is O(2^n), factorial growth is O(n!).
 
@@ -126,13 +126,43 @@ y : TCATGACCGCCATGGC
 
 ```text
 x : TCACCTGACCTCCAGGC
-         |||||  
-y :   TCATGACCGCCATGGC
+    |||xxxxxx|xxxx|x  
+y : TCATGACCGCCATGGC
 ```
 <!-- .element: class="fragment" data-fragment-index="1" -->
 
-Note: abcd vs. dbca. abcd vs bcad
+---
 
+## Longest common substring
+
+Given two possibly related strings $x$ and $y$, what is the longest common substring (no gaps)?
+
+```text
+x : TCACCTGACCTCCAGGC
+y : TCATGACCGCCATGGC
+```
+
+```text
+x : TCACCTGACCTCCAGGC
+     xxxxxxx|xx|xx|||          
+y :  TCATGACCGCCATGGC
+```
+---
+
+## Longest common substring
+
+Given two possibly related strings $x$ and $y$, what is the longest common substring (no gaps)?
+
+```text
+x : TCACCTGACCTCCAGGC
+y : TCATGACCGCCATGGC
+```
+
+```text
+x : TCACCTGACCTCCAGGC
+         |||||  
+y :   TCATGACCGCCATGGC
+```
 ---
 
 ## Longest common substring
@@ -306,57 +336,57 @@ Note: Use memoization (storing the results of expensive function calls and retur
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw5.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw6.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw7.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw8.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw9.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw10.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw11.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw12.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw13.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw14.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual/alternate path 
+## Returning an alternate optimal path 
 ![matrix](images/alignments/nw14alt.svg) <!-- .element height="40%" width="40%" -->
 
 ---
@@ -424,7 +454,7 @@ A local alignment of string $s$ and $t$ is an alignment of a substring of $s$ wi
 ---
 
 ## Global Alignment (Needleman-Wunsch algorithm)
-**Initialization:** $F(0,0) = 0$
+**Initialization:** $F(0,0) = 0, F(i,0) = -gap \times i, F(0, j) = -gap \times j$
 
 **Iteration:**
 
@@ -520,8 +550,6 @@ Note: if every position is a match or false-positive
 ## Karp-Rabin algorithm
 
 ![karp-robin](images/alignments/rk3.png) <!-- .element height="50%" width="50%" -->
-
-
 
 ---
 
