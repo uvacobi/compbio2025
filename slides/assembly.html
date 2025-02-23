@@ -68,11 +68,21 @@ Note: Shotgun sequencing requires multiple copies of the genome, which are effec
 
 ## Statistics
 
-* Parameters
+* Parameters 
   * $G$ = genome length in nucleotides
   * $L$ = read length in nucleotides
   * $N$ = number of reads sequenced
-* Coverage $a$ = $NL/G$
+* Coverage $a$ = ?
+
+---
+
+## Statistics
+
+* Parameters 
+  * $G$ = genome length in nucleotides
+  * $L$ = read length in nucleotides
+  * $N$ = number of reads sequenced
+* Coverage $a$ = $\frac{NL}{G}$
 
 ---
 
@@ -88,7 +98,21 @@ Note: Shotgun sequencing requires multiple copies of the genome, which are effec
 ## Statistics
 
 * The probability that one of the $N$ reads starts at any specific nucleotide is $N/G$.
-* Expected # of reads starting in interval $I$ of length $L$ is $NG/L = a$
+* Expected # of reads starting in interval $I$ of length $L$ is $\frac{N}{G} L = a$
+
+---
+
+## Poisson distribution
+
+* A discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time if these events occur with a known constant mean rate and independently of the time since the last event. 
+* With expectation of $\lambda$ events in a given interval, the probability of $k$ events in the same interval is $$\frac{\lambda^ke^{-\lambda}}{k!}$$
+
+---
+
+## Statistics
+
+* The probability that one of the $N$ reads starts at any specific nucleotide is $N/G$.
+* Expected # of reads starting in interval $I$ of length $L$ is $\frac{N}{G} L = a$
 * We can assume a poisson distribution
     * $\lambda$ events in a given interval
     * probability of k events = ${\frac {\lambda ^{k}e^{-\lambda }}{k!}}$
@@ -96,7 +120,7 @@ Note: Shotgun sequencing requires multiple copies of the genome, which are effec
 * $p$ = $P$(no read starts in $I$) = $e^{-a}$
 * $q$ = $P$(at least one read starts in $I$) = $1 - e^{-a}$
 
-Note: The other option is a binomial distribution when p=(1 - N/G)^L, but poisson is more accurate in casee when its likely that multiple reads start at the same position.
+Note: In the equation, we set k=0 and \lambda=a. The other option is a binomial distribution when p=(1 - N/G)^L, but poisson is more accurate in case when its likely that multiple reads start at the same position.
 
 ---
 
@@ -116,6 +140,14 @@ How much of the genome was sequenced?
 
 ---
 
+## More is better?
+![intro](images/assembly/more.png) <!-- .element width="70%" height="70%" -->
+
+Note: If we assume that sequencing of reads is random, then as more reads are sequenced, more start points for the reads and hence larger overlaps are reasonable.
+
+---
+
+
 ## Genome assembly
 ![intro](images/assembly/introduction5.svg)
 
@@ -125,13 +157,6 @@ How much of the genome was sequenced?
 ![intro](images/assembly/pairwise.png) <!-- .element width="70%" height="70%" -->
 
 Note: Even in this case, why could there be differences? 1. sequencing errors, 2. ploidy (humans have 2 copies of each chromosome, and those copies can be different). Real assemblers have to account for ploidy, but we are going to ignore it to simplify issues in this lecture.
-
----
-
-## More is better?
-![intro](images/assembly/more.png) <!-- .element width="70%" height="70%" -->
-
-Note: If we assume that sequencing of reads is random, then as more reads are sequenced, more start points for the reads and hence larger overlaps are reasonable.
 
 ---
 
