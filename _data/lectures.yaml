@@ -109,7 +109,7 @@ lectures:
     details: 
     instructor: Chongzhi Zang
     links:
-      - url: resources/11 Transcription factors.pdf
+      - url: resources/7 Transcription factors.pdf
         title: Lecture slides
       - url: https://www.nature.com/articles/nbt0406-423
         title: What are DNA sequence motifs?
@@ -119,7 +119,7 @@ lectures:
         url: https://docs.google.com/forms/d/e/1FAIpQLSfXIZPSpsOaf5PLksuHMZDacfRFyOEY1lk3lrbEmQuR1MZH2Q/viewform?usp=sharing
       - title: Assignment 3 due
       - title: Assignment 4
-        url: null
+        url: https://github.com/uvacobi/compbio2025/blob/main/resources/Assignment%204.pdf
 
   - lecture_number: 8
     date: 2025-03-05
