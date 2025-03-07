@@ -151,7 +151,7 @@ lectures:
         url: https://docs.google.com/forms/d/e/1FAIpQLSf0DCZUHegKt1tI4TZYUvJ1PWio6-V_LMfZLXg6tVxVePytqA/viewform?usp=sharing
       - title: Assignment 4 due
       - title: Assignment 5
-        url: null
+        url: resources/Assignment_5.pdf
   - lecture_number: 10
     date: 2025-03-12
     topic: Differential expression lab
