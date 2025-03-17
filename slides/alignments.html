@@ -40,6 +40,15 @@ Note: This signal can be used to determine orthologous genes in other species
 
 ---
 
+## What makes us human?
+
+![Tails](images/alignments/tail.png) <!-- .element height="80%" width="80%" -->
+Source: PMC10901737
+
+Note: a, Tail phenotypes across the primate phylogenetic tree. Ma, millions of years ago. b, UCSC Genome browser view51 of the conservation score through multi-species alignment at the TBXT locus across primate genomes. Exon numbering of human TBXT follows a conventional order across species without including the 5′ untranslated region exon. The hominoid-specific AluY element is highlighted in red. LINE, long interspersed nuclear element; LTR, long terminal repeat; SINE, short interspersed nuclear element. c, Schematic of the proposed mechanism of tail-loss evolution in hominoids.
+
+---
+
 ## How do we actually align two sequences?
 ![human_chicken](images/alignments/human_vs_chicken.png)
 
@@ -109,7 +118,7 @@ Note: We will often want to talk about how long does an algorithm take to comple
 ---
 
 ## Order of growth
-![complexity](images/alignments/growth.png)
+![complexity](images/alignments/growth.png) <!-- .element height="50%" width="50%" -->
 
 Note: Constant runtime is represented by O(1), linear growth is O(n), logarithmic growth is O(log n), log-linear growth is O(n log n), quadratic growth is O(n^2), exponential growth is O(2^n), factorial growth is O(n!).
 
@@ -126,13 +135,43 @@ y : TCATGACCGCCATGGC
 
 ```text
 x : TCACCTGACCTCCAGGC
-         |||||  
-y :   TCATGACCGCCATGGC
+    |||xxxxxx|xxxx|x  
+y : TCATGACCGCCATGGC
 ```
 <!-- .element: class="fragment" data-fragment-index="1" -->
 
-Note: abcd vs. dbca. abcd vs bcad
+---
 
+## Longest common substring
+
+Given two possibly related strings $x$ and $y$, what is the longest common substring (no gaps)?
+
+```text
+x : TCACCTGACCTCCAGGC
+y : TCATGACCGCCATGGC
+```
+
+```text
+x : TCACCTGACCTCCAGGC
+     xxxxxxx|xx|xx|||          
+y :  TCATGACCGCCATGGC
+```
+---
+
+## Longest common substring
+
+Given two possibly related strings $x$ and $y$, what is the longest common substring (no gaps)?
+
+```text
+x : TCACCTGACCTCCAGGC
+y : TCATGACCGCCATGGC
+```
+
+```text
+x : TCACCTGACCTCCAGGC
+         |||||  
+y :   TCATGACCGCCATGGC
+```
 ---
 
 ## Longest common substring
@@ -208,10 +247,16 @@ Note: Optimal substructure: Optimal solution to problems contains optimal soluti
 ---
 
 ## Sequence alignments: Optimal substructure
-![matrix](images/alignments/dpmatrix.svg)
+
+Let $X=[x_1,\...,x_m]$ and $Y=[y_1,\...,y_n]$ be sequences, and $Z=[z_1,\...,z_k]$ be a LCS of $X$ and $Y$.
+
+1. If $x_m = y_n$, then $z_k = x_m = y_n$ and $Z_{k-1}$ is a LCS of $X_{m-1}$ and $Y_{n-1}$.
+
+2. If $x_m \neq y_n$, then $z_k \neq x_m$ implies $Z$ is a LCS of $X_{m-1}$ and $Y$.
+
+3. If $x_m \neq y_n$, then $z_k \neq y_n$ implies $Z$ is a LCS of $X$ and $Y_{n-1}$.
 
 ---
-
 
 ## Sequence alignments: Overlapping subproblems
 ![additivescores](images/alignments/recursive.svg) <!-- .element height="70%" width="70%" -->
@@ -300,53 +345,58 @@ Note: Use memoization (storing the results of expensive function calls and retur
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw5.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw6.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw7.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw8.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw9.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw10.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw11.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw12.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw13.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
-## Returning the actual path
+## Returning an optimal path
 ![matrix](images/alignments/nw14.svg) <!-- .element height="40%" width="40%" -->
+
+---
+
+## Returning an alternate optimal path 
+![matrix](images/alignments/nw14alt.svg) <!-- .element height="40%" width="40%" -->
 
 ---
 
@@ -413,7 +463,7 @@ A local alignment of string $s$ and $t$ is an alignment of a substring of $s$ wi
 ---
 
 ## Global Alignment (Needleman-Wunsch algorithm)
-**Initialization:** $F(0,0) = 0$
+**Initialization:** $F(0,0) = 0, F(i,0) = -gap \times i, F(0, j) = -gap \times j$
 
 **Iteration:**
 
@@ -460,7 +510,7 @@ Recurrence equation with modifications can accomodate these variations
 
 ## Dynamic Programming
 
-* https://github.com/cphg/sequence_alignment
+* https://github.com/uvacobi/sequence_alignment
 * Implement local alignment of two sequences that can use affine gap penalties
 * Skeleton code is provided in python 
 * Simple test cases are also provided 
@@ -509,8 +559,6 @@ Note: if every position is a match or false-positive
 ## Karp-Rabin algorithm
 
 ![karp-robin](images/alignments/rk3.png) <!-- .element height="50%" width="50%" -->
-
-
 
 ---
 

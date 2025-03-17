@@ -5,14 +5,37 @@ tags: slides
 date: 2024-03-04
 ---
 
+
+<style>
+ol.outline {
+  list-style: none;
+  padding-left: 0;
+}
+
+ol.outline li {
+  opacity: 0.6;
+  display: inline-flex;
+  align-items: center;
+}
+
+ol.outline li.active {
+  opacity: 1;
+}
+
+ol.outline li::after {
+  content: "";
+  font-size: 1em;
+  margin-left: 0.25em;
+}
+
+ol.outline li.active::after {
+  content: "←"; /* Right-pointing arrow */
+}
+</style>
+
+
+
 ## {{ page.title }}
----
-
-## Outline
-
-1. Historical background of molecular evolution
-2. Sequence distances and sequence evolution models
-3. Phylogenetics and tree building
 
 ---
 ## Sources
@@ -20,6 +43,27 @@ date: 2024-03-04
 - [Adam Smith's lecture of Phylogenetic Trees](https://pages.cs.wisc.edu/~aasmith/biolec/trees.html)
 - [Bioinformatics and Molecular Evolution by Higgs and Attwood](https://onlinelibrary.wiley.com/doi/book/10.1002/9781118697078)
 - [Molecular Evolution: A Phylogenetic Approach, by Page and Holmes](https://www.wiley.com/en-sg/Molecular+Evolution%3A+A+Phylogenetic+Approach-p-9780865428898)
+
+---
+
+## Outline
+
+<ol class="outline">
+  <li>Historical background of molecular evolution</li>
+  <li>Sequence distances and sequence evolution models</li>
+  <li>Phylogenetics and tree building</li>
+</ol>
+
+---
+## Outline
+
+<ol class="outline">
+  <li class="active">Historical background of molecular evolution</li>
+  <li>Sequence distances and sequence evolution models</li>
+  <li>Phylogenetics and tree building</li>
+</ol>
+
+
 
 
 ---
@@ -34,7 +78,7 @@ What makes evolution molecular?
 
 
 ---
-Tree thinking (1827) and Origin of Species (1859)
+Tree thinking (1837) and Origin of Species (1859)
 
 <img alt="Darwin's notebook" src="images/phylogenetics/darwin_notebook.jpg" style="max-height: 450px; float:left; padding:5px"/>
 
@@ -75,6 +119,17 @@ Hug et al 2016, Nature Microbiology
 
 <img alt="Modern Tree of Life" src="images/phylogenetics/hug2016_fig2.jpg" style="max-height: 600px;"/>
 
+
+
+---
+
+## Outline
+
+<ol class="outline">
+  <li>Historical background of molecular evolution</li>
+  <li class="active">Sequence distances and sequence evolution models</li>
+  <li>Phylogenetics and tree building</li>
+</ol>
 
 ---
 
@@ -121,8 +176,8 @@ ACGTGCGATC
 
 ## Problems with $D$
 
-- homoplasy: the same character state arises independently in different lineages
 - multiple hits: the same character changes multiple times in the same lineage
+- homoplasy: the same character state arises independently in different lineages
 - $D$ does not increase linearly with time  
 - $D$ is not additive
 
@@ -330,6 +385,26 @@ Model testing:
 choose the simplest model that fits the data
 </span>
 
+
+---
+## Conclusion: Key points
+
+- Use a sequence evolution model to account for unobserved differences
+- Models of increasing complexity yield increasingly realistic distances
+- Models with increased complexity require more parameters
+
+
+
+
+---
+
+## Outline
+
+<ol class="outline">
+  <li>Historical background of molecular evolution</li>
+  <li>Sequence distances and sequence evolution models</li>
+  <li class="active">Phylogenetics and tree building</li>
+</ol>
 
 
 ---
