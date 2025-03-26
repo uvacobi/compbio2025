@@ -194,10 +194,14 @@ lectures:
     links: null
   - lecture_number: 13
     date: 2025-03-24
-    topic: "Special Topic: LLMs"
+    topic: "Special Topic: Transformers"
     details:
     instructor: Chirag Agarwal
-    links: null
+    links:
+        - url: slides/transformers.pdf
+          title: Lecture slides
+        - url: https://arxiv.org/pdf/1706.03762
+          title: Attention Is All You Need
     assignments:
       - title: Quiz 6
         url: https://docs.google.com/forms/d/e/1FAIpQLSfXS6MS2OkWKoPMkr9wE2HStCz_RYGL3DRumuZaEWBSTTpHrw/viewform?usp=sharing
