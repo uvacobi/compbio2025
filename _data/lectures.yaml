@@ -222,7 +222,7 @@ lectures:
     details: 
     instructor: Chongzhi Zang
     links:
-      - url: resources/14 Dimensionality reduction.pdf
+      - url: resources/15 Dimensionality reduction.pdf
         title: Lecture slides
       - url: https://jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf
         title: t-SNE
