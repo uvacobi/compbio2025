@@ -352,16 +352,19 @@ lectures:
         title: Lecture slides
   - lecture_number: 25
     date: 2025-05-05
-    topic: Special topic
+    topic: Special topic (Hidden Markov Models)
     details: null
-    instructor: Gloria Sheynkman
+    instructor: Nathan Sheffield
     links:
-      - url: "https://pubmed.ncbi.nlm.nih.gov/28284537/"
-        title: "Protein interactomes"
+      - url: slides/hmm
+        title: Lecture slides
+      - url: resources/hmm.pdf
+        title: Markov chains and hidden Markov models
         required: true
-      - url: "https://www.nature.com/articles/s41392-023-01381-z"
-        title: "Overview of alphafold"
-        required: true
+      - url: https://www.nature.com/articles/nbt1004-1315
+        title: What is a hidden Markov model?
+      - url: resources/RABINER1989.pdf
+        title: A tutorial on Hidden Markov Models and Selected Applications in Speech Recognition
     assignments:
       - title: Quiz 11
         url: https://docs.google.com/forms/d/e/1FAIpQLSegXadaGO6NVEzVUSvPsdl7_ivp_cRvXWIXj6DjdON9g4vwXg/viewform?usp=sharing
