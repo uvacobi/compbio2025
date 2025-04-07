@@ -42,7 +42,7 @@ lectures:
         required: true
       - url: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-022-02648-4
         title: Exaggerated false positives by popular differential expression methods when analyzing human population samples
-    assignments: null 
+    assignments: null
 
   - lecture_number: 3
     date: 2025-02-17
@@ -73,7 +73,7 @@ lectures:
       - url: slides/alignments_lab
         title: Lecture slides
       - url: https://www.ncbi.nlm.nih.gov/books/NBK464187/
-        title: Chapter on Sequence Alignment 
+        title: Chapter on Sequence Alignment
       - url: https://www.ncbi.nlm.nih.gov/BLAST/tutorial/Altschul-1.html
         title: The Statistics of Sequence Similarity Scores
   - lecture_number: 5
@@ -105,8 +105,8 @@ lectures:
         title: The Theory and Practice of Genome Sequence Assembly
   - lecture_number: 7
     date: 2025-03-03
-    topic: Transcription factors 
-    details: 
+    topic: Transcription factors
+    details:
     instructor: Chongzhi Zang
     links:
       - url: resources/7 Transcription factors.pdf
@@ -124,7 +124,7 @@ lectures:
   - lecture_number: 8
     date: 2025-03-05
     topic: Transcription factor lab
-    details: 
+    details:
     instructor: Chongzhi Zang
     links:
       - url: #
@@ -155,7 +155,7 @@ lectures:
   - lecture_number: 10
     date: 2025-03-12
     topic: Differential expression lab
-    details: 
+    details:
     instructor: Stefan Bekiranov
     links:
       - url: #
@@ -176,7 +176,7 @@ lectures:
         required: true
       - title: "Evolutionary Trees from DNA Sequences: A Maximum Likelihood Approach"
         url: http://nematodes.org/teaching/tutorials/phylogenetics/Bayesian_Workshop/PDFs/Felsenstein%20J%20Mol%20Evol%201981.pdf
-      - title: "A Simple, Fast, and Accurate Algorithm to Estimate Large Phylogenies by Maximum Likelihood"        
+      - title: "A Simple, Fast, and Accurate Algorithm to Estimate Large Phylogenies by Maximum Likelihood"
         url: https://doi.org/10.1080/10635150390235520
       - title: "MEGA11: Molecular Evolutionary Genetics Analysis Version 11"
         url: https://doi.org/10.1093/molbev/msab120
@@ -189,7 +189,7 @@ lectures:
   - lecture_number: 12
     date: 2025-03-19
     topic: Molecular evolution and phylogenetics lab
-    details: 
+    details:
     instructor: Nathan Sheffield
     links: null
   - lecture_number: 13
@@ -198,10 +198,10 @@ lectures:
     details:
     instructor: Chirag Agarwal
     links:
-        - url: slides/transformers.pdf
-          title: Lecture slides
-        - url: https://arxiv.org/pdf/1706.03762
-          title: Attention Is All You Need
+      - url: slides/transformers.pdf
+        title: Lecture slides
+      - url: https://arxiv.org/pdf/1706.03762
+        title: Attention Is All You Need
     assignments:
       - title: Quiz 6
         url: https://docs.google.com/forms/d/e/1FAIpQLSfXS6MS2OkWKoPMkr9wE2HStCz_RYGL3DRumuZaEWBSTTpHrw/viewform?usp=sharing
@@ -211,7 +211,7 @@ lectures:
     topic: Module I Review
     details:
     instructor: Aakrosh Ratan
-    links: 
+    links:
       - url: slides/review1
         title: Lecture slides
     assignments: null
@@ -219,7 +219,7 @@ lectures:
     section: "Computational Biology II"
     date: 2025-03-31
     topic: Dimensionality reduction
-    details: 
+    details:
     instructor: Chongzhi Zang
     links:
       - url: resources/15 Dimensionality reduction.pdf
@@ -253,7 +253,7 @@ lectures:
         title: "BigWig and BigBed: enabling browsing of large distributed datasets"
         required: true
       - title: "Opportunities and challenges in sharing and reusing genomic interval data"
-        url: https://doi.org/10.3389/fgene.2023.1155809 
+        url: https://doi.org/10.3389/fgene.2023.1155809
     assignments:
       - title: Quiz 7
         url: https://forms.gle/7HbocotR6Z1Qg5u68
@@ -266,11 +266,11 @@ lectures:
     instructor: Nathan Sheffield
     links:
       - url: #
-        title: Lecture slides   
+        title: Lecture slides
   - lecture_number: 19
     date: 2025-04-14
     topic: Deep learning in biology
-    details: null 
+    details: null
     instructor: Stefan Bekiranov
     links:
       - url: resources/Deep_Learning_1.pdf
@@ -318,8 +318,8 @@ lectures:
       - url: "https://people.csail.mit.edu/dsontag/courses/ml14/notes/Luxburg07_tutorial_spectral_clustering.pdf"
         title: "A tutorial on Spectral Clustering"
     assignments:
-      - title: Quiz 10
-        url: https://docs.google.com/forms/d/e/1FAIpQLScWOsScEuwe9LReW5VvFZxiS3aADnOO_YbQDKsNIq5RSbvqDA/viewform?usp=sharing
+      - title: Quiz 9
+        url: https://docs.google.com/forms/d/e/1FAIpQLSdIEleijvJPFZiSsR0PtDjkgc7df9knO076_nSmRcpoHXfbyQ/viewform?usp=sharing
       - title: Assignment 9 due
       - title: Assignment 10
         url: https://github.com/uvacobi/network_analysis
@@ -334,12 +334,12 @@ lectures:
   - lecture_number: 23
     date: 2025-04-28
     topic: RNA Binding proteins
-    details: 
+    details:
     instructor: John Platig
     links: null
     assignments:
-      - title: Quiz 9
-        url: https://docs.google.com/forms/d/e/1FAIpQLSdIEleijvJPFZiSsR0PtDjkgc7df9knO076_nSmRcpoHXfbyQ/viewform?usp=sharing
+      - title: Quiz 10
+        url: https://docs.google.com/forms/d/e/1FAIpQLScWOsScEuwe9LReW5VvFZxiS3aADnOO_YbQDKsNIq5RSbvqDA/viewform?usp=sharing
       - title: Assignment 10 due
       - title: Assignment 11
         url: null
@@ -349,7 +349,7 @@ lectures:
     instructor: John Platig
     links:
       - url: #
-        title: Lecture slides     
+        title: Lecture slides
   - lecture_number: 25
     date: 2025-05-05
     topic: Special topic
