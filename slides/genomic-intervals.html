@@ -6,24 +6,58 @@ date: 2021-12-09
 ---
 
 <style>
-	.reveal {font-size: 2.2em;}
+ol.outline {
+  list-style: none;
+  padding-left: 0;
+}
+
+ol.outline li {
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+}
+
+ol.outline li.active {
+  opacity: 1;
+}
+
+ol.outline li::after {
+  content: "";
+  font-size: 1em;
+  margin-left: 0.25em;
+}
+
+ol.outline li.active::after {
+  content: "←"; /* Right-pointing arrow */
+}
+
+.reveal {font-size: 2.2em;}
 </style>
 
 ## {{ page.title }}
 
-
 ---
 
+### Scalable computing in genomics
+
+Why do we need to think about scalability?
+
+<div class="fragment">
 Lower costs &rarr; More data
 
 <iframe src="https://databio.org/seqcosts/sra.html" width="950" height="550"></iframe>
+
+</div>
 ---
 ### Scalable computing in genomics
 
+When do we need to worry about scalability?
+
+<div class="fragment">
 Genomics can be 'big data'.<br>
 
 <img src="images/genomic-intervals/performance-importance-heatmap.svg" height="400" style="background:white">
-
+</div>
 ---
 ## Compressing BigBed files
 
@@ -35,13 +69,28 @@ still achieving nearly the same level of compression as compressing the entire f
 
 <span class="fragment">Why?</span>
 
+---
+
+## Outline
+
+<ol class="outline">
+  <li>Genomic intervals: biology and file formats</li>
+  <li>Interval operations and data structures</li>
+  <li>Compression and indexing</li>
+  <li>Region set enrichment</li>
+</ol>
+
 
 ---
 
-## Strategies for scalability
+## Outline
 
-1. compression
-2. indexing
+<ol class="outline">
+  <li class="active">Genomic intervals: biology and file formats</li>
+  <li>Interval operations and data structures</li>
+  <li>Compression and indexing</li>
+  <li>Region set enrichment</li>
+</ol>
 
 
 ---
@@ -128,6 +177,10 @@ SNPs are interval of width 1
 
 ---
 ![](images/genomic-intervals/chrom-sizes.png)
+
+
+
+
 
 ---
 ## Terminology
@@ -322,6 +375,19 @@ Sparsity. Wide vs tall structure on the data
 <div class="fragment">
 Processing level. Raw signal vs. summary signal vs. regions
 </div>
+
+
+---
+
+## Outline
+
+<ol class="outline">
+  <li>Genomic intervals: biology and file formats</li>
+  <li class="active">Interval operations and data structures</li>
+  <li>Compression and indexing</li>
+  <li>Region set enrichment</li>
+</ol>
+
 
 
 ---
@@ -629,6 +695,18 @@ For genomic intervals, R trees, NCLists, AILists, B+ trees have all been used to
 
 
 ---
+
+## Outline
+
+<ol class="outline">
+  <li>Genomic intervals: biology and file formats</li>
+  <li>Interval operations and data structures</li>
+  <li class="active">Compression and indexing</li>
+  <li>Region set enrichment</li>
+</ol>
+
+
+---
 ### Compressing BigBed files
 
 > The data regions of the file (but not the index) are compressed using the same deflate techniques
@@ -925,6 +1003,20 @@ gr[2:3]  # subset
 ##   seqinfo: 3 sequences from an unspecified genome
 ```
 
+
+---
+
+## Outline
+
+<ol class="outline">
+  <li>Genomic intervals: biology and file formats</li>
+  <li>Interval operations and data structures</li>
+  <li>Compression and indexing</li>
+  <li class="active">Region set enrichment</li>
+</ol>
+
+
+
 ---
 ### Region set enrichment analysis
 
@@ -980,8 +1072,8 @@ Given a query region set (say, from a ChIP-seq experiment), what other, previous
 ---
 # Conclusion
 
-- Genomic interval data is growing astronomically
 - Genomic intervals are an extremely useful abstraction
 - Diverse biological questions can be asked using intervals
+- Genomic interval data is growing rapidly
 - Data structures and algorithms enable large-scale analysis
 - New methods for genomic intervals are being developed
