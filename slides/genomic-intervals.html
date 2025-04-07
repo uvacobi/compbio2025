@@ -587,6 +587,7 @@ How can we handle containment?
 	- Nodes have $m$ children
 	- Node values are *boundaries* for subtrees
 	- Boundaries provide overlap constraints
+	- Still focused on individual elements (not intervals)
 
 ![](images/genomic-intervals/B-tree.svg)
 
@@ -606,6 +607,8 @@ How can we handle containment?
 <a href="https://doi.org/10.1093/bioinformatics/btl647">Alekseyenko & Lee 2017</a>
 
 - Used by Bioconductor GenomicRanges class
+- organizes elements into a hierarchical list
+- any contained intervals are moved into a sub-list
 ![](images/genomic-intervals/nclist.png)
 
 ---
@@ -615,6 +618,15 @@ Augmented Interval List - <a href="https://doi.org/10.1093/bioinformatics/btz407
 ![](images/genomic-intervals/subject-query-containment.svg)
 
 ![](images/genomic-intervals/binary-search-maxE.svg)
+
+
+---
+### Advanced data structures summary
+
+Encoding the data into a more sophisticated data structure, can improve . 
+
+For genomic intervals, R trees, NCLists, AILists, B+ trees have all been used to implement fast interval operations.
+
 
 ---
 ### Compressing BigBed files
@@ -628,8 +640,11 @@ that are used in gzip as implemented in the zlib library, a very widespread, sta
 
 Uses DEFLATE: a combination of LZ77 and Huffman Coding
 
+<span class="fragment">But first: Anyone know what RLE is?</span>
+
+
 ---
-### Run-length Encoding (RLE)
+###  Run-length Encoding (RLE)
 
 ```R
 > c(rep(1,20), rep(0,15))
@@ -640,19 +655,31 @@ Run Length Encoding
   values : num [1:2] 1 0
 ```
 
+<span class="fragment">(Aside: DEFLATE uses RLE to encode the huffman table, not input)</span>
+
+
+
 ---
 ### LZ77
 
-Duplicate string elimination
+Goal: Eliminate duplicate strings
 
 1. Find the longest repeated sequences in string
 2. Replace repeats with relative references to earlier
+
+<div class="fragment">
 
 Input: "The compression and the decompression leave an impression. Hahahahaha!"
 
 Output: "The compression and t [20 | 3] de [22 | 12] leave [28 | 3] i [42 | 7] . Hah [2 | 7] !"
 
+Here **[20 | 3]** means go back 20 spaces and copy 3 characters.
+
+
+
 <span style="font-size: 0.6em">Example credit: https://sudonull.com</span>
+
+</div>
 
 ---
 
@@ -670,11 +697,50 @@ Base   Freq     ASCII   2bit  HuffCode
    T      3  01010100     11       111    
 ```
 
-<span class="fragment">Requires prefix property for variable-width codes: a bit string representation is never a prefix of a different symbol</span>  
+<span class="fragment small">ASCII bitstring:
+01000001 01000011 01010100 01000111
+01000001 01000001 01000011 01000111
+01000001 01010100 01000011 01000001
+01000111 01010100 01000001 01000011
+01000001 01000111 01000001 01000001
+01000111
+</span>
+
+
+<span class="fragment small">Huffman bitstream: 01101111000110100111110101011101100100010</span>
+
+
+
+---
+
+```
+Base   Freq     ASCII   2bit  HuffCode    
+   A      9  01000001     00         0    
+   G      5  01000111     01        10    
+   C      4  01000011     10       110    
+   T      3  01010100     11       111    
+```
+
+<span class="small">ASCII bitstring:
+01000001 01000011 01010100 01000111
+01000001 01000001 01000011 01000111
+01000001 01010100 01000011 01000001
+01000111 01010100 01000001 01000011
+01000001 01000111 01000001 01000001
+01000111
+</span>
+
+
+<span class="small">Huffman bitstream: 01101111000110100111110101011101100100010</span>
+
+
+<span class="">Requires prefix property for variable-width codes: a bit string representation is never a prefix of a different symbol</span>  
 <span class="fragment">Requires sequential reading (no random access)</span>
 
 
 <span style="font-size: 0.6em">See [Okaily et al](https://dx.doi.org/10.1089%2Fcmb.2016.0151)</span>
+
+
 
 
 ---
@@ -686,6 +752,14 @@ Instead the regions between indexed items (containing 512 items by default) are 
 This maintains the same degree of random accessibility that was enabled by the sparse R tree index
 while still achieving nearly the same level of compression as compressing the entire file would.
 
+
+---
+### Why?
+
+- if each item was compressed separately: 
+	- weak duplicate string elimination
+- if the entire data area were compressed all at once:
+	- indexing not possible due to the **variable-length code** (Huffman)
 
 
 ---
