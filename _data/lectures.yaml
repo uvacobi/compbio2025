@@ -284,6 +284,8 @@ lectures:
         required: true
       - url: https://www.deeplearningbook.org
         title: Deep Learning (book)
+      - url: https://link.springer.com/book/10.1007/978-3-031-45468-4
+        title: Deep Learning: Foundations and Concepts
       - url: https://www.youtube.com/watch?v=CqOfi41LfDw&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1
         title: Neural Networks/Deep Learning StatQuest Video Series
       - url: https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi
