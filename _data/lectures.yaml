@@ -310,15 +310,12 @@ lectures:
     links:
       - url: slides/networks
         title: Lecture slides
-      - url: "https://barabasi.com/f/147.pdf"
+      - url: "https://www.nature.com/articles/nrg1272"
         title: "Network Biology: Understanding the Cells Functional Organization"
         required: true
-      - url: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007244
-        title: Ten simple rules to create biological network figures for communication
-      - url: "https://idekerlab.ucsd.edu/wp-content/uploads/publications/Cowen_NatReviews-Genetics_2017.pdf"
-        title: "Network propagation: a universal amplifier of genetic associations"
-      - url: "https://people.csail.mit.edu/dsontag/courses/ml14/notes/Luxburg07_tutorial_spectral_clustering.pdf"
-        title: "A tutorial on Spectral Clustering"
+      - url: "https://www.quantamagazine.org/scant-evidence-of-power-laws-found-in-real-world-networks-20180215/"
+        title: "Scant Evidence of Power Laws Found in Real-World Networks"
+        required: true
     assignments:
       - title: Quiz 9
         url: https://docs.google.com/forms/d/e/1FAIpQLSdIEleijvJPFZiSsR0PtDjkgc7df9knO076_nSmRcpoHXfbyQ/viewform?usp=sharing
