@@ -321,7 +321,7 @@ lectures:
         url: https://docs.google.com/forms/d/e/1FAIpQLSdIEleijvJPFZiSsR0PtDjkgc7df9knO076_nSmRcpoHXfbyQ/viewform?usp=sharing
       - title: Assignment 9 due
       - title: Assignment 10
-        url: https://github.com/uvacobi/network_analysis
+        url: null
   - lecture_number: 22
     date: 2025-04-23
     topic: Network analysis lab
