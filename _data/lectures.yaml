@@ -308,7 +308,7 @@ lectures:
     details: null
     instructor: John Platig
     links:
-      - url: slides/Comp_Bio_II_Networks.pdf
+      - url: slides/Comp_Bio_II_Networks_V2.pdf
         title: Lecture slides
       - url: "https://www.nature.com/articles/nrg1272"
         title: "Network Biology: Understanding the Cells Functional Organization"
