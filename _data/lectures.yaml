@@ -336,7 +336,7 @@ lectures:
     details: null
     instructor: John Platig
     links: 
-      - url: #
+      - url: resources/RBP_lecture.pdf
         title: Lecture slides
       - url: https://www.nature.com/articles/nrg3813
         title: "A census of human RNA-binding proteins"
@@ -352,8 +352,8 @@ lectures:
     topic: RNA Binding proteins lab
     instructor: John Platig
     links:
-      - url: resources/RBP_lecture.pdf
-        title: Lecture slides
+      - url: #
+        title: Assignment 12
   - lecture_number: 25
     date: 2025-05-05
     topic: Special topic (Hidden Markov Models)
