@@ -333,9 +333,11 @@ lectures:
   - lecture_number: 23
     date: 2025-04-28
     topic: RNA Binding proteins
-    details:
+    details: null
     instructor: John Platig
     links: 
+      - url: resources/RBP_lecture.pdf
+        title: Lecture slides
       - url: https://www.nature.com/articles/nrg3813
         title: "A census of human RNA-binding proteins"
         required: true
