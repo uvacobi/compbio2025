@@ -336,7 +336,7 @@ lectures:
     details: null
     instructor: John Platig
     links: 
-      - url: resources/RBP_lecture.pdf
+      - url: #
         title: Lecture slides
       - url: https://www.nature.com/articles/nrg3813
         title: "A census of human RNA-binding proteins"
