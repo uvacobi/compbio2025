@@ -352,7 +352,7 @@ lectures:
     topic: RNA Binding proteins lab
     instructor: John Platig
     links:
-      - url: #
+      - url: resources/RBP_lecture.pdf
         title: Lecture slides
   - lecture_number: 25
     date: 2025-05-05
