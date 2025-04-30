@@ -341,12 +341,14 @@ lectures:
       - url: https://www.nature.com/articles/nrg3813
         title: "A census of human RNA-binding proteins"
         required: true
+      - url: resources/vienna_hox6_structure.txt
+        title: resources/vienna_hox6_structure.txt
     assignments:
       - title: Quiz 10
         url: https://docs.google.com/forms/d/e/1FAIpQLScWOsScEuwe9LReW5VvFZxiS3aADnOO_YbQDKsNIq5RSbvqDA/viewform?usp=sharing
       - title: Assignment 10 due
       - title: Assignment 11
-        url: null
+        url: resources/Comp_Bio_II__Assignment_11.pdf
   - lecture_number: 24
     date: 2025-04-30
     topic: RNA Binding proteins lab
