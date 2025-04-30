@@ -342,7 +342,7 @@ lectures:
         title: "A census of human RNA-binding proteins"
         required: true
       - url: resources/vienna_hox6_structure.txt
-        title: resources/vienna_hox6_structure.txt
+        title: vienna_hox6_structure.txt
     assignments:
       - title: Quiz 10
         url: https://docs.google.com/forms/d/e/1FAIpQLScWOsScEuwe9LReW5VvFZxiS3aADnOO_YbQDKsNIq5RSbvqDA/viewform?usp=sharing
