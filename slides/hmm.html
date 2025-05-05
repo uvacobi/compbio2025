@@ -19,12 +19,11 @@ What is dynamic programming really?
 - introduced in 1950s by Richard Bellman of Rand Corp <!-- .element : class="fragment" data-fragment-index="1" --> <!-- .element : class="fragment" data-fragment-index="1" -->
 - it's hard to define  <!-- .element : class="fragment" data-fragment-index="1" --> 
 - it's extremely broad <!-- .element : class="fragment" data-fragment-index="1" --> 
+- Paper: [The theory of dynamic programming](https://www.ams.org/journals/bull/1954-60-06/S0002-9904-1954-09848-8/)  <!-- .element : class="fragment" data-fragment-index="1" --> 
 
-
-[The theory of dynamic programming](https://www.ams.org/journals/bull/1954-60-06/S0002-9904-1954-09848-8/)  <!-- .element : class="fragment" data-fragment-index="1" --> 
-
-
-
+Note:
+- give a chance to recall what the class remembers from earlier lectures about DP.
+- the point of this is that it's a bit hard to define. So, we'll go over it again now, from this historical perspective with excerpts from the paper.
 ---
 
 ## The setting
@@ -33,13 +32,43 @@ What is dynamic programming really?
 
 ---
 
-## The insight
+## The insight:
+
+The principle of **Local Decision Sufficiency**
 
 ![example](images/hmm/dynamic-programming-2.png)
 
-The essence of dynamic programming is "do the best you can from where you are" <!-- .element : class="fragment" --> 
+<span class="fragment">The Markov property. The essence of dynamic programming is "Do the best you can from where you are." <span class="fragment">But wait...</span> 
+
+<span class="fragment">
+
+![example](images/hmm/dynamic-programming-future.png)
+
+</span>
+
+Notes:
+- Q: does there seem to be a contradiction between these statements?
+- The "problems of the future" -- To determine what's the optimal choice now, you need to know how things would turn in each of your possible decisions, right?
+- So, let's revise the statement slightly.
 
 
+---
+
+## The insight:
+
+The principle of **Future-Aware Decision Making**
+
+The essence of dynamic programming is "Do the best you can from where you are...assuming your future decisions will be optimal."
+
+![example](images/hmm/dynamic-programming-3.png)<!-- .element : class="fragment" data-fragment-index="1" -->
+
+Principle of Optimality — all you need is your current position and the optimal strategy from that point forward.<!-- .element : class="fragment" data-fragment-index="1" -->
+
+---
+
+<img src="images/hmm/dynamic-programming-path.png" width="400px"/>
+
+It’s like hiking the shortest path to the top of a mountain: no matter where you are on the path, the route from that point to the summit must also be the shortest — otherwise, your whole path wouldn't be the shortest overall.
 
 ---
 
@@ -102,21 +131,28 @@ $$
 f_N(p) = Max_{P}R(p_N) = Max_{k} f_{N-1}(T_k(p))
 $$
 
-Which means: at any given time, we must choose the transformation that maximizes the return.
-
+Given the optimal policy, $R(P_N)$ is a function of the initial vector $p_0$ and the number of stages N.
 
 ---
 
 ## Dynamic programming: the gist
 
-You have a sequence of states, and at each time step, you make a decision. You want to end optimally, for some definition of optimal. 
+You have a sequence of states, and at each time step, you make a decision to try to achieve the best final outcome.
 
-The brute-force way is to consider all possible sequences of decisions and then pick the best one, but this is not possible for long sequences with many possible decisions. <!-- .element : class="fragment" --> 
+The brute-force method is to examine all possible decision sequences, but this is infeasible for long horizons. <!-- .element : class="fragment" --> 
 
-Instead, divide the problem into sub-problems: At any particular time determining your decision payoff depends only on the current state of the system, not on later states of the system. <!-- .element : class="fragment" --> 
+Instead, dynamic programming divides into sub-problems: at any point, the optimal decision needs only the current state.  Assuming all future decisions follow the optimal policy, the optimal decision at the current state is the one that leads to the state from which the optimal total outcome can be achieved. <!-- .element : class="fragment" --> 
 
 This concept can apply to a huge array of problems, from investing to aircraft control to...computational biology. <!-- .element : class="fragment" --> 
 
+Note:
+1. Optimal Substructure
+
+The optimal solution to the overall problem contains within it optimal solutions to subproblems. You can build the full solution by combining optimal solutions to smaller parts.Example: the shortest path from A to C via B must include the shortest path from A to B.
+
+2. Overlapping Subproblems
+
+The same subproblems are solved multiple times across different branches of the decision process. DP avoids redundant work by storing solutions.
 
 ---
 
@@ -142,7 +178,7 @@ Note: Joint probability $P(A,B) = P(A|B)  P(B) = P(B|A)  P(A)$, Marginal probabi
 
 ---
 
-## Markov models 
+## Markov chains 
 
 ## &darr; 
 
@@ -150,19 +186,22 @@ Note: Joint probability $P(A,B) = P(A|B)  P(B) = P(B|A)  P(A)$, Marginal probabi
 
 ---
 
-## Markov Models
+## Markov models
 * Set of states: $S \in {s_1, s_2, \ldots, s_n}$
 * Process moves from one state to another generating a sequence of $L$ states: $x_{1}, x_{2}, \ldots, x_{L}, $
 * Markov property:  The probability of a symbol depends only on the preceding symbol, not the entire previous sequence  
   $$P(x_{L} = s|x_{1},x_{2},\ldots,x_{i(L-1)}) = P(x_{L}=s|x_{i(L-1)})$$
 
-* A Markov chain is defined by:
+* A Markov chain is a simple markov model defined by:
   * transition probabilities $a_{st} = P(x_i=t| x_{i-1}=s)$, $A=\\{a_{ij}\\}$
   * initial probabilities: $a_{0s} = P(x_1=s)$
 
+Note:
+- A Markov model is a general probabilistic model where the future state of a system depends only on the present state, not on the past. A Markov chain is a specific type of Markov model where the states are discrete and the time is also discrete. In essence, a Markov chain is a simple, discrete-time Markov model.
+
 ---
 
-## Example 
+## Example of a Markov chain
 ![markov](images/hmm/markov.svg) <!-- .element width="80%" height="80%" -->
 
 $A = \begin{bmatrix}
@@ -203,7 +242,7 @@ $$
 ---
 
 ## Calculation of sequence probability
-![markov](images/hmm/markov.svg) <!-- .element width="80%" height="80%" -->
+![markov](images/hmm/markov.svg) <!-- .element width="60%" height="60%" -->
 
 $a_0 = (0.4, 0.6)$
 
@@ -221,7 +260,7 @@ P(L,L,F,F) &=& P(F|L,L,F) P(L,L,F) \\\\\\
 ## Hidden Markov Models
 * Set of states: $S \in {s_1, s_2, \ldots, s_n}$
 * Process moves from one state to another generating a sequence of $L$  states: $x_{1}, x_{2}, \ldots, x_{L}$
-* Markov property: $$P(x_{k}|x_{1},x_{2},\ldots,x_{(L-1)}) = P(x_{L}|x_{(L-1)})$$
+* Recall the Markov property: $$P(x_{k}|x_{1},x_{2},\ldots,x_{(L-1)}) = P(x_{L}|x_{(L-1)})$$
 * States are not visible, but each state randomly generates one of $L$ observations (or emissions): ${o_1, o_2, \ldots, o_L}$ <!-- .element : class="fragment" data-fragment-index="1" -->
 
 ---
@@ -233,12 +272,12 @@ The following need to be defined for Model $M = (A, B, a_0)$:
 * transition probabilities:  
    $ \mathbf{A} = \\{ a_{ij} \\} $  
    $a_{st} = P(x_i=t |x_{i-1} =s)$
-* initial probabilities:  
-  $a_{0s} = P(x_1 = s)$
 * observation/emission probabilities:  
   $\mathbf{B} = \\{ e_k(b) \\}$  
   $e_k(b) = P(x_i=b | \pi_i=k)$  
   (probability of seeing symbol $b$ when in state $k$)
+* initial probabilities:  
+  $a_{0s} = P(x_1 = s)$
 
 <!-- ---
 
@@ -276,13 +315,18 @@ P( \\{ H,H \\} ) &=& P( \\{ H,H \\}, \\{ F,F \\}) + \\\\\\
 & & P( \\{ H,H \\}, \\{ L,L \\})
 \end{eqnarray}$$
 
+Where: 
+
 $$\begin{eqnarray}
 P( \\{ H,H \\}, \\{ F,F \\}) &=& P( \\{ H,H \\} | \\{ F,F \\}) P(\\{ F,F \\})\\\\\\
 &=& P(H|F) P(H|F) P(F|F) P(F)
 \end{eqnarray}$$
 
-Note: Consider all possible hidden state sequences
-
+Note:
+- Just sum over all possible hidden state sequences
+- We could compute each component.
+- P({H,H}|{F,F}) =  P(H|F)P(H|F) (they are independent)
+- P({F,F}) = P(F|F)P(F)  (Markov property, transition)
 ---
 
 ## 3 Computational applications of HMMs
@@ -324,10 +368,11 @@ Given HMM $M=(A,B,a_0)$ and observation sequence $O$, find the sequence of state
 
 ![decoding](images/hmm/decoding1.png)
 
+
 ---
 
 ## Decoding problem 
-![decoding](images/hmm/decoding1.png)
+![decoding](images/hmm/decoding1.png)<!-- .element width="80%" height="80%" -->
 
 $P(O, S)$: the probability that HMM follows sequence of states $S$ and emits string $O$.
 
@@ -343,20 +388,25 @@ Find $S_{1:T}$ that maximises $P(O_{1:T}|S_{1:T})$ over all possible paths in th
 
 ![decoding](images/hmm/decoding1.png)
 
-$N$ states, $T$ time steps: $N^T$ paths...
+$N$ states (here: 3, $v_1$, $v_2$, $v_3$); $T$ time steps (here: 6)
+
+That means $N^T$ paths (here: 729)... how do we choose?
 
 ---
 
 ## Viterbi algorithm
 
-* Dynamic programming
-* $N$ rows (number of states), $T$ columns (length of sequence)
+Two steps using dynamic programming
+  1. Forward pass (fill matrix)
+  2. Backtrack (read back the final sequence)
+
+Filing the matrix: 
+* Matrix $v$: $N$ rows (n states), $T$ columns (length of sequence)
 * Initialization: $v_0(i) = a_{0i} B(O_1|S_i) = a_{0i} e_l(x_i) $
 * Recursion: $ v_l(i) = e_l(x_i) \times max_k(v_k(i-1)a_{kl}) $
+* Store a pointer to the path you chose.
 
-Read as: the viterbi score at time $l$ for state $i$ is the emission probability for observation $x_i$ at state $l$ times the best of the previous scores times transition probability
-
-![recursion](images/hmm/decoding1.png)
+Read as: the viterbi score at time $l$ for state $i$ is the emission probability for observation $x_i$ at state $l$ times the (best of the previous scores times transition probability)
 
 ---
 
@@ -427,6 +477,19 @@ Note: -1.39 - 1.20 - 1.20 = -3.79, -1.9 - 0.51 - 1.20 = -3.60
 ---
 
 ## Viterbi algorithm
+
+Two steps using dynamic programming
+  1. Forward pass (fill matrix)
+  2. Backtrack (read back the final sequence)
+
+Backtracking: 
+* Start at the most probable final state
+* Use stored pointer to determine how you got there
+* Repeat until the beginning
+
+---
+
+## Viterbi algorithm
 ![hidden_markov](images/hmm/hiddenmarkovlog.svg) <!-- .element width="50%" height="50%" -->
 
 ![dp](images/hmm/dp7.svg) 
@@ -444,6 +507,9 @@ Note: -1.39 - 1.20 - 1.20 = -3.79, -1.9 - 0.51 - 1.20 = -3.60
 ![hidden_markov](images/hmm/hiddenmarkovlog.svg) <!-- .element width="50%" height="50%" -->
 
 ![dp](images/hmm/dp9.svg) 
+
+Note:
+- Look closely at time steps 3 and 4, where the chosen state doesn't match the higher probability. This is a good example of where the **Future-Aware Decision Making** principle is important. If you weren't future-aware, you would make a different decision here.
 
 ---
 
@@ -514,11 +580,17 @@ $ f_l(i) = e_l(x_i) \times \sum_{k}{f_k(i-1)a_{kl}} $
 Forward: Probability of the state for observations now and preceding  
 Backward: Probability of the state for following observations 
 
-Then: The two results combined give the distribution over states at any specific point, given the all observations.
+Then: The two results combined give the distribution over states at any specific point, given all observations in both directions.
 
 The probability of being in a given state at a particular point is $P(\pi_i = k|x) = \frac{f_k(i)b_k(i)}{P(x)}$  <!-- .element : class="fragment" data-fragment-index="1" -->
 
-Note: Because we are interested in comparison of states at each time point, we have to scale it. So we will calculate alpha-3F * beta3F / sum(alpha_iF*beta_iF). So when using this method, we also get some confidence values associated with our determination of the most likely state
+
+
+Note:
+- Because we are interested in comparison of states at each time point, we have to scale it. So we will calculate alpha-3F * beta3F / sum(alpha_iF*beta_iF). So when using this method, we also get some confidence values associated with our determination of the most likely state
+- $\pi_i$​: The hidden state at time step $k$, is state $i$.
+- $x$: The full observation sequence $(x_1,...,x_T)$.
+
 
 ---
 
@@ -553,7 +625,7 @@ Transitions: $P(F|F), P(F|L), P(L|F), P(L|L)$ <!-- .element : class="fragment" d
 
 Problem: What if we don't have known state sequences? <!-- .element : class="fragment" data-fragment-index="3" -->
 
-Note: Consider a fully visible Markov model. This would easily allow us to compute the HMM parameters just by maximum likelihood estimation from the training data. For a real HMM, we cannot compute these counts directly from an observation sequence since we don’t know which path of states was taken through the machine for a given input. The Baum-Welch algorithm solves this by iteratively estimating the counts. We will start with an estimate for the transition and observation probabilities and then use these estimated probabilities and use the forward-backward procedure to determine the probability of the states at each observation. Then we can use that to determine better estimates of the transition and emission probabilities. 
+Note: Consider a fully visible Markov model. This would easily allow us to compute the HMM parameters just by maximum likelihood estimation from the training data. For a real HMM, we cannot compute these counts directly from an observation sequence since we don't know which path of states was taken through the machine for a given input. The Baum-Welch algorithm solves this by iteratively estimating the counts. We will start with an estimate for the transition and observation probabilities and then use these estimated probabilities and use the forward-backward procedure to determine the probability of the states at each observation. Then we can use that to determine better estimates of the transition and emission probabilities. 
 
 ---
 
@@ -683,3 +755,5 @@ which is transformed into counts of starts, overlap, and ends
 Output is a unified segmentation, a consensus region set
 
 ---
+
+Thanks for listening
