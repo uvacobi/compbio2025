@@ -284,6 +284,8 @@ lectures:
         required: true
       - url: https://www.deeplearningbook.org
         title: Deep Learning (book)
+      - url: https://link.springer.com/book/10.1007/978-3-031-45468-4
+        title: "Deep Learning: Foundations and Concepts (book)"
       - url: https://www.youtube.com/watch?v=CqOfi41LfDw&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1
         title: Neural Networks/Deep Learning StatQuest Video Series
       - url: https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi
@@ -306,23 +308,20 @@ lectures:
     details: null
     instructor: John Platig
     links:
-      - url: slides/networks
+      - url: slides/Comp_Bio_II_Networks_V2.pdf
         title: Lecture slides
-      - url: "https://barabasi.com/f/147.pdf"
+      - url: "https://www.nature.com/articles/nrg1272"
         title: "Network Biology: Understanding the Cells Functional Organization"
         required: true
-      - url: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007244
-        title: Ten simple rules to create biological network figures for communication
-      - url: "https://idekerlab.ucsd.edu/wp-content/uploads/publications/Cowen_NatReviews-Genetics_2017.pdf"
-        title: "Network propagation: a universal amplifier of genetic associations"
-      - url: "https://people.csail.mit.edu/dsontag/courses/ml14/notes/Luxburg07_tutorial_spectral_clustering.pdf"
-        title: "A tutorial on Spectral Clustering"
+      - url: "https://www.quantamagazine.org/scant-evidence-of-power-laws-found-in-real-world-networks-20180215/"
+        title: "Scant Evidence of Power Laws Found in Real-World Networks"
+        required: true
     assignments:
       - title: Quiz 9
         url: https://docs.google.com/forms/d/e/1FAIpQLSdIEleijvJPFZiSsR0PtDjkgc7df9knO076_nSmRcpoHXfbyQ/viewform?usp=sharing
       - title: Assignment 9 due
       - title: Assignment 10
-        url: https://github.com/uvacobi/network_analysis
+        url: resources/Comp_Bio_II__Assignment_10.pdf
   - lecture_number: 22
     date: 2025-04-23
     topic: Network analysis lab
@@ -334,22 +333,29 @@ lectures:
   - lecture_number: 23
     date: 2025-04-28
     topic: RNA Binding proteins
-    details:
+    details: null
     instructor: John Platig
-    links: null
+    links: 
+      - url: resources/RBP_lecture.pdf
+        title: Lecture slides
+      - url: https://www.nature.com/articles/nrg3813
+        title: "A census of human RNA-binding proteins"
+        required: true
+      - url: resources/vienna_hox6_structure.txt
+        title: vienna_hox6_structure.txt
     assignments:
       - title: Quiz 10
         url: https://docs.google.com/forms/d/e/1FAIpQLScWOsScEuwe9LReW5VvFZxiS3aADnOO_YbQDKsNIq5RSbvqDA/viewform?usp=sharing
       - title: Assignment 10 due
       - title: Assignment 11
-        url: null
+        url: resources/Comp_Bio_II__Assignment_11.pdf
   - lecture_number: 24
     date: 2025-04-30
     topic: RNA Binding proteins lab
     instructor: John Platig
     links:
       - url: #
-        title: Lecture slides
+        title: Assignment 12
   - lecture_number: 25
     date: 2025-05-05
     topic: Special topic (Hidden Markov Models)
