@@ -1,6 +1,6 @@
-# Introduction to Computational Biology I/II Spring 2024
+# Introduction to Computational Biology I/II Spring 20245
 
-This repository hosts the course website and slides for BIMS 8701/8701 Introduction to Computational Biology I/II, taught Spring 2024.
+This repository hosts the course website and slides for BIMS 8701/8701 Introduction to Computational Biology I/II.
 
 ## Course information
 
